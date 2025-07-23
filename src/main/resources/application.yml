@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  jmx:
+    enabled: false
+  # 어플리케이션
+  application:
+    name: SCSystem
+  # DB 연결 정보
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.50.133.13:3306/as_evse
+    username: as_evse
+    password: asEvse!1@2
+  
+    
+# MyBatis 설정 정보
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.SCSystem
+  
+logging:
+  level:
+    root: info
