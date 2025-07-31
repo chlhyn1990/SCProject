@@ -1,6 +1,17 @@
 server:
   port: 8080
 
+# SSH 터널 활성화
+ssh:
+  enabled: true
+  host: 49.50.133.13
+  sshPort: 22
+  username: as_evse
+  password: asEvse!1@2
+  localPort: 3306
+  remoteHost: localhost  # 원격 MySQL이 SSH 서버와 같은 머신에 있는 경우
+  remotePort: 3306
+
 spring:
   jmx:
     enabled: false
@@ -10,7 +21,7 @@ spring:
   # DB 연결 정보
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.50.133.13:3306/as_evse
+    url: jdbc:mysql://localhost:${ssh.local.port}/as_evse
     username: as_evse
     password: asEvse!1@2
   

@@ -16,6 +16,7 @@ public class ApiConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+    	//암호화
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

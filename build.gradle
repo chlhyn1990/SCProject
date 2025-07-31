@@ -29,6 +29,7 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'  // JDK 1.8 호환 가능한 MyBatis 버전
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.springframework.security:spring-security-crypto:5.7.1'
+    implementation 'com.jcraft:jsch:0.1.55'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
