@@ -3,7 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.SCSystem.mapper.ApiMapper">
-	<select id="getMember" parameterType="com.SCSystem.dto.Member" resultType="com.SCSystem.dto.Member">
-	
+	<select id="getManager" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
+	SELECT * 
+	FROM manager
+	WHERE ID = #{id}
 	</select>
 </mapper>
