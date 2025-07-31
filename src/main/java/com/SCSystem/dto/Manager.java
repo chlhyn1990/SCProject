@@ -6,10 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder 
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Manager {
+	public Manager(){
+
+	}
+
 	private int idx;
 	private int company_idx;
 	private int manager_grade_idx;
