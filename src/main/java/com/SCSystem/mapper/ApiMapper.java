@@ -7,6 +7,8 @@ import com.SCSystem.dto.Manager;
 public interface ApiMapper {
 
 	Manager getManager(Manager manager);
+	
+	int insertManager(Manager manager);
 
 }
 

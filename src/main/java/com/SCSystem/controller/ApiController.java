@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.Manager;
 import com.SCSystem.service.ApiService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/api/manager")
@@ -24,12 +25,22 @@ public class ApiController {
 	
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<Manager> getMember(@RequestBody  Manager manager){
+	public ResponseEntity<Manager> getManager(@RequestBody  Manager manager){
 		Manager loginManager = apiService.getManager(manager);
         return new ResponseEntity<>(
         		loginManager,
                 HttpStatus.OK
-        );
+        		);
+	}
+	
+	@PostMapping("/insert")
+	@ResponseBody
+	public ResponseEntity<Integer> insertManager(@RequestBody  Manager manager){
+		int result = apiService.insertManager(manager);
+		return new ResponseEntity<>(
+				result,
+                HttpStatus.OK
+				);
 	}
 
 	

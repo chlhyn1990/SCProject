@@ -5,7 +5,25 @@
 <mapper namespace="com.SCSystem.mapper.ApiMapper">
 	<select id="getManager" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
 	SELECT * 
-	FROM manager
+	FROM as_evse.manager
 	WHERE ID = #{id}
 	</select>
+	
+	<insert id="insertManager" parameterType="com.SCSystem.dto.Manager">
+	INSERT INTO as_evse.manager
+	(company_idx, manager_grade_idx, id, password, name, phone, longitude, latitude, create_dt, modify_dt)
+	VALUES
+	(
+		 #{company_idx}
+		,#{manager_grade_idx}
+		,#{id}
+		,#{password}
+		,#{name}
+		,#{phone}
+		,0
+		,0
+		,NOW()
+		,NOW()		
+	)
+	</insert>
 </mapper>
