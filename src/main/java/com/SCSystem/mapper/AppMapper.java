@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AppMapper {
 
 	Manager getManager(String id);
+	Manager getNonFixedChargerList(Integer company_idx);
 }

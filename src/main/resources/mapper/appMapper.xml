@@ -6,4 +6,7 @@
 	<select id="getManager" parameterType="String" resultType="com.SCSystem.dto.Manager">
 		select * from manager where id=#{id}
 	</select>
+	<select id="getNonFixedChargerList" parameterType="Integer" resultType="hashmap">
+		select * from charger_list where company_idx=#{idx}
+	</select>
 </mapper>

@@ -39,14 +39,14 @@ public class AppApiController {
             //NOT FOUND user ID
             log.info("NOT Found User id:{}",id);
             return new ResponseEntity<>(
-                    null,
+                    loginManager,
                     HttpStatus.NOT_FOUND);
         }
         else if(loginManager.getIdx()==-1){
             log.info("NOT Matched Password id:{}",id);
             //NOT MATCHED password
             return new ResponseEntity<>(
-                    null,
+                    loginManager,
                     HttpStatus.UNAUTHORIZED);
         }
         return null;
