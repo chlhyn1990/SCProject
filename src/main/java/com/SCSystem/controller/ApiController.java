@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Manager;
 import com.SCSystem.service.ApiService;
 
@@ -35,10 +36,17 @@ public class ApiController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<Integer> insertManager(@RequestBody  Manager manager){
-		int result = apiService.insertManager(manager);
+	public ResponseEntity<ApiResult> insertManager(@RequestBody  Manager manager){
+		ApiResult apiResult = new ApiResult();
+		if(apiService.insertManager(manager) == 1){
+			apiResult.setCode(ApiResult.SUCCESS);
+			apiResult.setMsg(ApiResult.SUCCESS_MSG);
+		}else {
+			apiResult.setCode(ApiResult.MANAGER_INSERT_FAIL);
+			apiResult.setMsg(ApiResult.MANAGER_INSERT_FAIL_MSG);
+		}
 		return new ResponseEntity<>(
-				result,
+				apiResult,
                 HttpStatus.OK
 				);
 	}
