@@ -7,100 +7,120 @@
 	},
 	"item": [
 		{
-			"name": "api login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"test\",\r\n    \"password\": \"mario!23\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "api",
+			"item": [
+				{
+					"name": "manager",
+					"item": [
+						{
+							"name": "api login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"test\",\r\n    \"password\": \"mario!23\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/api/manager/login",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"manager",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "api insertManger",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"company_idx\": \"1\",\r\n    \"manager_grade_idx\": \"3\",\r\n    \"id\": \"test\",\r\n    \"password\": \"mario!23\",\r\n    \"name\": \"김철현\",\r\n    \"phone\": \"01026107076\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/api/manager/insert",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"manager",
+										"insert"
+									]
+								}
+							},
+							"response": []
 						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:8080/api/manager/login",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"manager",
-						"login"
 					]
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "api insertManger",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"company_idx\": \"1\",\r\n    \"manager_grade_idx\": \"3\",\r\n    \"id\": \"test\",\r\n    \"password\": \"mario!23\",\r\n    \"name\": \"김철현\",\r\n    \"phone\": \"01026107076\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "app",
+			"item": [
+				{
+					"name": "manager",
+					"item": [
+						{
+							"name": "app login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"kstzz1004\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/app/api/login",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"app",
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
 						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:8080/api/manager/insert",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"manager",
-						"insert"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "app login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"kstzz1004\",\r\n    \"password\": \"1234\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:8080/app/api/login",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
