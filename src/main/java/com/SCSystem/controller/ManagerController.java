@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Manager;
-import com.SCSystem.service.ApiService;
+import com.SCSystem.service.ManagerService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/api/manager")
 @Slf4j
 @RestController
-public class ApiController {
+public class ManagerController {
 
 	@Autowired
-	ApiService apiService;
+	ManagerService managerService;
 	
 	@PostMapping("/login")
 	@ResponseBody
 	public ResponseEntity<Manager> getManager(@RequestBody  Manager manager){
-		Manager loginManager = apiService.getManager(manager);
+		Manager loginManager = managerService.getManager(manager);
         return new ResponseEntity<>(
         		loginManager,
                 HttpStatus.OK
@@ -38,7 +38,7 @@ public class ApiController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> insertManager(@RequestBody  Manager manager){
 		ApiResult apiResult = new ApiResult();
-		if(apiService.insertManager(manager) == 1){
+		if(managerService.insertManager(manager) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
