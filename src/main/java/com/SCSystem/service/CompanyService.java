@@ -1,13 +1,13 @@
 package com.SCSystem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.SCSystem.dto.Manager;
+import com.SCSystem.dto.Company;
 import com.SCSystem.mapper.CompanyMapper;
-import com.SCSystem.mapper.ManagerMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,24 +17,37 @@ public class CompanyService {
 	@Autowired
 	RestTemplate restTemplate;
 	@Autowired
-	ManagerMapper managerMapper;
-	@Autowired
 	CompanyMapper companyMapper;
-	@Autowired
-	PasswordEncoder passwordEncoder;
 	
-	public Manager getManager(Manager manager) {
-		Manager loginManager = managerMapper.getManager(manager);
-		if(loginManager != null && !passwordEncoder.matches(manager.getPassword(), loginManager.getPassword())) {
-			loginManager = null;
-		}
-		return loginManager;	 
+	public List<Company> getCompanyList() {
+		return companyMapper.getCompanyList();
 	}
 	
-	public int insertManager(Manager manager) {
-		manager.setPassword(passwordEncoder.encode(manager.getPassword()));
+	public Company getCompany(int companyId) {
+		return companyMapper.getCompany(companyId);
+	}
+	
+	public int insertCompany(Company company) {
 		try {
-			return managerMapper.insertManager(manager);
+			return companyMapper.insertCompany(company);
+		}catch(Exception e) {
+			log.warn(e.getMessage());
+			return 0;
+		}
+	}
+	
+	public int updateCompany(Company company) {
+		try {
+			return companyMapper.updateCompany(company);
+		}catch(Exception e) {
+			log.warn(e.getMessage());
+			return 0;
+		}
+	}
+	
+	public int deleteCompany(int companyId) {
+		try {
+			return companyMapper.deleteCompany(companyId);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

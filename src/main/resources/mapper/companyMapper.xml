@@ -3,27 +3,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.SCSystem.mapper.CompanyMapper">
-	<select id="getManager" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
+	<select id="getCompanyList" resultType="com.SCSystem.dto.Company">
 	SELECT * 
-	FROM as_evse.manager
-	WHERE ID = #{id}
+	FROM as_evse.company
 	</select>
 	
-	<insert id="insertManager" parameterType="com.SCSystem.dto.Manager">
-	INSERT INTO as_evse.manager
-	(company_idx, manager_grade_idx, id, password, name, phone, longitude, latitude, create_dt, modify_dt)
+	<select id="getCompany" parameterType="Integer" resultType="com.SCSystem.dto.Company">
+	SELECT * 
+	FROM as_evse.company
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insertCompany" parameterType="com.SCSystem.dto.Company">
+	INSERT INTO as_evse.company
+	(company_grade_idx, company_name, create_dt, modify_dt)
 	VALUES
 	(
-		 #{company_idx}
-		,#{manager_grade_idx}
-		,#{id}
-		,#{password}
-		,#{name}
-		,#{phone}
-		,0
-		,0
+		 #{company_grade_idx}
+		,#{company_name}
 		,NOW()
 		,NOW()		
 	)
 	</insert>
+	
+	<update id="updateCompany" parameterType="com.SCSystem.dto.Company">
+	UPDATE as_evse.company
+	SET company_grade_idx = #{company_grade_idx}
+	  , company_name = #{company_name}
+	  , create_dt = NOW()
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="deleteCompany" parameterType="Integer">
+	DELETE FROM as_evse.company
+	WHERE idx = #{idx}
+	</delete>
 </mapper>

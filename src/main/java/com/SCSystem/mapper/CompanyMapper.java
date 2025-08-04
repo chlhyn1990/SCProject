@@ -1,5 +1,7 @@
 package com.SCSystem.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import com.SCSystem.dto.Manager;
 import com.SCSystem.dto.Company;
@@ -7,9 +9,14 @@ import com.SCSystem.dto.Company;
 @Mapper
 public interface CompanyMapper {
 
-	Manager getManager(Manager manager);
+	List<Company> getCompanyList();
 	
-	int insertManager(Manager manager);
-
+	Company getCompany(int companyId);
+	
+	int insertCompany(Company company);
+	
+	int updateCompany(Company company);
+	
+	int deleteCompany(int companyId);
 }
 
