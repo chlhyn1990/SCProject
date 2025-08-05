@@ -14,44 +14,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
-import com.SCSystem.dto.Company;
-import com.SCSystem.service.CompanyService;
+import com.SCSystem.dto.CompanyGrade;
+import com.SCSystem.service.CompanyGradeService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/api/company")
 @Slf4j
 @RestController
-public class CompanyController {
+public class CompanyGradeController {
 
 	@Autowired
-	CompanyService companyService;
+	CompanyGradeService companyGradeService;
 	
 	@PostMapping("/{search}")
 	@ResponseBody
-	public ResponseEntity<List<Company>> getCompanyList(@PathVariable String search){
-		List<Company> companys = companyService.getCompanyList(search);
+	public ResponseEntity<List<CompanyGrade>> getCompanyGradeList(@PathVariable String search){
+		List<CompanyGrade> companyGradeList = companyGradeService.getCompanyGradeList(search);
         return new ResponseEntity<>(
-        		companys,
+        		companyGradeList,
                 HttpStatus.OK
         		);
 	}
 	
-	@PostMapping("/{companyId}")
+	@PostMapping("/{companyGradeId}")
 	@ResponseBody
-	public ResponseEntity<Company> getCompany(@PathVariable int companyId){
-		Company company = companyService.getCompany(companyId);
+	public ResponseEntity<CompanyGrade> getCompanyGrade(@PathVariable int companyGradeId){
+		CompanyGrade companyGrade = companyGradeService.getCompanyGrade(companyGradeId);
         return new ResponseEntity<>(
-        		company,
+        		companyGrade,
                 HttpStatus.OK
         		);
 	}
 	
-	@PostMapping("/delete/{companyId}")
+	@PostMapping("/delete/{companyGradeId}")
 	@ResponseBody
-	public ResponseEntity<ApiResult> deleteCompany(@PathVariable  int companyId){
+	public ResponseEntity<ApiResult> deleteCompanyGrade(@PathVariable  int companyGradeId){
 		ApiResult apiResult = new ApiResult();
-		if(companyService.deleteCompany(companyId) == 1){
+		if(companyGradeService.deleteCompanyGrade(companyGradeId) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
@@ -66,9 +66,9 @@ public class CompanyController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<ApiResult> insertCompany(@RequestBody Company company){
+	public ResponseEntity<ApiResult> insertCompanyGrade(@RequestBody CompanyGrade companyGrade){
 		ApiResult apiResult = new ApiResult();
-		if(companyService.insertCompany(company) == 1){
+		if(companyGradeService.insertCompanyGrade(companyGrade) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
@@ -83,9 +83,9 @@ public class CompanyController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public ResponseEntity<ApiResult> updateCompany(@RequestBody  Company company){
+	public ResponseEntity<ApiResult> updateCompanyGrade(@RequestBody  CompanyGrade companyGrade){
 		ApiResult apiResult = new ApiResult();
-		if(companyService.updateCompany(company) == 1){
+		if(companyGradeService.updateCompanyGrade(companyGrade) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {

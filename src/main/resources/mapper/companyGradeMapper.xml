@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.CompanyGradeMapper">
+	<select id="getCompanyGradeList" resultType="com.SCSystem.dto.CompanyGrade">
+	SELECT * 
+	FROM as_evse.company_grade
+	</select>
+	
+	<select id="getCompanyGradeSearchList" parameterType="String" resultType="com.SCSystem.dto.CompanyGrade">
+	SELECT * 
+	FROM as_evse.company_grade
+	WHERE grade_name LIKE '%'#{grade_name}'%'
+	</select>
+	
+	<select id="getCompanyGrade" parameterType="Integer" resultType="com.SCSystem.dto.CompanyGrade">
+	SELECT * 
+	FROM as_evse.company_grade
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insertCompanyGrade" parameterType="com.SCSystem.dto.CompanyGrade">
+	INSERT INTO as_evse.company_grade
+	(grade_name, create_dt, modify_dt)
+	VALUES
+	(
+		 #{grade_name}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="updateCompanyGrade" parameterType="com.SCSystem.dto.CompanyGrade">
+	UPDATE as_evse.company_grade
+	SET grade_name = #{grade_name}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="deleteCompanyGrade" parameterType="Integer">
+	DELETE FROM as_evse.company_grade
+	WHERE idx = #{idx}
+	</delete>
+</mapper>
