@@ -11,6 +11,8 @@ public interface CompanyMapper {
 
 	List<Company> getCompanyList();
 	
+	List<Company> getCompanySearchList(String search);
+	
 	Company getCompany(int companyId);
 	
 	int insertCompany(Company company);

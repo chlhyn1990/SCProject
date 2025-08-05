@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,10 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@PostMapping("/")
+	@PostMapping("/{search}")
 	@ResponseBody
-	public ResponseEntity<List<Company>> getCompanyList(){
-		List<Company> companys = companyService.getCompanyList();
+	public ResponseEntity<List<Company>> getCompanyList(@PathVariable String search){
+		List<Company> companys = companyService.getCompanyList(search);
         return new ResponseEntity<>(
         		companys,
                 HttpStatus.OK
@@ -40,12 +41,29 @@ public class CompanyController {
 	
 	@PostMapping("/{companyId}")
 	@ResponseBody
-	public ResponseEntity<Company> getCompany(@RequestParam int companyId){
+	public ResponseEntity<Company> getCompany(@PathVariable int companyId){
 		Company company = companyService.getCompany(companyId);
         return new ResponseEntity<>(
         		company,
                 HttpStatus.OK
         		);
+	}
+	
+	@PostMapping("/delete/{companyId}")
+	@ResponseBody
+	public ResponseEntity<ApiResult> deleteCompany(@PathVariable  int companyId){
+		ApiResult apiResult = new ApiResult();
+		if(companyService.deleteCompany(companyId) == 1){
+			apiResult.setCode(ApiResult.SUCCESS);
+			apiResult.setMsg(ApiResult.SUCCESS_MSG);
+		}else {
+			apiResult.setCode(ApiResult.COMPANY_DELETE_FAIL);
+			apiResult.setMsg(ApiResult.COMPANY_DELETE_FAIL_MSG);
+		}
+		return new ResponseEntity<>(
+				apiResult,
+                HttpStatus.OK
+				);
 	}
 	
 	@PostMapping("/insert")
@@ -82,22 +100,7 @@ public class CompanyController {
 				);
 	}
 	
-	@PostMapping("/delete")
-	@ResponseBody
-	public ResponseEntity<ApiResult> deleteCompany(@RequestParam  int companyId){
-		ApiResult apiResult = new ApiResult();
-		if(companyService.deleteCompany(companyId) == 1){
-			apiResult.setCode(ApiResult.SUCCESS);
-			apiResult.setMsg(ApiResult.SUCCESS_MSG);
-		}else {
-			apiResult.setCode(ApiResult.COMPANY_DELETE_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_DELETE_FAIL_MSG);
-		}
-		return new ResponseEntity<>(
-				apiResult,
-                HttpStatus.OK
-				);
-	}
+	
 
 	
 	

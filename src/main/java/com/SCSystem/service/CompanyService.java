@@ -19,8 +19,11 @@ public class CompanyService {
 	@Autowired
 	CompanyMapper companyMapper;
 	
-	public List<Company> getCompanyList() {
-		return companyMapper.getCompanyList();
+	public List<Company> getCompanyList(String search) {
+		if(search == null || search.equals(""))
+			return companyMapper.getCompanyList();
+		else
+			return companyMapper.getCompanySearchList(search);
 	}
 	
 	public Company getCompany(int companyId) {
