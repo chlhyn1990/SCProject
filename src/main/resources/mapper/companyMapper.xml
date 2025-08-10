@@ -11,7 +11,7 @@
 	<select id="getCompanySearchList" parameterType="String" resultType="com.SCSystem.dto.Company">
 	SELECT * 
 	FROM as_evse.company
-	WHERE company_name LIKE '%'#{company_name}'%'
+	WHERE company_name LIKE CONCAT('%', #{search}, '%')
 	</select>
 	
 	<select id="getCompany" parameterType="Integer" resultType="com.SCSystem.dto.Company">
@@ -36,7 +36,6 @@
 	UPDATE as_evse.company
 	SET company_grade_idx = #{company_grade_idx}
 	  , company_name = #{company_name}
-	  , create_dt = NOW()
 	  , modify_dt = NOW()
 	WHERE idx = #{idx}
 	</update>

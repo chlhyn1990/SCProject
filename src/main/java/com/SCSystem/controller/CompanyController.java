@@ -27,9 +27,9 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@PostMapping("/{search}")
+	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<Company>> getCompanyList(@PathVariable String search){
+	public ResponseEntity<List<Company>> getCompanyList(@PathVariable(required = false) String search){
 		List<Company> companys = companyService.getCompanyList(search);
         return new ResponseEntity<>(
         		companys,
