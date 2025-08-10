@@ -19,7 +19,7 @@ import com.SCSystem.service.CompanyGradeService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/api/company")
+@RequestMapping("/api/companyGrade")
 @Slf4j
 @RestController
 public class CompanyGradeController {
@@ -27,9 +27,9 @@ public class CompanyGradeController {
 	@Autowired
 	CompanyGradeService companyGradeService;
 	
-	@PostMapping("/{search}")
+	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<CompanyGrade>> getCompanyGradeList(@PathVariable String search){
+	public ResponseEntity<List<CompanyGrade>> getCompanyGradeList(@PathVariable(required = false) String search){
 		List<CompanyGrade> companyGradeList = companyGradeService.getCompanyGradeList(search);
         return new ResponseEntity<>(
         		companyGradeList,

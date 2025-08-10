@@ -11,7 +11,7 @@
 	<select id="getCompanyGradeSearchList" parameterType="String" resultType="com.SCSystem.dto.CompanyGrade">
 	SELECT * 
 	FROM as_evse.company_grade
-	WHERE grade_name LIKE '%'#{grade_name}'%'
+	WHERE grade_name LIKE CONCAT('%', #{search}, '%')
 	</select>
 	
 	<select id="getCompanyGrade" parameterType="Integer" resultType="com.SCSystem.dto.CompanyGrade">
