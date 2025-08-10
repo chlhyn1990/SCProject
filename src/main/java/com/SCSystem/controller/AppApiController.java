@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/app/api")
 @Slf4j
@@ -60,7 +58,7 @@ public class AppApiController {
         return null;
     }
 
-    @PostMapping("/get/non_fixed_chargers")
+    @PostMapping("/get/chargers_from_station_id")
     public ResponseEntity<List<Charger>> getChargerListFromStationIdx(@RequestBody HashMap<String, Integer> stationIdx){
 
         List<Charger> nonFixedChargers = appService.getNonFixedChargers(stationIdx.get("stationIdx"));
