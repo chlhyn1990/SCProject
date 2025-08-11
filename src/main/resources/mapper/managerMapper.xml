@@ -3,13 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.SCSystem.mapper.ManagerMapper">
-	<select id="getManager" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
+	<select id="login" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
 	SELECT * 
 	FROM as_evse.manager
 	WHERE ID = #{id}
 	</select>
 	
-	<insert id="insertManager" parameterType="com.SCSystem.dto.Manager">
+	<insert id="insert" parameterType="com.SCSystem.dto.Manager">
 	INSERT INTO as_evse.manager
 	(company_idx, manager_grade_idx, id, password, name, phone, longitude, latitude, create_dt, modify_dt)
 	VALUES
@@ -26,4 +26,37 @@
 		,NOW()		
 	)
 	</insert>
+	
+	<select id="getList" resultType="com.SCSystem.dto.Manager">
+	SELECT * 
+	FROM as_evse.manager
+	</select>
+	
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Manager">
+	SELECT * 
+	FROM as_evse.manager
+	WHERE name LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Manager">
+	SELECT * 
+	FROM as_evse.manager
+	WHERE idx = #{idx}
+	</select>
+	
+	<update id="update" parameterType="com.SCSystem.dto.Manager">
+	UPDATE as_evse.manager
+	SET company_idx = #{company_idx}
+	  , manager_grade_idx = #{manager_grade_idx}
+	  , password = #{password}
+	  , name = #{name}
+	  , phone = #{phone}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.manager
+	WHERE idx = #{idx}
+	</delete>
 </mapper>
