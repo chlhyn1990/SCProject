@@ -48,7 +48,9 @@
 	UPDATE as_evse.manager
 	SET company_idx = #{company_idx}
 	  , manager_grade_idx = #{manager_grade_idx}
+	  <if test="password != null and password != ''">
 	  , password = #{password}
+	  </if>
 	  , name = #{name}
 	  , phone = #{phone}
 	  , modify_dt = NOW()
