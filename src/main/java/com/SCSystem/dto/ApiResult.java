@@ -22,7 +22,19 @@ public class ApiResult {
 	
 	//MANAGER
 	final static public String MANAGER_INSERT_FAIL = "2001";
-	final static public String MANAGER_INSERT_FAIL_MSG = "회원가입 실패";
+	final static public String MANAGER_UPDATE_FAIL = "2002";
+	final static public String MANAGER_DELETE_FAIL = "2003";
+	final static public String MANAGER_INSERT_FAIL_MSG = "매니저 가입 실패";
+	final static public String MANAGER_UPDATE_FAIL_MSG = "매니저 수정 실패";
+	final static public String MANAGER_DELETE_FAIL_MSG = "매니저 삭제 실패";
+	
+	//COMPANY
+	final static public String COMPANY_INSERT_FAIL = "3001";
+	final static public String COMPANY_UPDATE_FAIL = "3002";
+	final static public String COMPANY_DELETE_FAIL = "3003";
+	final static public String COMPANY_INSERT_FAIL_MSG = "회사 등록 실패";
+	final static public String COMPANY_UPDATE_FAIL_MSG = "회사 수정 실패";
+	final static public String COMPANY_DELETE_FAIL_MSG = "회사 삭제 실패";
 	
 	public String code;
 	public String msg;

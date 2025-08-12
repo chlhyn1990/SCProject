@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.SCSystem.mapper.ApiMapper">
+<mapper namespace="com.SCSystem.mapper.ManagerMapper">
 	<select id="getManager" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
 	SELECT * 
 	FROM as_evse.manager

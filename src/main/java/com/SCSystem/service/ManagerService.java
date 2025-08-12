@@ -6,21 +6,21 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.SCSystem.dto.Manager;
-import com.SCSystem.mapper.ApiMapper;
+import com.SCSystem.mapper.ManagerMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class ApiService {
+public class ManagerService {
 	@Autowired
 	RestTemplate restTemplate;
 	@Autowired
-	ApiMapper apiMapper;
+	ManagerMapper managerMapper;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	public Manager getManager(Manager manager) {
-		Manager loginManager = apiMapper.getManager(manager);
+		Manager loginManager = managerMapper.getManager(manager);
 		if(loginManager != null && !passwordEncoder.matches(manager.getPassword(), loginManager.getPassword())) {
 			loginManager = null;
 		}
@@ -30,7 +30,7 @@ public class ApiService {
 	public int insertManager(Manager manager) {
 		manager.setPassword(passwordEncoder.encode(manager.getPassword()));
 		try {
-			return apiMapper.insertManager(manager);
+			return managerMapper.insertManager(manager);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

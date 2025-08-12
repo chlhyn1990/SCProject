@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.SCSystem.dto.Manager;
 
 @Mapper
-public interface ApiMapper {
+public interface ManagerMapper {
 
 	Manager getManager(Manager manager);
 	
