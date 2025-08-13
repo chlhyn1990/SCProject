@@ -23,7 +23,7 @@
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.ChargerStation">
 	INSERT INTO as_evse.charger_station
-	(company_idx, manager_idx, name, station_id, addr, detail_addr, latitude, longitude, create_dt, modify_dt)
+	(company_idx, manager_idx, name, station_id, addr, detail_addr, sido, sigungu, latitude, longitude, create_dt, modify_dt)
 	VALUES
 	(
 		 #{company_idx}
@@ -32,6 +32,8 @@
 		,#{station_id}
 		,#{addr}
 		,#{detail_addr}
+		,#{sido}
+		,#{sigungu}
 		,#{latitude}
 		,#{longitude}
 		,NOW()
@@ -47,6 +49,8 @@
 	  , station_id = #{station_id}
 	  , addr = #{addr}
 	  , detail_addr = #{detail_addr}
+	  , sido = #{sido}
+	  , sigungu = #{sigungu}
 	  , latitude = #{latitude}
 	  , longitude = #{longitude}
 	  , modify_dt = NOW()

@@ -17,6 +17,8 @@ public class ChargerStation {
 	private String station_id;
 	private String addr;
 	private String detail_addr;
+	private String sido;
+	private String sigungu;
 	private double latitude;
 	private double longitude;
 	private String create_dt;
