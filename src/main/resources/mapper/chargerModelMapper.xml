@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.ChargerModelMapper">
+
+	<select id="getList" resultType="com.SCSystem.dto.ChargerModel">
+	SELECT * 
+	FROM as_evse.charger_model
+	</select>
+	
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.ChargerModel">
+	SELECT * 
+	FROM as_evse.charger_model
+	WHERE name LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.ChargerModel">
+	SELECT * 
+	FROM as_evse.charger_model
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.SCSystem.dto.ChargerModel">
+	INSERT INTO as_evse.charger_model
+	(company_idx, name, code, vendor, speed, connector_type, connector_number, create_dt, modify_dt)
+	VALUES
+	(
+		 #{company_idx}
+		,#{name}
+		,#{code}
+		,#{vendor}
+		,#{speed}
+		,#{connector_type}
+		,#{connector_number}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.ChargerModel">
+	UPDATE as_evse.charger_model
+	SET company_idx = #{company_idx}
+	  , name = #{name}
+	  , code = #{code}
+	  , vendor = #{vendor}
+	  , speed = #{speed}
+	  , connector_type = #{connector_type}
+	  , connector_number = #{connector_number}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.charger_model
+	WHERE idx = #{idx}
+	</delete>
+</mapper>

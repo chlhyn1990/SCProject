@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.ChargerStationMapper">
+
+	<select id="getList" resultType="com.SCSystem.dto.ChargerStation">
+	SELECT * 
+	FROM as_evse.charger_station
+	</select>
+	
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.ChargerStation">
+	SELECT * 
+	FROM as_evse.charger_station
+	WHERE name LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">
+	SELECT * 
+	FROM as_evse.charger_station
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.SCSystem.dto.ChargerStation">
+	INSERT INTO as_evse.charger_station
+	(company_idx, manager_idx, name, station_id, addr, detail_addr, latitude, longitude, create_dt, modify_dt)
+	VALUES
+	(
+		 #{company_idx}
+		,#{manager_idx}
+		,#{name}
+		,#{station_id}
+		,#{addr}
+		,#{detail_addr}
+		,#{latitude}
+		,#{longitude}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.ChargerStation">
+	UPDATE as_evse.charger_station
+	SET company_idx = #{company_idx}
+	  , manager_idx = #{manager_idx}
+	  , name = #{name}
+	  , station_id = #{station_id}
+	  , addr = #{addr}
+	  , detail_addr = #{detail_addr}
+	  , latitude = #{latitude}
+	  , longitude = #{longitude}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.charger_station
+	WHERE idx = #{idx}
+	</delete>
+</mapper>

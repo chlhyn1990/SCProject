@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.ChargerMapper">
+
+	<select id="getList" resultType="com.SCSystem.dto.Charger">
+	SELECT * 
+	FROM as_evse.charger
+	</select>
+	
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
+	SELECT * 
+	FROM as_evse.charger
+	WHERE charger_id LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+	SELECT * 
+	FROM as_evse.charger
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.SCSystem.dto.Charger">
+	INSERT INTO as_evse.charger
+	(charger_station_idx, charger_model_idx, charger_id, me_id, detail_place, broken_part, remark, fixed_dt, manager_idx, create_dt, modify_dt)
+	VALUES
+	(
+		 #{charger_station_idx}
+		,#{charger_model_idx}
+		,#{charger_id}
+		,#{me_id}
+		,#{detail_place}
+		,#{broken_part}
+		,#{remark}
+		,#{fixed_dt}
+		,#{manager_idx}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.Charger">
+	UPDATE as_evse.charger
+	SET charger_station_idx = #{charger_station_idx}
+	  , charger_model_idx = #{charger_model_idx}
+	  , charger_id = #{charger_id}
+	  , me_id = #{me_id}
+	  , detail_place = #{detail_place}
+	  , broken_part = #{broken_part}
+	  , remark = #{remark}
+	  , fixed_dt = #{fixed_dt}
+	  , manager_idx = #{manager_idx}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE idx = #{idx}
+	</delete>
+</mapper>

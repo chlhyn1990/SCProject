@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Charger {
-	private int dix;
+	private int idx;
 	private int charger_station_idx;
 	private int charger_model_idx;
 	private String charger_id;
@@ -19,8 +19,7 @@ public class Charger {
 	private String broken_part;
 	private String remark;
 	private String fixed_dt;
-	private String manager_id;
+	private int manager_idx;
 	private String modify_dt;
 	private String create_dt;
-	private String chargercol;
 }

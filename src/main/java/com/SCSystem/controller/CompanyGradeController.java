@@ -55,8 +55,8 @@ public class CompanyGradeController {
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.COMPANY_DELETE_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_DELETE_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_DELETE_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_DELETE_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,
@@ -72,8 +72,8 @@ public class CompanyGradeController {
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.COMPANY_INSERT_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_INSERT_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,
@@ -89,8 +89,8 @@ public class CompanyGradeController {
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.COMPANY_UPDATE_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_UPDATE_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_UPDATE_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_UPDATE_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,

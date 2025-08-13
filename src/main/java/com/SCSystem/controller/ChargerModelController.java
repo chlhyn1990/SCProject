@@ -14,44 +14,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
-import com.SCSystem.dto.ManagerGrade;
-import com.SCSystem.service.ManagerGradeService;
+import com.SCSystem.dto.ChargerModel;
+import com.SCSystem.service.ChargerModelService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/api/managerGrade")
+@RequestMapping("/api/chargerModel")
 @Slf4j
 @RestController
-public class ManagerGradeController {
+public class ChargerModelController {
 
 	@Autowired
-	ManagerGradeService managerGradeService;
+	ChargerModelService service;
 	
 	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<ManagerGrade>> getManagerGradeList(@PathVariable(required = false) String search){
-		List<ManagerGrade> managerGradeList = managerGradeService.getManagerGradeList(search);
+	public ResponseEntity<List<ChargerModel>> getList(@PathVariable(required = false) String search){
+		List<ChargerModel> dtos = service.getList(search);
         return new ResponseEntity<>(
-        		managerGradeList,
+        		dtos,
                 HttpStatus.OK
         		);
 	}
 	
-	@PostMapping("/{managerGradeId}")
+	@PostMapping("/{idx}")
 	@ResponseBody
-	public ResponseEntity<ManagerGrade> getManagerGrade(@PathVariable int managerGradeId){
-		ManagerGrade companyGrade = managerGradeService.getManagerGrade(managerGradeId);
+	public ResponseEntity<ChargerModel> get(@PathVariable int idx){
+		ChargerModel dto = service.get(idx);
         return new ResponseEntity<>(
-        		companyGrade,
+        		dto,
                 HttpStatus.OK
         		);
 	}
 	
-	@PostMapping("/delete/{managerGradeId}")
+	@PostMapping("/delete/{idx}")
 	@ResponseBody
-	public ResponseEntity<ApiResult> deleteManagerGrade(@PathVariable  int managerGradeId){
+	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
-		if(managerGradeService.deleteManagerGrade(managerGradeId) == 1){
+		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
@@ -66,9 +66,9 @@ public class ManagerGradeController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<ApiResult> insertManagerGrade(@RequestBody ManagerGrade managerGrade){
+	public ResponseEntity<ApiResult> insert(@RequestBody  ChargerModel dto){
 		ApiResult apiResult = new ApiResult();
-		if(managerGradeService.insertManagerGrade(managerGrade) == 1){
+		if(service.insert(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
@@ -83,9 +83,9 @@ public class ManagerGradeController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public ResponseEntity<ApiResult> updateManagerGrade(@RequestBody  ManagerGrade managerGrade){
+	public ResponseEntity<ApiResult> update(@RequestBody  ChargerModel dto){
 		ApiResult apiResult = new ApiResult();
-		if(managerGradeService.updateManagerGrade(managerGrade) == 1){
+		if(service.update(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
@@ -97,10 +97,6 @@ public class ManagerGradeController {
                 HttpStatus.OK
 				);
 	}
-	
-	
-
-	
 	
 }
 

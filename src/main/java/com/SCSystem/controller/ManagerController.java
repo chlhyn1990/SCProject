@@ -40,7 +40,7 @@ public class ManagerController {
 	
 	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<Manager>> getCompanyList(@PathVariable(required = false) String search){
+	public ResponseEntity<List<Manager>> getList(@PathVariable(required = false) String search){
 		List<Manager> dtos = service.getList(search);
         return new ResponseEntity<>(
         		dtos,
@@ -50,7 +50,7 @@ public class ManagerController {
 	
 	@PostMapping("/{idx}")
 	@ResponseBody
-	public ResponseEntity<Manager> getCompany(@PathVariable int idx){
+	public ResponseEntity<Manager> get(@PathVariable int idx){
 		Manager manager = service.get(idx);
         return new ResponseEntity<>(
         		manager,
@@ -60,14 +60,14 @@ public class ManagerController {
 	
 	@PostMapping("/delete/{idx}")
 	@ResponseBody
-	public ResponseEntity<ApiResult> deleteCompany(@PathVariable  int idx){
+	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
 		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.COMPANY_DELETE_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_DELETE_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_DELETE_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_DELETE_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,
@@ -83,8 +83,8 @@ public class ManagerController {
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.MANAGER_INSERT_FAIL);
-			apiResult.setMsg(ApiResult.MANAGER_INSERT_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,
@@ -100,8 +100,8 @@ public class ManagerController {
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
-			apiResult.setCode(ApiResult.COMPANY_UPDATE_FAIL);
-			apiResult.setMsg(ApiResult.COMPANY_UPDATE_FAIL_MSG);
+			apiResult.setCode(ApiResult.COMMON_UPDATE_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_UPDATE_FAIL_MSG);
 		}
 		return new ResponseEntity<>(
 				apiResult,

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ChargerStation {
 	private int idx;
 	private int company_idx;
+	private int manager_idx;
 	private String name;
 	private String station_id;
 	private String addr;
