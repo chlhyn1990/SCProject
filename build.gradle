@@ -31,9 +31,9 @@ dependencies {
     implementation 'org.springframework.security:spring-security-crypto:5.7.1'
     implementation 'com.jcraft:jsch:0.1.55'
 
-    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.30'  // 최신 안정화 버전
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
     runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'  // 테스트도 호환되는 버전으로 수정
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
