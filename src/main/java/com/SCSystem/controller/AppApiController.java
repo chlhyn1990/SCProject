@@ -70,7 +70,6 @@ public class AppApiController {
                     HttpStatus.NOT_FOUND);
         }
         else{
-            //NOT FOUND user ID
             return new ResponseEntity<>(
                     nonFixedChargers,
                     HttpStatus.OK);
@@ -90,6 +89,7 @@ public class AppApiController {
                     HttpStatus.NOT_FOUND);
         }
         else{
+            log.info("FOUND CHARGER MODELS!");
             return new ResponseEntity<>(
                     chargerModel,
                     HttpStatus.OK);
@@ -107,9 +107,27 @@ public class AppApiController {
                     HttpStatus.NOT_FOUND);
         }
         else{
+            log.info("FOUND CHARGER STATIONS!");
             return new ResponseEntity<>(
                     chargerStations,
                     HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/set/station_manager")
+    public ResponseEntity<ChargerStation> setStationManager(@RequestBody HashMap<String, Integer> data) {
+        Integer updated = appService.setStationManager(data.get("stationIdx"), data.get("managerIdx"));
+        ChargerStation chargerStation = appService.getStationFromIdx(data.get("stationIdx"));
+        if (updated == 1) {
+            return new ResponseEntity<>(
+                    chargerStation,
+                    HttpStatus.OK);
+        } else {
+            chargerStation = new ChargerStation();
+            chargerStation.setIdx(0);
+            return new ResponseEntity<>(
+                    chargerStation,
+                    HttpStatus.NOT_FOUND);
         }
     }
 

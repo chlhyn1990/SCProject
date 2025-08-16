@@ -52,4 +52,13 @@ public class AppService {
     public List<ChargerStation> getNonFixedChargerStations(Integer companyIdx) {
         return appMapper.getNonFixedChargerStations(companyIdx);
     }
+
+    public Integer setStationManager(Integer chargerStationIdx, Integer managerIdx){
+        return appMapper.updateStationManager(chargerStationIdx, managerIdx);
+    };
+
+    public ChargerStation getStationFromIdx(Integer chargerStationIdx){
+        return appMapper.getStationFromIdx(chargerStationIdx);
+    };
+
 }

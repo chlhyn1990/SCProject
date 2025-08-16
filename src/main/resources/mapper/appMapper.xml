@@ -16,4 +16,13 @@
 	<select id="getFixedChargerStations" parameterType="Integer" resultType="hashmap">
 		SELECT DISTINCT charger_station_idx, cs.* FROM charger c JOIN charger_station cs ON c.charger_station_idx=cs.idx WHERE fixed_dt IS NOT NULL AND cs.company_idx=#{companyIdx};
 	</select>
+
+	<update id="updateStationManager" parameterType="Integer" >
+		UPDATE charger_station SET manager_idx=#{managerIdx} where idx=#{chargerStationIdx};
+	</update>
+
+	<select id="getStationFromIdx" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">
+		SELECT * from charger_station where idx=#{chargerStationIdx};
+	</select>
+
 </mapper>
