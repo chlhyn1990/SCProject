@@ -54,6 +54,9 @@ public class AppService {
     }
 
     public Integer setStationManager(Integer chargerStationIdx, Integer managerIdx){
+        if(managerIdx==0){
+            managerIdx=null;
+        }
         return appMapper.updateStationManager(chargerStationIdx, managerIdx);
     };
 
