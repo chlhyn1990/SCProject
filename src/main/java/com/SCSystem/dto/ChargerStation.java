@@ -14,6 +14,7 @@ public class ChargerStation {
 	private int company_idx;
 	private int manager_idx;
 	private String name;
+	private String chargerCompany;
 	private String station_id;
 	private String addr;
 	private String detail_addr;
@@ -21,6 +22,10 @@ public class ChargerStation {
 	private String sigungu;
 	private double latitude;
 	private double longitude;
+	private int volt;
+	private int watt;
+	private String chargerType;
+	private String result;
 	private String create_dt;
 	private String modify_dt;
 }

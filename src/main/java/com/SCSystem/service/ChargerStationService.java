@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.SCSystem.dto.ChargerStation;
 import com.SCSystem.mapper.ChargerStationMapper;
+import com.SCSystem.mapper.CheckListMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,6 +18,7 @@ public class ChargerStationService {
 	RestTemplate restTemplate;
 	@Autowired
 	ChargerStationMapper mapper;
+	CheckListMapper checkListMapper;
 
 	public List<ChargerStation> getList(String search) {
 		if(search == null || search.equals(""))
