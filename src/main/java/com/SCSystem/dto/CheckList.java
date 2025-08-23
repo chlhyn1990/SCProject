@@ -13,6 +13,8 @@ public class CheckList {
 	private int idx;
 	private int company_idx;
 	private int manager_idx;
+	private String company_name;
+	private String manager_name;
 	private String checking_name;
 	private int row;
 	private int col;

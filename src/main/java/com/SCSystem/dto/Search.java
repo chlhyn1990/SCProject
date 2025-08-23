@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Company {
-	private int idx;
-	private int company_grade_idx;
-	private String grade_name;
-	private String company_name;
-	private String create_dt;
-	private String modify_dt;
+public class Search {
+	private String searchCompany = null;
+	private String searchManager = null;
+	private String searchName = null;
 }

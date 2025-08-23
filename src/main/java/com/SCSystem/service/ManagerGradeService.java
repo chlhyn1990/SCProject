@@ -20,10 +20,7 @@ public class ManagerGradeService {
 	ManagerGradeMapper managerGradeMapper;
 	
 	public List<ManagerGrade> getManagerGradeList(String search) {
-		if(search == null || search.equals(""))
-			return managerGradeMapper.getManagerGradeList();
-		else
-			return managerGradeMapper.getManagerGradeSearchList(search);
+		return managerGradeMapper.getManagerGradeSearchList(search);
 	}
 	
 	public ManagerGrade getManagerGrade(int managerGradeId) {

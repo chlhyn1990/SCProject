@@ -19,10 +19,7 @@ public class ChargerService {
 	ChargerMapper mapper;
 
 	public List<Charger> getList(String search) {
-		if(search == null || search.equals(""))
-			return mapper.getList();
-		else
-			return mapper.getSearchList(search);
+		return mapper.getSearchList(search);
 	}
 	
 	public Charger get(int idx) {

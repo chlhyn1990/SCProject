@@ -31,10 +31,7 @@ public class ManagerService {
 	}
 	
 	public List<Manager> getList(String search) {
-		if(search == null || search.equals(""))
-			return mapper.getList();
-		else
-			return mapper.getSearchList(search);
+		return mapper.getSearchList(search);
 	}
 	
 	public Manager get(int idx) {

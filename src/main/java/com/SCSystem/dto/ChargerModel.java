@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ChargerModel {
 	private int idx;
 	private int company_idx;
+	private String company_name;
 	private String name;
 	private String code;
 	private String vendor;

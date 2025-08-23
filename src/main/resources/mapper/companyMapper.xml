@@ -3,15 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.SCSystem.mapper.CompanyMapper">
-	<select id="getCompanyList" resultType="com.SCSystem.dto.Company">
-	SELECT * 
-	FROM as_evse.company
-	</select>
-	
+
 	<select id="getCompanySearchList" parameterType="String" resultType="com.SCSystem.dto.Company">
-	SELECT * 
-	FROM as_evse.company
-	WHERE company_name LIKE CONCAT('%', #{search}, '%')
+	SELECT A.*
+		, (SELECT grade_name 
+			 FROM as_evse.company_grade B
+			WHERE B.idx = A.company_grade_idx) grade_name
+	FROM as_evse.company A
+	<if test="search != null and search != ''">
+    WHERE A.company_name LIKE CONCAT('%', #{search}, '%')
+    </if>
 	</select>
 	
 	<select id="getCompany" parameterType="Integer" resultType="com.SCSystem.dto.Company">

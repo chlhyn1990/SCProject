@@ -15,6 +15,8 @@ public class Manager {
 	private int idx;
 	private int company_idx;
 	private int manager_grade_idx;
+	private String manager_grade_name;
+	private String company_name;
 	private String id;
 	private String password;
 	private String name;

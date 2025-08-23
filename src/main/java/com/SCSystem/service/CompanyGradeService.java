@@ -20,10 +20,7 @@ public class CompanyGradeService {
 	CompanyGradeMapper companyGradeMapper;
 	
 	public List<CompanyGrade> getCompanyGradeList(String search) {
-		if(search == null || search.equals(""))
-			return companyGradeMapper.getCompanyGradeList();
-		else
-			return companyGradeMapper.getCompanyGradeSearchList(search);
+		return companyGradeMapper.getCompanyGradeSearchList(search);
 	}
 	
 	public CompanyGrade getCompanyGrade(int companyGradeId) {

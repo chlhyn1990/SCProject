@@ -5,13 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.SCSystem.dto.CheckList;
+import com.SCSystem.dto.Search;
 
 @Mapper
 public interface CheckListMapper {
 	
 	List<CheckList> getList();
 	
-	List<CheckList> getSearchList(String search);
+	List<CheckList> getSearchList(Search search);
 	
 	CheckList get(int idx);
 	

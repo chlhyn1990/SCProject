@@ -4,15 +4,18 @@
 
 <mapper namespace="com.SCSystem.mapper.ChargerStationMapper">
 
-	<select id="getList" resultType="com.SCSystem.dto.ChargerStation">
-	SELECT * 
-	FROM as_evse.charger_station
-	</select>
-	
 	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.ChargerStation">
-	SELECT * 
-	FROM as_evse.charger_station
-	WHERE name LIKE CONCAT('%', #{search}, '%')
+	SELECT A.*
+		, (SELECT name 
+			 FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name  
+	FROM as_evse.charger_station A
+	<if test="search != null and search != ''">
+    WHERE name LIKE CONCAT('%', #{search}, '%')
+    </if>
 	</select>
 	
 	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">

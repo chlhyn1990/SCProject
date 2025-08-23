@@ -21,10 +21,7 @@ public class ChargerStationService {
 	CheckListMapper checkListMapper;
 
 	public List<ChargerStation> getList(String search) {
-		if(search == null || search.equals(""))
-			return mapper.getList();
-		else
-			return mapper.getSearchList(search);
+		return mapper.getSearchList(search);
 	}
 	
 	public ChargerStation get(int idx) {

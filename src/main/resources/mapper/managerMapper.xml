@@ -4,7 +4,7 @@
 
 <mapper namespace="com.SCSystem.mapper.ManagerMapper">
 	<select id="login" parameterType="com.SCSystem.dto.Manager" resultType="com.SCSystem.dto.Manager">
-	SELECT * 
+	SELECT *
 	FROM as_evse.manager
 	WHERE ID = #{id}
 	</select>
@@ -27,15 +27,18 @@
 	)
 	</insert>
 	
-	<select id="getList" resultType="com.SCSystem.dto.Manager">
-	SELECT * 
-	FROM as_evse.manager
-	</select>
-	
 	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Manager">
-	SELECT * 
-	FROM as_evse.manager
-	WHERE name LIKE CONCAT('%', #{search}, '%')
+	SELECT A.*
+		, (SELECT grade_name 
+				 FROM as_evse.manager_grade B
+				WHERE B.idx = A.manager_grade_idx) manager_grade_name
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name 
+	FROM as_evse.manager A
+	<if test="search != null and search != ''">
+    WHERE name LIKE CONCAT('%', #{search}, '%')
+    </if>
 	</select>
 	
 	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Manager">

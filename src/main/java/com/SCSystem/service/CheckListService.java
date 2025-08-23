@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.CheckList;
+import com.SCSystem.dto.Search;
 import com.SCSystem.mapper.CheckListMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,11 +19,8 @@ public class CheckListService {
 	@Autowired
 	CheckListMapper mapper;
 
-	public List<CheckList> getList(String search) {
-		if(search == null || search.equals(""))
-			return mapper.getList();
-		else
-			return mapper.getSearchList(search);
+	public List<CheckList> getList(Search search) {
+		return mapper.getSearchList(search);
 	}
 	
 	public CheckList get(int idx) {
