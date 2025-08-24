@@ -13,6 +13,7 @@ public class Charger {
 	private int idx;
 	private int charger_station_idx;
 	private int charger_model_idx;
+	private int distribution_idx;
 	private String station_name;
 	private String model_name;
 	private String charger_id;
