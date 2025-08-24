@@ -49,6 +49,13 @@
 	)
 	</insert>
 	
+	<insert id="insertCheckList" statementType="CALLABLE">
+    {call insert_station_default_data(
+        #{company_idx, mode=IN, jdbcType=INTEGER},
+        #{manager_idx, mode=IN, jdbcType=INTEGER}
+    )}
+	</insert>
+	
 	<update id="update" parameterType="com.SCSystem.dto.ChargerStation">
 	UPDATE as_evse.charger_station
 	SET company_idx = #{company_idx}

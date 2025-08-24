@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.ChargerStation;
 import com.SCSystem.mapper.ChargerStationMapper;
-import com.SCSystem.mapper.CheckListMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,7 +17,6 @@ public class ChargerStationService {
 	RestTemplate restTemplate;
 	@Autowired
 	ChargerStationMapper mapper;
-	CheckListMapper checkListMapper;
 
 	public List<ChargerStation> getList(String search) {
 		return mapper.getSearchList(search);
@@ -30,6 +28,7 @@ public class ChargerStationService {
 	
 	public int insert(ChargerStation dto) {
 		try {
+			mapper.insertCheckList(dto.getCompany_idx(), dto.getManager_idx());
 			return mapper.insert(dto);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
