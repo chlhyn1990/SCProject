@@ -1,9 +1,6 @@
 package com.SCSystem.service;
 
-import com.SCSystem.dto.Charger;
-import com.SCSystem.dto.ChargerModel;
-import com.SCSystem.dto.ChargerStation;
-import com.SCSystem.dto.Manager;
+import com.SCSystem.dto.*;
 import com.SCSystem.mapper.AppMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +55,13 @@ public class AppService {
             managerIdx=null;
         }
         return appMapper.updateStationManager(chargerStationIdx, managerIdx);
-    };
+    }
 
     public ChargerStation getStationFromIdx(Integer chargerStationIdx){
         return appMapper.getStationFromIdx(chargerStationIdx);
+    }
+    public List<Distribution> getDistributions(Integer chargerStationIdx){
+        return appMapper.getDistributions(chargerStationIdx);
     };
 
 }

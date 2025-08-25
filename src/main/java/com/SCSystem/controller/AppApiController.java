@@ -1,9 +1,6 @@
 package com.SCSystem.controller;
 
-import com.SCSystem.dto.Charger;
-import com.SCSystem.dto.ChargerModel;
-import com.SCSystem.dto.ChargerStation;
-import com.SCSystem.dto.Manager;
+import com.SCSystem.dto.*;
 import com.SCSystem.service.AppService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,4 +131,24 @@ public class AppApiController {
                     HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/get/distributions_from_station_id")
+    public ResponseEntity<List<Distribution>> getDistributions(@RequestBody HashMap<String, Integer> stationIdx){
+
+        List<Distribution> distributions = appService.getDistributions(stationIdx.get("stationIdx"));
+
+        if(distributions.isEmpty()) {
+            log.info("[getChargerListFromStationIdx]NOT FOUND CHARGER!");
+            return new ResponseEntity<>(
+                    distributions,
+                    HttpStatus.NOT_FOUND);
+        }
+        else{
+            log.info("[getChargerListFromStationIdx]FOUND CHARGER!");
+            return new ResponseEntity<>(
+                    distributions,
+                    HttpStatus.OK);
+        }
+    }
+
 }
