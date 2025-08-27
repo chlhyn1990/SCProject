@@ -24,8 +24,8 @@
 	<select id="getStationFromIdx" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">
 		SELECT * from charger_station where idx=#{chargerStationIdx};
 	</select>
-	<select id="getDistributionsFromStationIdx" parameterType="Integer" resultType="hashmap">
-		SELECT * from distribution where idx=#{chargerStationIdx};
+	<select id="getDistributions" parameterType="Integer" resultType="hashmap">
+		SELECT * from distribution where charger_station_idx=#{chargerStationIdx};
 	</select>
 
 </mapper>
