@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.DistributionMapper">
+
+	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">
+	SELECT A.*
+	FROM as_evse.distribution A
+	WHERE charger_station_idx = #{charger_station_idx}
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">
+	SELECT * 
+	FROM as_evse.distribution
+	WHERE charger_station_idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.SCSystem.dto.Distribution">
+	INSERT INTO as_evse.distribution
+	(charger_station_idx, id, name, detail_place, create_dt, modify_dt)
+	VALUES
+	(
+		 #{charger_station_idx}
+		,#{id}
+		,#{name}
+		,#{detail_place}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.Distribution">
+	UPDATE as_evse.distribution
+	SET charger_station_idx = #{charger_station_idx}
+	  , id = #{id}
+	  , name = #{name}
+	  , detail_place = #{detail_place}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.distribution
+	WHERE idx = #{idx}
+	</delete>
+	
+	<delete id="deleteFromStation" parameterType="Integer">
+	DELETE FROM as_evse.distribution
+	WHERE charger_station_idx = #{charger_station_idx}
+	</delete>
+</mapper>

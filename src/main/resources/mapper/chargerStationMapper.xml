@@ -47,6 +47,10 @@
 		,NOW()
 		,NOW()		
 	)
+	
+		<selectKey keyProperty="idx" resultType="java.lang.Integer" >
+         	SELECT LAST_INSERT_ID()
+  		</selectKey>
 	</insert>
 	
 	<insert id="insertCheckList" statementType="CALLABLE">

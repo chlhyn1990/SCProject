@@ -29,7 +29,8 @@ public class ChargerStationService {
 	public int insert(ChargerStation dto) {
 		try {
 			mapper.insertCheckList(dto.getCompany_idx(), dto.getManager_idx());
-			return mapper.insert(dto);
+			mapper.insert(dto);
+			return dto.getIdx();
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

@@ -14,30 +14,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
-import com.SCSystem.dto.ChargerStation;
-import com.SCSystem.service.ChargerStationService;
+import com.SCSystem.dto.Distribution;
 import com.SCSystem.service.DistributionService;
 import com.SCSystem.service.ChargerService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/api/chargerStation")
+@RequestMapping("/api/distribution")
 @Slf4j
 @RestController
-public class ChargerStationController {
+public class DistributionController {
 
 	@Autowired
-	ChargerStationService service;
-	@Autowired
-	DistributionService distributionService;
+	DistributionService service;
 	@Autowired
 	ChargerService chargerService;
 	
-	
-	@PostMapping({"/list", "/list/{search}"})
+	@PostMapping({"/list", "/list/{charger_station_idx}"})
 	@ResponseBody
-	public ResponseEntity<List<ChargerStation>> getList(@PathVariable(required = false) String search){
-		List<ChargerStation> dtos = service.getList(search);
+	public ResponseEntity<List<Distribution>> getList(@PathVariable(required = false) int charger_station_idx){
+		List<Distribution> dtos = service.getList(charger_station_idx);
         return new ResponseEntity<>(
         		dtos,
                 HttpStatus.OK
@@ -46,8 +42,8 @@ public class ChargerStationController {
 	
 	@PostMapping("/{idx}")
 	@ResponseBody
-	public ResponseEntity<ChargerStation> get(@PathVariable int idx){
-		ChargerStation dto = service.get(idx);
+	public ResponseEntity<Distribution> get(@PathVariable int idx){
+		Distribution dto = service.get(idx);
         return new ResponseEntity<>(
         		dto,
                 HttpStatus.OK
@@ -58,8 +54,7 @@ public class ChargerStationController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
-		chargerService.deleteFromStation(idx);
-		distributionService.deleteFromStation(idx);
+		chargerService.deleteFromDistribution(idx);
 		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
@@ -75,26 +70,24 @@ public class ChargerStationController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<Integer> insert(@RequestBody  ChargerStation dto){
+	public ResponseEntity<ApiResult> insert(@RequestBody  Distribution dto){
 		ApiResult apiResult = new ApiResult();
-		int insertIdx = service.insert(dto);
-		if(insertIdx > 0){
+		if(service.insert(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
 			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
 			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
 		}
-
 		return new ResponseEntity<>(
-				insertIdx,
+				apiResult,
                 HttpStatus.OK
 				);
 	}
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public ResponseEntity<ApiResult> update(@RequestBody  ChargerStation dto){
+	public ResponseEntity<ApiResult> update(@RequestBody  Distribution dto){
 		ApiResult apiResult = new ApiResult();
 		if(service.update(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);

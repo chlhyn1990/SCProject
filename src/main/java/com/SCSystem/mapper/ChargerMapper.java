@@ -20,6 +20,10 @@ public interface ChargerMapper {
 	int update(Charger manager);
 	
 	int delete(int idx);
+	
+	int deleteFromStation(int charger_station_idx);
+	
+	int deleteFromDistribution(int distribution_idx);
 
 }
 

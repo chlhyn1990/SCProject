@@ -6,27 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.SCSystem.dto.Charger;
-import com.SCSystem.mapper.ChargerMapper;
+import com.SCSystem.dto.Distribution;
+import com.SCSystem.mapper.DistributionMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class ChargerService {
+public class DistributionService {
 	@Autowired
 	RestTemplate restTemplate;
 	@Autowired
-	ChargerMapper mapper;
+	DistributionMapper mapper;
 
-	public List<Charger> getList(String search) {
-		return mapper.getSearchList(search);
+	public List<Distribution> getList(int charger_station_idx) {
+		return mapper.getList(charger_station_idx);
 	}
 	
-	public Charger get(int idx) {
+	public Distribution get(int idx) {
 		return mapper.get(idx);
 	}
 	
-	public int insert(Charger dto) {
+	public int insert(Distribution dto) {
 		try {
 			return mapper.insert(dto);
 		}catch(Exception e) {
@@ -35,7 +35,7 @@ public class ChargerService {
 		}
 	}
 	
-	public int update(Charger dto) {
+	public int update(Distribution dto) {
 		try {
 			return mapper.update(dto);
 		}catch(Exception e) {
@@ -55,14 +55,6 @@ public class ChargerService {
 	public int deleteFromStation(int charger_station_idx) {
 		try {
 			return mapper.deleteFromStation(charger_station_idx);
-		}catch(Exception e) {
-			log.warn(e.getMessage());
-			return 0;
-		}
-	}
-	public int deleteFromDistribution(int distribution_idx) {
-		try {
-			return mapper.deleteFromDistribution(distribution_idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

@@ -29,10 +29,11 @@
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.Charger">
 	INSERT INTO as_evse.charger
-	(charger_station_idx, charger_model_idx, charger_id, me_id, detail_place, broken_part, remark, fixed_dt, manager_idx, create_dt, modify_dt)
+	(charger_station_idx, distribution_idx, charger_model_idx, charger_id, me_id, detail_place, broken_part, remark, fixed_dt, manager_idx, create_dt, modify_dt)
 	VALUES
 	(
 		 #{charger_station_idx}
+		,#{distribution_idx}
 		,#{charger_model_idx}
 		,#{charger_id}
 		,#{me_id}
@@ -49,6 +50,7 @@
 	<update id="update" parameterType="com.SCSystem.dto.Charger">
 	UPDATE as_evse.charger
 	SET charger_station_idx = #{charger_station_idx}
+	  , distribution_idx = #{distribution_idx}
 	  , charger_model_idx = #{charger_model_idx}
 	  , charger_id = #{charger_id}
 	  , me_id = #{me_id}
@@ -64,5 +66,15 @@
 	<delete id="delete" parameterType="Integer">
 	DELETE FROM as_evse.charger
 	WHERE idx = #{idx}
+	</delete>
+	
+	<delete id="deleteFromStation" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE charger_station_idx = #{charger_station_idx}
+	</delete>
+	
+	<delete id="deleteFromDistribution" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE distribution_idx = #{distribution_idx}
 	</delete>
 </mapper>
