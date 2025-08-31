@@ -29,8 +29,8 @@ public class ChargerController {
 	
 	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<Charger>> getList(@PathVariable(required = false) String search){
-		List<Charger> dtos = service.getList(search);
+	public ResponseEntity<List<Charger>> getSearchList(@PathVariable(required = false) String search){
+		List<Charger> dtos = service.getSearchList(search);
         return new ResponseEntity<>(
         		dtos,
                 HttpStatus.OK

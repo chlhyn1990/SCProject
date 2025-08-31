@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.Distribution;
 import com.SCSystem.mapper.DistributionMapper;
+import com.SCSystem.mapper.ChargerMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,9 +18,15 @@ public class DistributionService {
 	RestTemplate restTemplate;
 	@Autowired
 	DistributionMapper mapper;
+	@Autowired
+	ChargerMapper chargerMapper;
 
 	public List<Distribution> getList(int charger_station_idx) {
-		return mapper.getList(charger_station_idx);
+		List<Distribution> distributionList = mapper.getList(charger_station_idx);
+		for(int i = 0; i < distributionList.size(); i++) {
+			distributionList.get(i).setChargerList(chargerMapper.getList(distributionList.get(i).getIdx()));
+		}
+		return distributionList;
 	}
 	
 	public Distribution get(int idx) {

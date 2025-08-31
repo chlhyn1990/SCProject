@@ -17,8 +17,12 @@ public class ChargerService {
 	RestTemplate restTemplate;
 	@Autowired
 	ChargerMapper mapper;
+	
+	public List<Charger> getList(int distribution_idx) {
+		return mapper.getList(distribution_idx);
+	}
 
-	public List<Charger> getList(String search) {
+	public List<Charger> getSearchList(String search) {
 		return mapper.getSearchList(search);
 	}
 	

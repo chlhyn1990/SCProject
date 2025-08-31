@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.ibatis.cache.Cache;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Data
 public class Distribution {
@@ -14,4 +15,5 @@ public class Distribution {
     private String detail_place;
     private String create_dt;
     private String modify_dt;
+    private List<Charger> chargerList;
 }

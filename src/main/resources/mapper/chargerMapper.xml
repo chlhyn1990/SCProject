@@ -4,6 +4,12 @@
 
 <mapper namespace="com.SCSystem.mapper.ChargerMapper">
 
+	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+		SELECT *
+		FROM as_evse.charger
+		WHERE distribution_idx = #{distribution_idx}
+	</select
+	>
 	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
 	SELECT A.*
 		, (SELECT B.name 
@@ -16,8 +22,9 @@
 			 FROM as_evse.manager B
 			WHERE B.idx = A.manager_idx) manager_name
 	FROM as_evse.charger A
+	WHERE 1 = 1
 	<if test="search != null and search != ''">
-    WHERE charger_id LIKE CONCAT('%', #{search}, '%')
+    AND charger_id LIKE CONCAT('%', #{search}, '%')
     </if>
 	</select>
 	

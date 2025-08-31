@@ -9,7 +9,7 @@ import com.SCSystem.dto.Charger;
 @Mapper
 public interface ChargerMapper {
 	
-	List<Charger> getList();
+	List<Charger> getList(int distribution_idx);
 	
 	List<Charger> getSearchList(String search);
 	
