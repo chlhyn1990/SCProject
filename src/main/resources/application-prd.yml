@@ -13,8 +13,11 @@ spring:
     url: jdbc:mysql://localhost:3306/as_evse
     username: as_evse
     password: asEvse!1@2
-  
-    
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
 # MyBatis 설정 정보
 mybatis:
   config-location: classpath:mybatis-config.xml

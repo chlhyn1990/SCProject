@@ -55,21 +55,21 @@ public class AppApiController {
         return null;
     }
 
-    @PostMapping("/get/chargers_from_station_id")
-    public ResponseEntity<List<Charger>> getChargerListFromStationIdx(@RequestBody HashMap<String, Integer> stationIdx){
+    @PostMapping("/get/chargers_from_distribution_idx")
+    public ResponseEntity<List<Charger>> getChargersFromDistributionIdx(@RequestBody HashMap<String, Integer> distributionIdx){
 
-        List<Charger> nonFixedChargers = appService.getNonFixedChargers(stationIdx.get("stationIdx"));
+        List<Charger> chargers = appService.getChargersFromDistributionIdx(distributionIdx.get("distributionIdx"));
 
-        if(nonFixedChargers.isEmpty()) {
-            log.info("[getChargerListFromStationIdx]NOT FOUND CHARGER!");
+        if(chargers.isEmpty()) {
+            log.info("[getChargersFromDistributionIdx]NOT FOUND CHARGER!");
             return new ResponseEntity<>(
-                    nonFixedChargers,
+                    chargers,
                     HttpStatus.NOT_FOUND);
         }
         else{
-            log.info("[getChargerListFromStationIdx]FOUND CHARGER!");
+            log.info("[getChargersFromDistributionIdx]FOUND CHARGER!");
             return new ResponseEntity<>(
-                    nonFixedChargers,
+                    chargers,
                     HttpStatus.OK);
         }
     }
@@ -150,5 +150,26 @@ public class AppApiController {
                     HttpStatus.OK);
         }
     }
+
+    @PostMapping("/set/station_fixed")
+    public ResponseEntity<ChargerStation> setStationFixed(@RequestBody HashMap<String, Integer> stationIdx){
+        Integer updated = appService.setStationFixed(stationIdx.get("stationIdx"));
+        ChargerStation chargerStation = appService.getStationFromIdx(stationIdx.get("stationIdx"));
+
+        if (updated == 1) {
+            log.info("[setStationManager]UPDATED MANAGER CHARGER STATIONS!");
+            return new ResponseEntity<>(
+                    chargerStation,
+                    HttpStatus.OK);
+        } else {
+            log.info("[setStationManager]FAILED TO UPDATE MANAGER CHARGER STATIONS!");
+            chargerStation = new ChargerStation();
+            chargerStation.setIdx(-1);
+            return new ResponseEntity<>(
+                    chargerStation,
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }

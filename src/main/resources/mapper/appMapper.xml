@@ -27,5 +27,12 @@
 	<select id="getDistributions" parameterType="Integer" resultType="hashmap">
 		SELECT * from distribution where charger_station_idx=#{chargerStationIdx};
 	</select>
+	<update id="updateStationFixed" parameterType="Integer" >
+		UPDATE charger_station SET fixed_dt=now() where idx=#{chargerStationIdx};
+	</update>
+	<select id="getChargersFromDistributionIdx" parameterType="Integer" resultType="hashmap">
+		SELECT * from charger where distribution_idx=#{distributionIdx};
+	</select>
+
 
 </mapper>

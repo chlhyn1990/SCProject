@@ -38,8 +38,8 @@ public class AppService {
         }
     }
 
-    public List<Charger> getNonFixedChargers(Integer companyIdx) {
-        return appMapper.getChargersFromStationIdx(companyIdx);
+    public List<Charger> getChargersFromDistributionIdx(Integer distributionIdx) {
+        return appMapper.getChargersFromDistributionIdx(distributionIdx);
     }
 
     public ChargerModel getChargerModel(Integer chargerModelIdx) {
@@ -63,5 +63,9 @@ public class AppService {
     public List<Distribution> getDistributions(Integer chargerStationIdx){
         return appMapper.getDistributions(chargerStationIdx);
     };
+
+    public Integer setStationFixed(Integer chargerStationIdx){
+        return appMapper.updateStationFixed(chargerStationIdx);
+    }
 
 }
