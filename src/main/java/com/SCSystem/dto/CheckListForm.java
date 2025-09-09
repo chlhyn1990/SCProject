@@ -74,7 +74,7 @@ public class CheckListForm {
 		list.add(new ExcelData("배선의 적정성", "Y", 1, 1));
 		list.add(new ExcelData("적합한 케이블 사용", "Y", 1, 1));
 		list.add(new ExcelData("금속부분은 접지", "Y", 1, 1));
-		list.add(new ExcelData("케이블의 손상 없슴", "Y", 1, 1));
+		list.add(new ExcelData("케이블의 손상 없음", "Y", 1, 1));
 		list.add(new ExcelData("", "", 3, 1));
 		list.add(new ExcelData("분전함 결선상태 정상", "Y", 1, 1));
 		list.add(new ExcelData("절연 저항 측정", "무한대", 1, 1));
