@@ -33,12 +33,15 @@
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.CheckList">
 	INSERT INTO as_evse.check_list
-	(company_idx, manager_idx, checking_name, ord, photo_yn, create_dt, modify_dt)
+	(company_idx, manager_idx, checking_name, page, row, col, ord, photo_yn, create_dt, modify_dt)
 	VALUES
 	(
 		 #{company_idx}
 		,#{manager_idx}
 		,#{checking_name}
+		,#{page}
+		,#{row}
+		,#{col}
 		,#{ord}
 		,#{photo_yn}
 		,NOW()
@@ -51,6 +54,9 @@
 	SET company_idx = #{company_idx}
 	  , manager_idx = #{manager_idx}
 	  , checking_name = #{checking_name}
+	  , page = #{page}
+	  , row = #{row}
+	  , col = #{col}
 	  , ord = #{ord}
 	  , photo_yn = #{photo_yn}
 	  , modify_dt = NOW()

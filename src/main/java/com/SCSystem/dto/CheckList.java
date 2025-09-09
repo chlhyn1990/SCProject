@@ -16,6 +16,7 @@ public class CheckList {
 	private String company_name;
 	private String manager_name;
 	private String checking_name;
+	private int page;
 	private int row;
 	private int col;
 	private int ord;
