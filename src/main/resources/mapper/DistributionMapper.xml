@@ -4,10 +4,17 @@
 
 <mapper namespace="com.SCSystem.mapper.DistributionMapper">
 
-	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">
+	<select id="getList" resultType="com.SCSystem.dto.Distribution">
 	SELECT A.*
 	FROM as_evse.distribution A
-	WHERE charger_station_idx = #{charger_station_idx}
+	</select>
+
+	<select id="getListByStation" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">
+	SELECT A.*
+	FROM as_evse.distribution A
+	<if test="charger_station_idx != null and charger_station_idx != ''">
+    WHERE charger_station_idx = #{charger_station_idx}
+    </if>
 	</select>
 	
 	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">

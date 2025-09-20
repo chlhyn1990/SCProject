@@ -21,6 +21,9 @@
 		, (SELECT name 
 			 FROM as_evse.manager B
 			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.name 
+			 FROM as_evse.distribution B
+			WHERE B.idx = A.distribution_idx) distribution_name  
 	FROM as_evse.charger A
 	WHERE 1 = 1
 	<if test="search != null and search != ''">

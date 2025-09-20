@@ -14,36 +14,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
-import com.SCSystem.dto.Distribution;
+import com.SCSystem.dto.ChargerCheck;
+import com.SCSystem.service.ChargerCheckService;
 import com.SCSystem.service.DistributionService;
 import com.SCSystem.service.ChargerService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/api/distribution")
+@RequestMapping("/api/chargerCheck")
 @Slf4j
 @RestController
-public class DistributionController {
+public class ChargerCheckController {
 
 	@Autowired
-	DistributionService service;
+	ChargerCheckService service;
+	@Autowired
+	DistributionService distributionService;
 	@Autowired
 	ChargerService chargerService;
 	
-	@PostMapping("/list")
-	@ResponseBody
-	public ResponseEntity<List<Distribution>> getList(){
-		List<Distribution> dtos = service.getList();
-        return new ResponseEntity<>(
-        		dtos,
-                HttpStatus.OK
-        		);
-	}
 	
-	@PostMapping("/list/{charger_station_idx}")
+	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<Distribution>> getListByStation(@PathVariable(required = false) int charger_station_idx){
-		List<Distribution> dtos = service.getListByStation(charger_station_idx);
+	public ResponseEntity<List<ChargerCheck>> getList(@PathVariable(required = false) String search){
+		List<ChargerCheck> dtos = service.getList(search);
         return new ResponseEntity<>(
         		dtos,
                 HttpStatus.OK
@@ -52,8 +46,8 @@ public class DistributionController {
 	
 	@PostMapping("/{idx}")
 	@ResponseBody
-	public ResponseEntity<Distribution> get(@PathVariable int idx){
-		Distribution dto = service.get(idx);
+	public ResponseEntity<ChargerCheck> get(@PathVariable int idx){
+		ChargerCheck dto = service.get(idx);
         return new ResponseEntity<>(
         		dto,
                 HttpStatus.OK
@@ -64,7 +58,8 @@ public class DistributionController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
-		chargerService.deleteFromDistribution(idx);
+		chargerService.deleteFromStation(idx);
+		distributionService.deleteFromStation(idx);
 		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
@@ -80,24 +75,26 @@ public class DistributionController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<ApiResult> insert(@RequestBody  Distribution dto){
+	public ResponseEntity<Integer> insert(@RequestBody  ChargerCheck dto){
 		ApiResult apiResult = new ApiResult();
-		if(service.insert(dto) == 1){
+		int insertIdx = service.insert(dto);
+		if(insertIdx > 0){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {
 			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
 			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
 		}
+
 		return new ResponseEntity<>(
-				apiResult,
+				insertIdx,
                 HttpStatus.OK
 				);
 	}
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public ResponseEntity<ApiResult> update(@RequestBody  Distribution dto){
+	public ResponseEntity<ApiResult> update(@RequestBody  ChargerCheck dto){
 		ApiResult apiResult = new ApiResult();
 		if(service.update(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);

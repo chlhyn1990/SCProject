@@ -24,6 +24,7 @@ public class Charger {
 	private String fixed_dt;
 	private int manager_idx;
 	private String manager_name;
+	private String distribution_name;
 	private String modify_dt;
 	private String create_dt;
 }

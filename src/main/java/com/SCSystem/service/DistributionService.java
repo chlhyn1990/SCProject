@@ -20,9 +20,14 @@ public class DistributionService {
 	DistributionMapper mapper;
 	@Autowired
 	ChargerMapper chargerMapper;
+	
+	public List<Distribution> getList() {
+		List<Distribution> distributionList = mapper.getList();
+		return distributionList;
+	}
 
-	public List<Distribution> getList(int charger_station_idx) {
-		List<Distribution> distributionList = mapper.getList(charger_station_idx);
+	public List<Distribution> getListByStation(int charger_station_idx) {
+		List<Distribution> distributionList = mapper.getListByStation(charger_station_idx);
 		for(int i = 0; i < distributionList.size(); i++) {
 			distributionList.get(i).setChargerList(chargerMapper.getList(distributionList.get(i).getIdx()));
 		}

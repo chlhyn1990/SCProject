@@ -9,7 +9,9 @@ import com.SCSystem.dto.Distribution;
 @Mapper
 public interface DistributionMapper {
 	
-	List<Distribution> getList(int charger_station_idx);
+	List<Distribution> getList();
+	
+	List<Distribution> getListByStation(int charger_station_idx);
 	
 	
 	Distribution get(int idx);
