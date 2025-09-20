@@ -18,6 +18,7 @@ public class CheckMst {
 	
 	private String check_dt;
 	private String temperature;
+	private String adjustment;
 
 	private String modify_dt;
 	private String create_dt;
