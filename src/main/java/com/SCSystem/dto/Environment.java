@@ -13,35 +13,14 @@ public class Environment {
 	private int idx;
 	private int check_mst_idx;
 	
-	private String facilities;
-	private String rainwater;
-	private String contact;
-	private String danger;
-	private String locking;
-	private String wire;
-	private String meter;
-	private String gate;
-	private String grounding_work;
-	private String resistance;
-	private String thickness;
-	private String distribution;
-	private String cable;
-	private String wiring;
-	private String suitable_cable;
-	private String metal_part;
-	private String cable_damage;
-	private String wiring_status;
-	private String insulation_resistance;
-	private String type_charger1;
-	private String type_charger2;
-	private String gate_value;
-	private String overcurrentW;
-	private String overcurrentA;
-	private String leakageW;
-	private String leakageA;
-	private String sensitivity;
-	private String wire_thickness;
-	private String cable_tightening;
+	private String temperature;	//주위온도  적정성 (옥내:-5℃ ~ +40℃,옥외:-25℃ ~ +40℃)
+	private String gas;			//분진,가스등에  안전
+	private String openness;	//발열대비  개방성
+	private String slip;		//미끄럼방지  여부
+	private String ventilation;	//환기  적정성
+	private String snowrain;	//눈,비에  안전
+	private String flooding;	//침수방지  등
+	private String vibration;	//진동,발열체에  안전
 	
 	private String modify_dt;
 	private String create_dt;

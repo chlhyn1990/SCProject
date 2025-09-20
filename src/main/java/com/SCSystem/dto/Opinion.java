@@ -13,7 +13,7 @@ public class Opinion {
 	private int idx;
 	private int check_mst_idx;
 	
-	private String content;
+	private String content;	//종합의견
 	
 	private String modify_dt;
 	private String create_dt;

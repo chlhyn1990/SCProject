@@ -13,10 +13,10 @@ public class ChargingOperation {
 	private int idx;
 	private int check_mst_idx;
 	
-	private String charge;
-	private String speed;
-	private String button;
-	private String share;
+	private String charge;	//차량 충전 작동
+	private String speed;	//충전 속도 정상
+	private String button;	//비상정지버튼 작동
+	private String share;	//데이터 공유 적합성
 	
 	private String modify_dt;
 	private String create_dt;

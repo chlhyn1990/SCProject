@@ -16,9 +16,9 @@ public class CheckMst {
 	private int charger_station_idx;
 	private int distribution_idx;
 	
-	private String check_dt;
-	private String temperature;
-	private String adjustment;
+	private String check_dt;	//점검일자
+	private String temperature;	//주변 온도/습도
+	private String adjustment;	//정산여부
 
 	private String modify_dt;
 	private String create_dt;
