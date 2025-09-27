@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.CheckMapper">
+
+	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+		SELECT *
+		FROM as_evse.charger
+		WHERE distribution_idx = #{distribution_idx}
+	</select
+	>
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
+	SELECT A.*
+		, (SELECT B.name 
+			FROM as_evse.charger_station B
+			WHERE B.idx = A.charger_station_idx) station_name
+		, (SELECT B.name 
+			FROM as_evse.charger_model B
+			WHERE B.idx = A.charger_model_idx) model_name
+		, (SELECT name 
+			 FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.name 
+			 FROM as_evse.distribution B
+			WHERE B.idx = A.distribution_idx) distribution_name  
+	FROM as_evse.charger A
+	WHERE 1 = 1
+	<if test="search != null and search != ''">
+    AND charger_id LIKE CONCAT('%', #{search}, '%')
+    </if>
+	</select>
+	
+	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+	SELECT * 
+	FROM as_evse.charger
+	WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.SCSystem.dto.Charger">
+	INSERT INTO as_evse.charger
+	(charger_station_idx, distribution_idx, charger_model_idx, charger_id, me_id, detail_place, broken_part, remark, fixed_dt, manager_idx, create_dt, modify_dt)
+	VALUES
+	(
+		 #{charger_station_idx}
+		,#{distribution_idx}
+		,#{charger_model_idx}
+		,#{charger_id}
+		,#{me_id}
+		,#{detail_place}
+		,#{broken_part}
+		,#{remark}
+		,#{fixed_dt}
+		,#{manager_idx}
+		,NOW()
+		,NOW()		
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.Charger">
+	UPDATE as_evse.charger
+	SET charger_station_idx = #{charger_station_idx}
+	  , distribution_idx = #{distribution_idx}
+	  , charger_model_idx = #{charger_model_idx}
+	  , charger_id = #{charger_id}
+	  , me_id = #{me_id}
+	  , detail_place = #{detail_place}
+	  , broken_part = #{broken_part}
+	  , remark = #{remark}
+	  , fixed_dt = #{fixed_dt}
+	  , manager_idx = #{manager_idx}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE idx = #{idx}
+	</delete>
+	
+	<delete id="deleteFromStation" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE charger_station_idx = #{charger_station_idx}
+	</delete>
+	
+	<delete id="deleteFromDistribution" parameterType="Integer">
+	DELETE FROM as_evse.charger
+	WHERE distribution_idx = #{distribution_idx}
+	</delete>
+</mapper>
