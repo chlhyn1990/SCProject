@@ -53,7 +53,7 @@ public class CheckController {
 	public ResponseEntity<ApiResult> insert(@RequestBody  Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx){
 		ApiResult apiResult = new ApiResult();
 		try {
-			service.insert(company_idx, manager_idx, charger_station_idx, distribution_idx)
+			service.insert(company_idx, manager_idx, charger_station_idx, distribution_idx);
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}catch(Exception e) {
