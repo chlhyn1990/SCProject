@@ -4,26 +4,40 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.SCSystem.dto.Charger;
+import com.SCSystem.dto.ChargingOperation;
+import com.SCSystem.dto.Check;
+import com.SCSystem.dto.CheckMst;
+import com.SCSystem.dto.Compatibility;
+import com.SCSystem.dto.Convenience;
+import com.SCSystem.dto.ElectricalStability;
+import com.SCSystem.dto.Environment;
+import com.SCSystem.dto.FireSafety;
+import com.SCSystem.dto.Maintenance;
+import com.SCSystem.dto.Opinion;
+import com.SCSystem.dto.ProductSafety;
 
 @Mapper
 public interface CheckMapper {
 	
-	List<Charger> getList(int distribution_idx);
+	List<CheckMst> getSearchList(String search);
 	
-	List<Charger> getSearchList(String search);
+	CheckMst getCheckMst(int idx);
+	Compatibility getCompatibility(CheckMst checkMst);
+	Environment getEnvironment(CheckMst checkMst);
+	Convenience getConvenience(CheckMst checkMst);
+	ProductSafety getProductSafety(CheckMst checkMst);
+	ElectricalStability getElectricalStability(CheckMst checkMst);
+	FireSafety getFireSafety(CheckMst checkMst);
+	Maintenance getMaintenance(CheckMst checkMst);
+	ChargingOperation getChargingOperation(CheckMst checkMst);
+	Opinion getOpinion(CheckMst checkMst);
 	
-	Charger get(int idx);
+	int insert(Check manager);
 	
-	int insert(Charger manager);
+	int update(Check manager);
 	
-	int update(Charger manager);
 	
-	int delete(int idx);
 	
-	int deleteFromStation(int charger_station_idx);
-	
-	int deleteFromDistribution(int distribution_idx);
 
 }
 

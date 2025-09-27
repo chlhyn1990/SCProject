@@ -4,37 +4,89 @@
 
 <mapper namespace="com.SCSystem.mapper.CheckMapper">
 
-	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
-		SELECT *
-		FROM as_evse.charger
-		WHERE distribution_idx = #{distribution_idx}
-	</select
-	>
+
 	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
 	SELECT A.*
 		, (SELECT B.name 
 			FROM as_evse.charger_station B
 			WHERE B.idx = A.charger_station_idx) station_name
-		, (SELECT B.name 
-			FROM as_evse.charger_model B
-			WHERE B.idx = A.charger_model_idx) model_name
 		, (SELECT name 
 			 FROM as_evse.manager B
 			WHERE B.idx = A.manager_idx) manager_name
-		, (SELECT B.name 
-			 FROM as_evse.distribution B
-			WHERE B.idx = A.distribution_idx) distribution_name  
-	FROM as_evse.charger A
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name  
+	FROM as_evse.check_mst A
 	WHERE 1 = 1
-	<if test="search != null and search != ''">
-    AND charger_id LIKE CONCAT('%', #{search}, '%')
+	<if test="searchCompany != null and searchCompany != ''">
+    	AND company_name LIKE CONCAT('%', #{searchCompany}, '%')
+    </if>
+    <if test="searchManager!= null and searchManager != ''">
+    	AND name LIKE CONCAT('%', #{searchManager}, '%')
+    </if>
+    <if test="searchChargerSation != null and searchChargerSation != ''">
+    	AND name LIKE CONCAT('%', #{searchChargerSation}, '%')
     </if>
 	</select>
 	
-	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
-	SELECT * 
-	FROM as_evse.charger
-	WHERE idx = #{idx}
+	<select id="setCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
+		SELECT A.* 
+		FROM as_evse.check_mst A
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getCompatibility" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Compatibility">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN compatibility B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getEnvironment" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Environment">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN environment B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getConvenience" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Convenience">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN convenience B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getProductSafety" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ProductSafety">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN product_safety B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getElectricalStability" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ElectricalStability">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN electrical_stability B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getFireSafety" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.FireSafety">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN fire_safety B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getMaintenance" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Maintenance">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN maintenance B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getChargingOperation" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ChargingOperation">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN charging_operation B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getOpinion" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Opinion">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN opinion B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
 	</select>
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.Charger">
@@ -73,18 +125,4 @@
 	WHERE idx = #{idx}
 	</update>
 	
-	<delete id="delete" parameterType="Integer">
-	DELETE FROM as_evse.charger
-	WHERE idx = #{idx}
-	</delete>
-	
-	<delete id="deleteFromStation" parameterType="Integer">
-	DELETE FROM as_evse.charger
-	WHERE charger_station_idx = #{charger_station_idx}
-	</delete>
-	
-	<delete id="deleteFromDistribution" parameterType="Integer">
-	DELETE FROM as_evse.charger
-	WHERE distribution_idx = #{distribution_idx}
-	</delete>
 </mapper>

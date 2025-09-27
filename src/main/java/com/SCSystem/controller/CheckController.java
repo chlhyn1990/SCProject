@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
-import com.SCSystem.dto.Charger;
+import com.SCSystem.dto.Check;
+import com.SCSystem.dto.CheckMst;
 import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +30,8 @@ public class CheckController {
 	
 	@PostMapping({"/list", "/list/{search}"})
 	@ResponseBody
-	public ResponseEntity<List<Charger>> getSearchList(@PathVariable(required = false) String search){
-		List<Charger> dtos = service.getSearchList(search);
+	public ResponseEntity<List<CheckMst>> getSearchList(@PathVariable(required = false) String search){
+		List<CheckMst> dtos = service.getSearchList(search);
         return new ResponseEntity<>(
         		dtos,
                 HttpStatus.OK
@@ -39,34 +40,17 @@ public class CheckController {
 	
 	@PostMapping("/{idx}")
 	@ResponseBody
-	public ResponseEntity<Charger> get(@PathVariable int idx){
-		Charger dto = service.get(idx);
+	public ResponseEntity<Check> get(@PathVariable int idx){
+		Check dto = service.get(idx);
         return new ResponseEntity<>(
         		dto,
                 HttpStatus.OK
         		);
 	}
 	
-	@PostMapping("/delete/{idx}")
-	@ResponseBody
-	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
-		ApiResult apiResult = new ApiResult();
-		if(service.delete(idx) == 1){
-			apiResult.setCode(ApiResult.SUCCESS);
-			apiResult.setMsg(ApiResult.SUCCESS_MSG);
-		}else {
-			apiResult.setCode(ApiResult.COMMON_DELETE_FAIL);
-			apiResult.setMsg(ApiResult.COMMON_DELETE_FAIL_MSG);
-		}
-		return new ResponseEntity<>(
-				apiResult,
-                HttpStatus.OK
-				);
-	}
-	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<ApiResult> insert(@RequestBody  Charger dto){
+	public ResponseEntity<ApiResult> insert(@RequestBody  Check dto){
 		ApiResult apiResult = new ApiResult();
 		if(service.insert(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
@@ -83,7 +67,7 @@ public class CheckController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public ResponseEntity<ApiResult> update(@RequestBody  Charger dto){
+	public ResponseEntity<ApiResult> update(@RequestBody  Check dto){
 		ApiResult apiResult = new ApiResult();
 		if(service.update(dto) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
