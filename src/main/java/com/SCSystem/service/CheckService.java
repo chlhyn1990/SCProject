@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
-
+import com.SCSystem.dto.Search;
 import com.SCSystem.mapper.CheckMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ public class CheckService {
 	@Autowired
 	CheckMapper mapper;
 
-	public List<CheckMst> getSearchList(String search) {
+	public List<CheckMst> getSearchList(Search search) {
 		return mapper.getSearchList(search);
 	}
 	
