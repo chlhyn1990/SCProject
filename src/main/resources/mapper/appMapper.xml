@@ -34,5 +34,128 @@
 		SELECT * from charger where distribution_idx=#{distributionIdx};
 	</select>
 
+	<!--Distribution 파일 업로드용-->
+	<insert id="insertDistributionForeground" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, foreground_url, foreground_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{foreground_url}, #{foreground_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		foreground_url = #{foreground_url},
+		foreground_path = #{foreground_path},
+		modify_dt = NOW()
+	</insert>
 
+	<insert id="insertDistributionExternal" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, external_url, external_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{external_url}, #{external_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		external_url = #{external_url},
+		external_path = #{external_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionInternal" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, internal_url, internal_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{internal_url}, #{internal_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		internal_url = #{internal_url},
+		internal_path = #{internal_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionMccb" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, mccb_url, mccb_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{mccb_url}, #{mccb_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		mccb_url = #{mccb_url},
+		mccb_path = #{mccb_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionResistance" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, resistance_url, resistance_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{resistance_url}, #{resistance_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		resistance_url = #{resistance_url},
+		resistance_path = #{resistance_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionWireStatus" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, wire_status_url, wire_status_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{wire_status_url}, #{wire_status_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		wire_status_url = #{wire_status_url},
+		wire_status_path = #{wire_status_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionMeter" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, meter_url, meter_path, create_dt, modify_dt, meter_text)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{meter_url}, #{meter_path}, NOW(), NOW(), #{meter_text})
+		ON DUPLICATE KEY UPDATE
+		meter_url = #{meter_url},
+		meter_path = #{meter_path},
+		meter_text = #{meter_text},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionModemFront" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, modem_front_url, modem_front_path, create_dt, modify_dt, modem_front_text)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{modem_front_url}, #{modem_front_path}, NOW(), NOW(), #{modem_front_text})
+		ON DUPLICATE KEY UPDATE
+		modem_front_url = #{modem_front_url},
+		modem_front_path = #{modem_front_path},
+		modem_front_text = #{modem_front_text},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionModemBack" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, modem_back_url, modem_back_path, create_dt, modify_dt, modem_back_text)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{modem_back_url}, #{modem_back_path}, NOW(), NOW(), #{modem_back_text})
+		ON DUPLICATE KEY UPDATE
+		modem_back_url = #{modem_back_url},
+		modem_back_path = #{modem_back_path},
+		modem_back_text = #{modem_back_text},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionBollard" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, bollard_url, bollard_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{bollard_url}, #{bollard_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		bollard_url = #{bollard_url},
+		bollard_path = #{bollard_path},
+		modify_dt = NOW()
+	</insert>
+
+	<insert id="insertDistributionEtc" parameterType="DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, etc_url, etc_path, create_dt, modify_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, #{etc_url}, #{etc_path}, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+		etc_url = #{etc_url},
+		etc_path = #{etc_path},
+		modify_dt = NOW()
+	</insert>
 </mapper>

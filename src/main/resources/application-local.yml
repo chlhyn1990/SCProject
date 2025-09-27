@@ -10,7 +10,7 @@ spring:
   # DB 연결 정보
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/as_evse_0_2
+    url: jdbc:mysql://127.0.0.1:3306/as_evse
     username: root
     password: root
   servlet:

@@ -12,13 +12,15 @@ import java.io.File;
 @RestController
 public class FileUploadController {
     // 절대경로 (리눅스 예시)
-    private static final String UPLOAD_BASE_DIR = "/home/myapp/uploads/";
+    private static final String UPLOAD_BASE_DIR = "/home/as_evse/uploads/";
 
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(
             @RequestParam("file") MultipartFile file,
             @RequestParam("folder") String folder,
-            @RequestParam("filename") String filename) {
+            @RequestParam("filename") String filename,
+            @RequestParam("distributionIdx") String distributionIdx
+            ) {
 
         try {
             // 저장할 폴더 경로 (절대경로)
