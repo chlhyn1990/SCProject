@@ -89,25 +89,7 @@
 		WHERE A.idx = #{idx}
 	</select>
 	
-	<insert id="insert" parameterType="com.SCSystem.dto.Charger">
-	INSERT INTO as_evse.charger
-	(charger_station_idx, distribution_idx, charger_model_idx, charger_id, me_id, detail_place, broken_part, remark, fixed_dt, manager_idx, create_dt, modify_dt)
-	VALUES
-	(
-		 #{charger_station_idx}
-		,#{distribution_idx}
-		,#{charger_model_idx}
-		,#{charger_id}
-		,#{me_id}
-		,#{detail_place}
-		,#{broken_part}
-		,#{remark}
-		,#{fixed_dt}
-		,#{manager_idx}
-		,NOW()
-		,NOW()		
-	)
-	</insert>
+	
 	
 	<update id="update" parameterType="com.SCSystem.dto.Charger">
 	UPDATE as_evse.charger

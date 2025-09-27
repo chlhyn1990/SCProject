@@ -41,9 +41,9 @@ public class CheckService {
 		return check;
 	}
 	
-	public int insert(Check dto) {
+	public int insert(Integer company_idx, Integer manager_idx, Integer p_charger_station_idx, Integer p_distribution_idx) {
 		try {
-			return mapper.insert(dto);
+			return mapper.insertCheck(company_idx, manager_idx, p_charger_station_idx, p_distribution_idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

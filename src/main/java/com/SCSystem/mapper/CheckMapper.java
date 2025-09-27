@@ -3,6 +3,7 @@ package com.SCSystem.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.SCSystem.dto.ChargingOperation;
 import com.SCSystem.dto.Check;
@@ -32,7 +33,10 @@ public interface CheckMapper {
 	ChargingOperation getChargingOperation(CheckMst checkMst);
 	Opinion getOpinion(CheckMst checkMst);
 	
-	int insert(Check manager);
+	int insertCheck(@Param("company_idx") Integer company_idx, 
+					@Param("manager_idx") Integer manager_idx,
+					@Param("p_charger_station_idx") Integer p_charger_station_idx,
+					@Param("p_distribution_idx") Integer p_distribution_idx);
 	
 	int update(Check manager);
 	
