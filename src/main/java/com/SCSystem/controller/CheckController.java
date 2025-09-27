@@ -50,12 +50,13 @@ public class CheckController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public ResponseEntity<ApiResult> insert(@RequestBody  Check dto){
+	public ResponseEntity<ApiResult> insert(@RequestBody  Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx){
 		ApiResult apiResult = new ApiResult();
-		if(service.insert(dto) == 1){
+		try {
+			service.insert(company_idx, manager_idx, charger_station_idx, distribution_idx)
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
-		}else {
+		}catch(Exception e) {
 			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
 			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
 		}
@@ -69,7 +70,7 @@ public class CheckController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> update(@RequestBody  Check dto){
 		ApiResult apiResult = new ApiResult();
-		if(service.update(dto) == 1){
+		if(service.update(dto) == 10){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {

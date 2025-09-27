@@ -35,12 +35,19 @@ public interface CheckMapper {
 	
 	int insertCheck(@Param("company_idx") Integer company_idx, 
 					@Param("manager_idx") Integer manager_idx,
-					@Param("p_charger_station_idx") Integer p_charger_station_idx,
-					@Param("p_distribution_idx") Integer p_distribution_idx);
+					@Param("p_charger_station_idx") Integer charger_station_idx,
+					@Param("p_distribution_idx") Integer distribution_idx);
 	
-	int update(Check manager);
-	
-	
+	int updateCheckMst(CheckMst checkMst);
+	int updateCompatibility(Compatibility compatibility);
+	int updateEnvironment(Environment environment);
+	int updateConvenience(Convenience convenience);
+	int updateProductSafety(ProductSafety productSafety);
+	int updateElectricalStability(ElectricalStability electricalStability);
+	int updateFireSafety(FireSafety fireSafety);
+	int updateMaintenance(Maintenance maintenance);
+	int updateChargingOperation(ChargingOperation chargingOperation);
+	int updateOpinion(Opinion opinion);
 	
 
 }

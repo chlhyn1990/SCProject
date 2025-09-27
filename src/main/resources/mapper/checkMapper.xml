@@ -89,7 +89,14 @@
 		WHERE A.idx = #{idx}
 	</select>
 	
-	
+	<insert id="insertCheck" statementType="CALLABLE">
+    {call insert_check_default_data(
+        #{company_idx, mode=IN, jdbcType=INTEGER},
+        #{manager_idx, mode=IN, jdbcType=INTEGER},
+        #{charger_station_idx, mode=IN, jdbcType=INTEGER},
+        #{distribution_idx, mode=IN, jdbcType=INTEGER}
+    )}
+	</insert>
 	
 	<update id="update" parameterType="com.SCSystem.dto.Charger">
 	UPDATE as_evse.charger

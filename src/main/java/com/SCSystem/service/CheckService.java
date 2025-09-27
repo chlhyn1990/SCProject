@@ -29,7 +29,6 @@ public class CheckService {
 		Check check = new Check();
 		check.setCheckMst(mapper.getCheckMst(idx));
 		check.setCompatibility(mapper.getCompatibility(check.getCheckMst()));
-		check.setCompatibility(mapper.getCompatibility(check.getCheckMst()));
 		check.setEnvironment(mapper.getEnvironment(check.getCheckMst()));
 		check.setConvenience(mapper.getConvenience(check.getCheckMst()));
 		check.setProductSafety(mapper.getProductSafety(check.getCheckMst()));
@@ -41,9 +40,10 @@ public class CheckService {
 		return check;
 	}
 	
-	public int insert(Integer company_idx, Integer manager_idx, Integer p_charger_station_idx, Integer p_distribution_idx) {
+	@Transactional
+	public int insert(Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx) {
 		try {
-			return mapper.insertCheck(company_idx, manager_idx, p_charger_station_idx, p_distribution_idx);
+			return mapper.insertCheck(company_idx, manager_idx, charger_station_idx, distribution_idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
@@ -51,9 +51,20 @@ public class CheckService {
 	}
 	
 	@Transactional
-	public int update(Check dto) {
+	public int update(Check check) {
 		try {
-			return mapper.update(dto);
+			int result = 0;
+			result += mapper.updateCheckMst(check.getCheckMst());
+			result += mapper.updateCompatibility(check.getCompatibility());
+			result += mapper.updateEnvironment(check.getEnvironment());
+			result += mapper.updateConvenience(check.getConvenience());
+			result += mapper.updateProductSafety(check.getProductSafety());
+			result += mapper.updateElectricalStability(check.getElectricalStability());
+			result += mapper.updateFireSafety(check.getFireSafety());
+			result += mapper.updateMaintenance(check.getMaintenance());
+			result += mapper.updateChargingOperation(check.getChargingOperation());
+			result += mapper.updateOpinion(check.getOpinion());			
+			return result;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
