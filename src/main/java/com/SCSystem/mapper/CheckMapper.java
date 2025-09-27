@@ -16,11 +16,12 @@ import com.SCSystem.dto.FireSafety;
 import com.SCSystem.dto.Maintenance;
 import com.SCSystem.dto.Opinion;
 import com.SCSystem.dto.ProductSafety;
+import com.SCSystem.dto.Search;
 
 @Mapper
 public interface CheckMapper {
 	
-	List<CheckMst> getSearchList(String search);
+	List<CheckMst> getSearchList(Search search);
 	
 	CheckMst getCheckMst(int idx);
 	Compatibility getCompatibility(CheckMst checkMst);

@@ -24,8 +24,8 @@
     <if test="searchManager!= null and searchManager != ''">
     	AND name LIKE CONCAT('%', #{searchManager}, '%')
     </if>
-    <if test="searchChargerSation != null and searchChargerSation != ''">
-    	AND name LIKE CONCAT('%', #{searchChargerSation}, '%')
+    <if test="searchChargerStation != null and searchChargerStation != ''">
+    	AND name LIKE CONCAT('%', #{searchChargerStation}, '%')
     </if>
 	</select>
 	

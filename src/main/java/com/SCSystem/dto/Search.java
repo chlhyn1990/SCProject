@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class Search {
 	private String searchCompany = null;
 	private String searchManager = null;
-	private String searchName = null;
+	private String searchChargerStation = null;
 }
