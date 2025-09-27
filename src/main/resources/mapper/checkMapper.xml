@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SCSystem.mapper.CheckMapper">
+
+
+	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
+	SELECT A.*
+		, (SELECT B.name 
+			FROM as_evse.charger_station B
+			WHERE B.idx = A.charger_station_idx) station_name
+		, (SELECT name 
+			 FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name  
+	FROM as_evse.check_mst A
+	WHERE 1 = 1
+	<if test="searchCompany != null and searchCompany != ''">
+    	AND company_name LIKE CONCAT('%', #{searchCompany}, '%')
+    </if>
+    <if test="searchManager!= null and searchManager != ''">
+    	AND name LIKE CONCAT('%', #{searchManager}, '%')
+    </if>
+    <if test="searchChargerSation != null and searchChargerSation != ''">
+    	AND name LIKE CONCAT('%', #{searchChargerSation}, '%')
+    </if>
+	</select>
+	
+	<select id="setCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
+		SELECT A.* 
+		FROM as_evse.check_mst A
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getCompatibility" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Compatibility">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN compatibility B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getEnvironment" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Environment">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN environment B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getConvenience" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Convenience">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN convenience B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getProductSafety" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ProductSafety">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN product_safety B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getElectricalStability" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ElectricalStability">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN electrical_stability B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getFireSafety" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.FireSafety">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN fire_safety B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getMaintenance" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Maintenance">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN maintenance B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getChargingOperation" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.ChargingOperation">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN charging_operation B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	<select id="getOpinion" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Opinion">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN opinion B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
+	</select>
+	
+	<insert id="insertCheck" statementType="CALLABLE">
+    {call insert_check_default_data(
+        #{company_idx, mode=IN, jdbcType=INTEGER},
+        #{manager_idx, mode=IN, jdbcType=INTEGER},
+        #{charger_station_idx, mode=IN, jdbcType=INTEGER},
+        #{distribution_idx, mode=IN, jdbcType=INTEGER}
+    )}
+	</insert>
+	
+	<update id="update" parameterType="com.SCSystem.dto.Charger">
+	UPDATE as_evse.charger
+	SET charger_station_idx = #{charger_station_idx}
+	  , distribution_idx = #{distribution_idx}
+	  , charger_model_idx = #{charger_model_idx}
+	  , charger_id = #{charger_id}
+	  , me_id = #{me_id}
+	  , detail_place = #{detail_place}
+	  , broken_part = #{broken_part}
+	  , remark = #{remark}
+	  , fixed_dt = #{fixed_dt}
+	  , manager_idx = #{manager_idx}
+	  , modify_dt = NOW()
+	WHERE idx = #{idx}
+	</update>
+	
+</mapper>
