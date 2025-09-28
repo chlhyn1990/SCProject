@@ -35,7 +35,7 @@
 	</select>
 
 	<!--Distribution 파일 업로드용-->
-	<insert id="insertDistributionForeground" parameterType="DistributionFile">
+	<insert id="insertDistributionForeground" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, foreground_url, foreground_path, create_dt, modify_dt)
 		VALUES
@@ -46,7 +46,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionExternal" parameterType="DistributionFile">
+	<insert id="insertDistributionExternal" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, external_url, external_path, create_dt, modify_dt)
 		VALUES
@@ -57,7 +57,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionInternal" parameterType="DistributionFile">
+	<insert id="insertDistributionInternal" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, internal_url, internal_path, create_dt, modify_dt)
 		VALUES
@@ -68,7 +68,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionMccb" parameterType="DistributionFile">
+	<insert id="insertDistributionMccb" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, mccb_url, mccb_path, create_dt, modify_dt)
 		VALUES
@@ -79,7 +79,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionResistance" parameterType="DistributionFile">
+	<insert id="insertDistributionResistance" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, resistance_url, resistance_path, create_dt, modify_dt)
 		VALUES
@@ -90,7 +90,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionWireStatus" parameterType="DistributionFile">
+	<insert id="insertDistributionWireStatus" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, wire_status_url, wire_status_path, create_dt, modify_dt)
 		VALUES
@@ -101,7 +101,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionMeter" parameterType="DistributionFile">
+	<insert id="insertDistributionMeter" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, meter_url, meter_path, create_dt, modify_dt, meter_text)
 		VALUES
@@ -113,7 +113,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionModemFront" parameterType="DistributionFile">
+	<insert id="insertDistributionModemFront" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, modem_front_url, modem_front_path, create_dt, modify_dt, modem_front_text)
 		VALUES
@@ -125,7 +125,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionModemBack" parameterType="DistributionFile">
+	<insert id="insertDistributionModemBack" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, modem_back_url, modem_back_path, create_dt, modify_dt, modem_back_text)
 		VALUES
@@ -137,7 +137,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionBollard" parameterType="DistributionFile">
+	<insert id="insertDistributionBollard" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, bollard_url, bollard_path, create_dt, modify_dt)
 		VALUES
@@ -148,7 +148,7 @@
 		modify_dt = NOW()
 	</insert>
 
-	<insert id="insertDistributionEtc" parameterType="DistributionFile">
+	<insert id="insertDistributionEtc" parameterType="hashmap">
 		INSERT INTO distribution_file
 		(check_mst_idx, distribution_idx, etc_url, etc_path, create_dt, modify_dt)
 		VALUES

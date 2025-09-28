@@ -68,22 +68,20 @@ public class AppService {
         return appMapper.updateStationFixed(chargerStationIdx);
     }
 
-    @Autowired
-
-    public Integer saveForeground(Integer checkMstIdx, Integer distributionIdx, String foregroundUrl, String foregroundPath) {
-        return appMapper.insertOrUpdateForeground(checkMstIdx, distributionIdx, foregroundUrl, foregroundPath);
+    public Integer setForeground(Integer checkMstIdx, Integer distributionIdx, String foregroundUrl, String foregroundPath) {
+        return appMapper.insertDistributionForeground(checkMstIdx, distributionIdx, foregroundUrl, foregroundPath);
     }
 
-    public Integer saveMeter(Integer checkMstIdx, Integer distributionIdx, String meterUrl, String meterPath, String meterText) {
-        return appMapper.insertOrUpdateMeter(checkMstIdx, distributionIdx, meterUrl, meterPath, meterText);
+    public Integer setMeter(Integer checkMstIdx, Integer distributionIdx, String meterUrl, String meterPath, String meterText) {
+        return appMapper.insertDistributionMeter(checkMstIdx, distributionIdx, meterUrl, meterPath, meterText);
     }
 
-    public Integer saveModemFront(Integer checkMstIdx, Integer distributionIdx, String modemFrontUrl, String modemFrontPath, String modemFrontText) {
-        return appMapper.insertOrUpdateModemFront(checkMstIdx, distributionIdx, modemFrontUrl, modemFrontPath, modemFrontText);
+    public Integer setModemFront(Integer checkMstIdx, Integer distributionIdx, String modemFrontUrl, String modemFrontPath, String modemFrontText) {
+        return appMapper.insertDistributionModemFront(checkMstIdx, distributionIdx, modemFrontUrl, modemFrontPath, modemFrontText);
     }
 
-    public Integer saveModemBack(Integer checkMstIdx, Integer distributionIdx, String modemBackUrl, String modemBackPath, String modemBackText) {
-        return appMapper.insertOrUpdateModemBack(checkMstIdx, distributionIdx, modemBackUrl, modemBackPath, modemBackText);
+    public Integer setModemBack(Integer checkMstIdx, Integer distributionIdx, String modemBackUrl, String modemBackPath, String modemBackText) {
+        return appMapper.insertDistributionModemBack(checkMstIdx, distributionIdx, modemBackUrl, modemBackPath, modemBackText);
     }
 
 
