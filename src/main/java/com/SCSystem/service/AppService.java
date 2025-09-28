@@ -84,5 +84,27 @@ public class AppService {
         return appMapper.insertDistributionModemBack(checkMstIdx, distributionIdx, modemBackUrl, modemBackPath, modemBackText);
     }
 
+    public Integer setDistributionBollard(Integer checkMstIdx, Integer distributionIdx, String bollardUrl, String bollardPath){
+        return appMapper.insertDistributionBollard(checkMstIdx, distributionIdx, bollardUrl, bollardPath);
+    }
+    public Integer setDistributionInternal(Integer checkMstIdx, Integer distributionIdx, String internalUrl, String internalPath){
+        return appMapper.insertDistributionInternal(checkMstIdx, distributionIdx, internalUrl, internalPath);
+    }
+    public Integer setDistributionExternal(Integer checkMstIdx, Integer distributionIdx, String externalUrl, String externalPath){
+        return appMapper.insertDistributionExternal(checkMstIdx, distributionIdx, externalUrl, externalPath);
+    }
+    public Integer setDistributionResistance(Integer checkMstIdx, Integer distributionIdx, String resistanceUrl, String resistanceUrlPath){
+        return appMapper.insertDistributionResistance(checkMstIdx, distributionIdx, resistanceUrl, resistanceUrlPath);
+    }
+    public Integer setDistributionWireStatus(Integer checkMstIdx, Integer distributionIdx, String wireStatusUrl, String wireStatusPath){
+        return appMapper.insertDistributionWireStatus(checkMstIdx, distributionIdx, wireStatusUrl, wireStatusPath);
+    }
+    public Integer setDistributionMccb(Integer checkMstIdx, Integer distributionIdx, String mccbUrl, String mccbPath){
+        return appMapper.insertDistributionMccb(checkMstIdx, distributionIdx, mccbUrl, mccbPath);
+    }
+    public Integer setDistributionEtc(Integer checkMstIdx, Integer distributionIdx, String etcUrl, String etcPath){
+        return appMapper.insertDistributionEtc(checkMstIdx, distributionIdx, etcUrl, etcPath);
+    }
+
 
 }
