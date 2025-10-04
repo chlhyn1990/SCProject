@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.ChargerStation;
 import com.SCSystem.dto.Distribution;
+import com.SCSystem.dto.Search;
 import com.SCSystem.mapper.ChargerStationMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ public class ChargerStationService {
 	@Autowired
 	DistributionService distributionService;
 
-	public List<ChargerStation> getList(String search) {
+	public List<ChargerStation> getList(Search search) {
 		return mapper.getSearchList(search);
 	}
 	

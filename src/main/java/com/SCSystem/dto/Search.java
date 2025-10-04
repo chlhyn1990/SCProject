@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Search {
-	private String searchCompany = null;
-	private String searchManager = null;
-	private String searchChargerStation = null;
+	private String searchCompany;
+	private String searchManager;
+	private String searchChargerStation;
 }

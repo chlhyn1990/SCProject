@@ -48,24 +48,7 @@ public class CheckController {
                 HttpStatus.OK
         		);
 	}
-	
-	@PostMapping("/insert")
-	@ResponseBody
-	public ResponseEntity<ApiResult> insert(@RequestBody  Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx){
-		ApiResult apiResult = new ApiResult();
-		try {
-			service.insert(company_idx, manager_idx, charger_station_idx, distribution_idx);
-			apiResult.setCode(ApiResult.SUCCESS);
-			apiResult.setMsg(ApiResult.SUCCESS_MSG);
-		}catch(Exception e) {
-			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
-			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
-		}
-		return new ResponseEntity<>(
-				apiResult,
-                HttpStatus.OK
-				);
-	}
+
 	
 	@PostMapping("/update")
 	@ResponseBody
@@ -84,23 +67,6 @@ public class CheckController {
 				);
 	}
 	
-	@PostMapping("/delete")
-	@ResponseBody
-	public ResponseEntity<ApiResult> delete(@RequestBody  Integer check_idx){
-		ApiResult apiResult = new ApiResult();
-		try {
-			service.delete(check_idx);
-			apiResult.setCode(ApiResult.SUCCESS);
-			apiResult.setMsg(ApiResult.SUCCESS_MSG);
-		}catch(Exception e) {
-			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
-			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
-		}
-		return new ResponseEntity<>(
-				apiResult,
-                HttpStatus.OK
-				);
-	}
 	
 }
 

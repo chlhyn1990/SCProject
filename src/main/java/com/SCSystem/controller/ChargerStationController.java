@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.ChargerStation;
+import com.SCSystem.dto.Search;
 import com.SCSystem.service.ChargerStationService;
 import com.SCSystem.service.DistributionService;
 import com.SCSystem.service.ChargerService;
@@ -34,9 +35,9 @@ public class ChargerStationController {
 	ChargerService chargerService;
 	
 	
-	@PostMapping({"/list", "/list/{search}"})
+	@PostMapping("/list")
 	@ResponseBody
-	public ResponseEntity<List<ChargerStation>> getList(@PathVariable(required = false) String search){
+	public ResponseEntity<List<ChargerStation>> getList(@RequestBody Search search){
 		List<ChargerStation> dtos = service.getList(search);
         return new ResponseEntity<>(
         		dtos,
