@@ -29,11 +29,24 @@
     </if>
 	</select>
 	
+	<select id="getCheckMstByStation" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
+		SELECT A.* 
+		     , (SELECT B.name 
+			FROM as_evse.distribution B
+			WHERE B.idx = A.distribution_idx) distribution_name
+		FROM as_evse.check_mst A
+		WHERE A.charger_station_idx = #{charger_station_idx}
+	</select>
+	
 	<select id="getCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
 		SELECT A.* 
+		, (SELECT B.name 
+			FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
 		FROM as_evse.check_mst A
 		WHERE A.idx = #{idx}
 	</select>
+	
 	<select id="getCompatibility" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.Compatibility">
 		SELECT B.* 
 		FROM as_evse.check_mst A
@@ -104,7 +117,7 @@
 		  , temperature = #{temperature}
 		  , adjustment = #{adjustment}
 		  , modify_dt = NOW()
-		WHERE A.idx = #{idx}
+		WHERE idx = #{idx}
 	</update>
 	<update id="updateCompatibility" parameterType="com.SCSystem.dto.Compatibility">
 		UPDATE compatibility
@@ -151,7 +164,7 @@
 		SET rust = #{rust}
 		  , stopper = #{stopper}
 		  , connector = #{connector}
-		  , lock = #{lock}
+		  , `lock` = #{lock}
 		  , discolor = #{discolor}
 		  , pad = #{pad}
 		  , modify_dt = NOW()

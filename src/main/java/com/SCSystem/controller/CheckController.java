@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
-import com.SCSystem.dto.Search;
 import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +28,12 @@ public class CheckController {
 	@Autowired
 	CheckService service;
 	
-	@PostMapping({"/list", "/list/{search}"})
+	@PostMapping("/checkMst/{charger_station_idx}")
 	@ResponseBody
-	public ResponseEntity<List<CheckMst>> getSearchList(@PathVariable(required = false) Search search){
-		List<CheckMst> dtos = service.getSearchList(search);
+	public ResponseEntity<List<CheckMst>> getCheckMstByStation(@PathVariable int charger_station_idx){
+		List<CheckMst> dto = service.getCheckMstByStation(charger_station_idx);
         return new ResponseEntity<>(
-        		dtos,
+        		dto,
                 HttpStatus.OK
         		);
 	}
