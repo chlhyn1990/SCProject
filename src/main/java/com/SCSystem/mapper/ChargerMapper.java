@@ -9,7 +9,9 @@ import com.SCSystem.dto.Charger;
 @Mapper
 public interface ChargerMapper {
 	
-	List<Charger> getList(int distribution_idx);
+	List<Charger> getListByDistribution(int distribution_idx);
+	
+	List<Charger> getListByStation(int charger_station_idx);
 	
 	List<Charger> getSearchList(String search);
 	
@@ -21,9 +23,6 @@ public interface ChargerMapper {
 	
 	int delete(int idx);
 	
-	int deleteFromStation(int charger_station_idx);
-	
-	int deleteFromDistribution(int distribution_idx);
 
 }
 

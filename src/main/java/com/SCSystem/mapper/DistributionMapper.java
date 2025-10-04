@@ -22,7 +22,6 @@ public interface DistributionMapper {
 	
 	int delete(int idx);
 	
-	int deleteFromStation(int charger_station_idx);
 
 }
 

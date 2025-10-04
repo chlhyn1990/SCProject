@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.Charger;
+import com.SCSystem.dto.ChargerFile;
 import com.SCSystem.mapper.ChargerMapper;
+import com.SCSystem.mapper.CheckMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,9 +19,11 @@ public class ChargerService {
 	RestTemplate restTemplate;
 	@Autowired
 	ChargerMapper mapper;
+	@Autowired
+	CheckService checkService;
 	
-	public List<Charger> getList(int distribution_idx) {
-		return mapper.getList(distribution_idx);
+	public List<Charger> getListByDistribution(int distribution_idx) {
+		return mapper.getListByDistribution(distribution_idx);
 	}
 
 	public List<Charger> getSearchList(String search) {
@@ -32,6 +36,12 @@ public class ChargerService {
 	
 	public int insert(Charger dto) {
 		try {
+			int chargerIdx = mapper.insert(dto);
+			int checkMstIdx = checkService.getCheckMstIdxByDistribution(dto.getDistribution_idx());
+			ChargerFile chargerFile = new ChargerFile();
+			chargerFile.setCharger_idx(chargerIdx);
+			chargerFile.setCheck_mst_idx(checkMstIdx);
+			checkService.insertChargerFile(chargerFile);
 			return mapper.insert(dto);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
@@ -50,23 +60,8 @@ public class ChargerService {
 	
 	public int delete(int idx) {
 		try {
+			checkService.deleteChargerFile(idx);
 			return mapper.delete(idx);
-		}catch(Exception e) {
-			log.warn(e.getMessage());
-			return 0;
-		}
-	}
-	public int deleteFromStation(int charger_station_idx) {
-		try {
-			return mapper.deleteFromStation(charger_station_idx);
-		}catch(Exception e) {
-			log.warn(e.getMessage());
-			return 0;
-		}
-	}
-	public int deleteFromDistribution(int distribution_idx) {
-		try {
-			return mapper.deleteFromDistribution(distribution_idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;

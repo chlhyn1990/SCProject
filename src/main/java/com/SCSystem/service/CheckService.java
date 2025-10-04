@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.SCSystem.dto.ChargerFile;
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
+import com.SCSystem.dto.DistributionFile;
 import com.SCSystem.dto.Search;
 import com.SCSystem.mapper.CheckMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +73,55 @@ public class CheckService {
 		}
 	}
 	
+	@Transactional
+	public int delete(int check_idx) {
+		try {
+			return mapper.deleteCheck(check_idx);
+		}catch(Exception e) {
+			log.warn(e.getMessage());
+			return 0;
+		}
+	}
+	
+	public int getCheckMstIdxByDistribution(int distribution_idx) {
+		return mapper.getCheckMstIdxByDistribution(distribution_idx);
+	}
+	
+	ChargerFile getChargerFile(int idx) {
+		return mapper.getChargerFile(idx);
+	}
+	
+	@Transactional
+	int insertChargerFile(ChargerFile chargerFile) {
+		return mapper.insertChargerFile(chargerFile);
+	}
+	
+	@Transactional
+	int updateChargerFile(ChargerFile chargerFile) {
+		return mapper.updateChargerFile(chargerFile);
+	}
+	
+	@Transactional
+	int deleteChargerFile(int charger_idx) {
+		return mapper.deleteChargerFile(charger_idx);
+	}
+	
+	DistributionFile getDistributionFile(int idx) {
+		return mapper.getDistributionFile(idx);
+	}
+	@Transactional
+	int insertDistributionFile(DistributionFile distributionFile) {
+		return mapper.insertDistributionFile(distributionFile);
+	}
 
+	@Transactional
+	int updateDistributionFile(DistributionFile distributionFile) {
+		return mapper.updateDistributionFile(distributionFile);
+	}
+	
+	@Transactional
+	int deleteDistributionFile(int distribution_idx) {
+		return mapper.deleteDistributionFile(distribution_idx);
+	}
 }
 

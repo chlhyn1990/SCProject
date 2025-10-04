@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.ChargerStation;
+import com.SCSystem.dto.Distribution;
 import com.SCSystem.mapper.ChargerStationMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,8 @@ public class ChargerStationService {
 	RestTemplate restTemplate;
 	@Autowired
 	ChargerStationMapper mapper;
+	@Autowired
+	DistributionService distributionService;
 
 	public List<ChargerStation> getList(String search) {
 		return mapper.getSearchList(search);
@@ -28,9 +31,8 @@ public class ChargerStationService {
 	
 	public int insert(ChargerStation dto) {
 		try {
-			mapper.insertCheckList(dto.getCompany_idx(), dto.getManager_idx());
-			mapper.insert(dto);
-			return dto.getIdx();
+			int chargerStationIdx = mapper.insert(dto);
+			return chargerStationIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
@@ -48,6 +50,10 @@ public class ChargerStationService {
 	
 	public int delete(int idx) {
 		try {
+			List<Distribution> list = distributionService.getListByStation(idx);
+			for(Distribution distribution : list) {
+				distributionService.delete(distribution.getIdx());
+			}
 			return mapper.delete(idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());

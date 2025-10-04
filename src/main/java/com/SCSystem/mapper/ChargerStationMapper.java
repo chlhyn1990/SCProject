@@ -18,9 +18,6 @@ public interface ChargerStationMapper {
 	
 	int insert(ChargerStation manager);
 	
-	int insertCheckList(@Param("company_idx") Integer company_idx, 
-	        			@Param("manager_idx") Integer manager_idx);
-	
 	int update(ChargerStation manager);
 	
 	int delete(int idx);

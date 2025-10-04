@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SCSystem.dto.ApiResult;
+import com.SCSystem.dto.Charger;
 import com.SCSystem.dto.Distribution;
 import com.SCSystem.service.DistributionService;
 import com.SCSystem.service.ChargerService;
+import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,8 @@ public class DistributionController {
 	DistributionService service;
 	@Autowired
 	ChargerService chargerService;
+	@Autowired
+	CheckService checkService;
 	
 	@PostMapping("/list")
 	@ResponseBody
@@ -64,7 +68,10 @@ public class DistributionController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
-		chargerService.deleteFromDistribution(idx);
+		List<Charger> list = chargerService.getListByDistribution(idx);
+		for(Charger charger : list) {
+			chargerService.delete(charger.getIdx());
+		}
 		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
@@ -82,7 +89,7 @@ public class DistributionController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> insert(@RequestBody  Distribution dto){
 		ApiResult apiResult = new ApiResult();
-		if(service.insert(dto) == 1){
+		if(service.insert(dto) > 0){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {

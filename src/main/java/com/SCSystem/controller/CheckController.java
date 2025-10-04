@@ -84,5 +84,23 @@ public class CheckController {
 				);
 	}
 	
+	@PostMapping("/delete")
+	@ResponseBody
+	public ResponseEntity<ApiResult> delete(@RequestBody  Integer check_idx){
+		ApiResult apiResult = new ApiResult();
+		try {
+			service.delete(check_idx);
+			apiResult.setCode(ApiResult.SUCCESS);
+			apiResult.setMsg(ApiResult.SUCCESS_MSG);
+		}catch(Exception e) {
+			apiResult.setCode(ApiResult.COMMON_INSERT_FAIL);
+			apiResult.setMsg(ApiResult.COMMON_INSERT_FAIL_MSG);
+		}
+		return new ResponseEntity<>(
+				apiResult,
+                HttpStatus.OK
+				);
+	}
+	
 }
 

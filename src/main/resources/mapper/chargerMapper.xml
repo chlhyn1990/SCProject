@@ -4,12 +4,18 @@
 
 <mapper namespace="com.SCSystem.mapper.ChargerMapper">
 
-	<select id="getList" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+	<select id="getListByDistribution" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
 		SELECT *
 		FROM as_evse.charger
 		WHERE distribution_idx = #{distribution_idx}
-	</select
-	>
+	</select>
+	
+	<select id="getListByStation" parameterType="Integer" resultType="com.SCSystem.dto.Charger">
+		SELECT *
+		FROM as_evse.charger
+		WHERE charger_station_idx = #{charger_station_idx}
+	</select>
+	
 	<select id="getSearchList" parameterType="String" resultType="com.SCSystem.dto.Charger">
 	SELECT A.*
 		, (SELECT B.name 
@@ -55,6 +61,9 @@
 		,NOW()
 		,NOW()		
 	)
+		<selectKey keyProperty="idx" resultType="java.lang.Integer" >
+         	SELECT LAST_INSERT_ID()
+  		</selectKey>
 	</insert>
 	
 	<update id="update" parameterType="com.SCSystem.dto.Charger">
@@ -78,13 +87,4 @@
 	WHERE idx = #{idx}
 	</delete>
 	
-	<delete id="deleteFromStation" parameterType="Integer">
-	DELETE FROM as_evse.charger
-	WHERE charger_station_idx = #{charger_station_idx}
-	</delete>
-	
-	<delete id="deleteFromDistribution" parameterType="Integer">
-	DELETE FROM as_evse.charger
-	WHERE distribution_idx = #{distribution_idx}
-	</delete>
 </mapper>

@@ -58,8 +58,6 @@ public class ChargerStationController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> delete(@PathVariable  int idx){
 		ApiResult apiResult = new ApiResult();
-		chargerService.deleteFromStation(idx);
-		distributionService.deleteFromStation(idx);
 		if(service.delete(idx) == 1){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
