@@ -1,5 +1,6 @@
 package com.SCSystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +23,50 @@ public class CheckService {
 	RestTemplate restTemplate;
 	@Autowired
 	CheckMapper mapper;
+	
+	public List<CheckMst> getCheckMstByStation(int charger_station_idx){
+		return mapper.getCheckMstByStation(charger_station_idx);
+	}
 
 	public List<CheckMst> getSearchList(Search search) {
 		return mapper.getSearchList(search);
 	}
 	
 	public Check get(int idx) {
-		Check check = new Check();
-		check.setCheckMst(mapper.getCheckMst(idx));
-		check.setCompatibility(mapper.getCompatibility(check.getCheckMst()));
-		check.setEnvironment(mapper.getEnvironment(check.getCheckMst()));
-		check.setConvenience(mapper.getConvenience(check.getCheckMst()));
-		check.setProductSafety(mapper.getProductSafety(check.getCheckMst()));
-		check.setElectricalStability(mapper.getElectricalStability(check.getCheckMst()));
-		check.setFireSafety(mapper.getFireSafety(check.getCheckMst()));
-		check.setMaintenance(mapper.getMaintenance(check.getCheckMst()));
-		check.setChargingOperation(mapper.getChargingOperation(check.getCheckMst()));
-		check.setOpinion(mapper.getOpinion(check.getCheckMst()));
-		return check;
+			Check check = new Check();
+			check.setCheckMst(mapper.getCheckMst(idx));
+			check.setCompatibility(mapper.getCompatibility(check.getCheckMst()));
+			check.setEnvironment(mapper.getEnvironment(check.getCheckMst()));
+			check.setConvenience(mapper.getConvenience(check.getCheckMst()));
+			check.setProductSafety(mapper.getProductSafety(check.getCheckMst()));
+			check.setElectricalStability(mapper.getElectricalStability(check.getCheckMst()));
+			check.setFireSafety(mapper.getFireSafety(check.getCheckMst()));
+			check.setMaintenance(mapper.getMaintenance(check.getCheckMst()));
+			check.setChargingOperation(mapper.getChargingOperation(check.getCheckMst()));
+			check.setOpinion(mapper.getOpinion(check.getCheckMst()));
+			return check;
+	}
+	
+	public List<Check> getCheckList(int charger_station_idx) {
+		List<Check> report = new ArrayList<Check>();
+		List<CheckMst> checkMstList =  mapper.getCheckMstByStation(charger_station_idx);
+		
+		for(CheckMst checkMst : checkMstList) {
+			Check check = new Check();
+			check.setCheckMst(checkMst);
+			check.setCompatibility(mapper.getCompatibility(check.getCheckMst()));
+			check.setEnvironment(mapper.getEnvironment(check.getCheckMst()));
+			check.setConvenience(mapper.getConvenience(check.getCheckMst()));
+			check.setProductSafety(mapper.getProductSafety(check.getCheckMst()));
+			check.setElectricalStability(mapper.getElectricalStability(check.getCheckMst()));
+			check.setFireSafety(mapper.getFireSafety(check.getCheckMst()));
+			check.setMaintenance(mapper.getMaintenance(check.getCheckMst()));
+			check.setChargingOperation(mapper.getChargingOperation(check.getCheckMst()));
+			check.setOpinion(mapper.getOpinion(check.getCheckMst()));
+			report.add(check);
+		}
+		
+		return report;
 	}
 	
 	public int insert(Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx) {

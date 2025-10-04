@@ -26,6 +26,7 @@ public interface CheckMapper {
 	List<CheckMst> getSearchList(Search search);
 	
 	CheckMst getCheckMst(int idx);
+	List<CheckMst> getCheckMstByStation(int charger_station_idx);
 	Compatibility getCompatibility(CheckMst checkMst);
 	Environment getEnvironment(CheckMst checkMst);
 	Convenience getConvenience(CheckMst checkMst);
