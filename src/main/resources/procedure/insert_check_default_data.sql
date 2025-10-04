@@ -1,4 +1,4 @@
-CREATE DEFINER=`as_evse`@`localhost` PROCEDURE `as_evse`.`insert_check_default_data`(
+CREATE DEFINER=`as_evse`@`localhost` PROCEDURE `as_evse`.`insert_check_data`(
     IN p_company_idx INT,
     IN p_manager_idx INT,
     IN p_charger_station_idx INT,
@@ -13,7 +13,7 @@ BEGIN
     
     START TRANSACTION;
 	
-	INSERT INTO checkMst (company_idx, manager_idx, charger_station_idx, distribution_idx) VALUES (p_company_idx, p_manager_idx, p_charger_station_idx, p_distribution_idx);
+	INSERT INTO check_mst (company_idx, manager_idx, charger_station_idx, distribution_idx, create_dt) VALUES (p_company_idx, p_manager_idx, p_charger_station_idx, p_distribution_idx, NOW());
 	SET m_check_mst_idx = LAST_INSERT_ID();
 	
 	INSERT INTO compatibility (check_mst_idx) VALUES (m_check_mst_idx);

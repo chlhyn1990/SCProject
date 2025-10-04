@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.Charger;
@@ -33,22 +34,23 @@ public class ChargerService {
 	public Charger get(int idx) {
 		return mapper.get(idx);
 	}
-	
+	@Transactional
 	public int insert(Charger dto) {
 		try {
-			int chargerIdx = mapper.insert(dto);
+			mapper.insert(dto);
+			int chargerIdx = dto.getIdx();
 			int checkMstIdx = checkService.getCheckMstIdxByDistribution(dto.getDistribution_idx());
 			ChargerFile chargerFile = new ChargerFile();
 			chargerFile.setCharger_idx(chargerIdx);
 			chargerFile.setCheck_mst_idx(checkMstIdx);
 			checkService.insertChargerFile(chargerFile);
-			return mapper.insert(dto);
+			return chargerIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
 		}
 	}
-	
+
 	public int update(Charger dto) {
 		try {
 			return mapper.update(dto);
@@ -57,7 +59,7 @@ public class ChargerService {
 			return 0;
 		}
 	}
-	
+	@Transactional
 	public int delete(int idx) {
 		try {
 			checkService.deleteChargerFile(idx);

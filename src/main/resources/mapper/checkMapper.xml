@@ -91,10 +91,10 @@
 	
 	<insert id="insertCheck" statementType="CALLABLE">
     {call insert_check_data(
-        #{company_idx, mode=IN, jdbcType=INTEGER},
-        #{manager_idx, mode=IN, jdbcType=INTEGER},
-        #{charger_station_idx, mode=IN, jdbcType=INTEGER},
-        #{distribution_idx, mode=IN, jdbcType=INTEGER}
+        #{p_company_idx, mode=IN, jdbcType=INTEGER},
+        #{p_manager_idx, mode=IN, jdbcType=INTEGER},
+        #{p_charger_station_idx, mode=IN, jdbcType=INTEGER},
+        #{p_distribution_idx, mode=IN, jdbcType=INTEGER}
     )}
 	</insert>
 	
@@ -106,7 +106,7 @@
 		  , modify_dt = NOW()
 		WHERE A.idx = #{idx}
 	</update>
-	<update id="updateCompatibility" parameterType="com.SCSystem.dto.compatibility">
+	<update id="updateCompatibility" parameterType="com.SCSystem.dto.Compatibility">
 		UPDATE compatibility
 		SET open = #{open}
 		  , access = #{access}
@@ -117,7 +117,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateEnvironment" parameterType="com.SCSystem.dto.environment">
+	<update id="updateEnvironment" parameterType="com.SCSystem.dto.Environment">
 		UPDATE environment
 		SET temperature = #{temperature}
 		  , gas = #{gas}
@@ -130,7 +130,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateConvenience" parameterType="com.SCSystem.dto.convenience">
+	<update id="updateConvenience" parameterType="com.SCSystem.dto.Convenience">
 		UPDATE convenience
 		SET homepage = #{homepage}
 		  , facility = #{facility}
@@ -146,7 +146,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateProductSafety" parameterType="com.SCSystem.dto.product_safety">
+	<update id="updateProductSafety" parameterType="com.SCSystem.dto.ProductSafety">
 		UPDATE product_safety
 		SET rust = #{rust}
 		  , stopper = #{stopper}
@@ -157,7 +157,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateElectricalStability" parameterType="com.SCSystem.dto.electrical_stability">
+	<update id="updateElectricalStability" parameterType="com.SCSystem.dto.ElectricalStability">
 		UPDATE electrical_stability
 		SET facilities = #{facilities}
 		  , rainwater = #{rainwater}
@@ -191,14 +191,14 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateFireSafety" parameterType="com.SCSystem.dto.fire_safety">
+	<update id="updateFireSafety" parameterType="com.SCSystem.dto.FireSafety">
 		UPDATE fire_safety
 		SET facility = #{facility}
 		  , evacuation = #{evacuation}
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateMaintenance" parameterType="com.SCSystem.dto.maintenance">
+	<update id="updateMaintenance" parameterType="com.SCSystem.dto.Maintenance">
 		UPDATE maintenance
 		SET contact = #{contact}
 		  , organize = #{organize}
@@ -208,7 +208,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateChargingOperation" parameterType="com.SCSystem.dto.charging_operation">
+	<update id="updateChargingOperation" parameterType="com.SCSystem.dto.ChargingOperation">
 		UPDATE charging_operation 
 		SET charge = #{charge}
 		  , speed = #{speed}
@@ -217,7 +217,7 @@
 		  , modify_dt = NOW()
 		WHERE idx = #{idx}
 	</update>
-	<update id="updateOpinion" parameterType="com.SCSystem.dto.opinion">
+	<update id="updateOpinion" parameterType="com.SCSystem.dto.Opinion">
 		UPDATE opinion
 		SET content = #{content}
 		  , modify_dt = NOW()
@@ -226,13 +226,13 @@
 	
 	<delete id="deleteCheck" statementType="CALLABLE">
     {call delete_check_data(
-        #{check_idx, mode=IN, jdbcType=INTEGER}
+        #{p_check_mst_idx, mode=IN, jdbcType=INTEGER}
     )}
 	</delete>
 	
 	<select id="getCheckMstIdxByDistribution" parameterType="Integer" resultType="Integer">
 		SELECT idx
-		FROM CHECK_MST
+		FROM check_mst
 		WHERE distribution_idx = #{distribution_idx}
 	</select>
 	

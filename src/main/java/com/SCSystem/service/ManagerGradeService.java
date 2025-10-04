@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.ManagerGrade;
@@ -26,7 +27,7 @@ public class ManagerGradeService {
 	public ManagerGrade getManagerGrade(int managerGradeId) {
 		return managerGradeMapper.getManagerGrade(managerGradeId);
 	}
-	
+
 	public int insertManagerGrade(ManagerGrade manager) {
 		try {
 			return managerGradeMapper.insertManagerGrade(manager);
@@ -35,7 +36,7 @@ public class ManagerGradeService {
 			return 0;
 		}
 	}
-	
+
 	public int updateManagerGrade(ManagerGrade manager) {
 		try {
 			return managerGradeMapper.updateManagerGrade(manager);
@@ -44,7 +45,7 @@ public class ManagerGradeService {
 			return 0;
 		}
 	}
-	
+	@Transactional
 	public int deleteManagerGrade(int managerGradeId) {
 		try {
 			return managerGradeMapper.deleteManagerGrade(managerGradeId);

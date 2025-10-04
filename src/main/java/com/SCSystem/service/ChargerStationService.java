@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.ChargerStation;
@@ -28,17 +29,18 @@ public class ChargerStationService {
 	public ChargerStation get(int idx) {
 		return mapper.get(idx);
 	}
-	
+
 	public int insert(ChargerStation dto) {
 		try {
-			int chargerStationIdx = mapper.insert(dto);
+			mapper.insert(dto);
+			int chargerStationIdx = dto.getIdx();
 			return chargerStationIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
 		}
 	}
-	
+
 	public int update(ChargerStation dto) {
 		try {
 			return mapper.update(dto);
@@ -47,7 +49,7 @@ public class ChargerStationService {
 			return 0;
 		}
 	}
-	
+	@Transactional
 	public int delete(int idx) {
 		try {
 			List<Distribution> list = distributionService.getListByStation(idx);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.CompanyGrade;
@@ -26,7 +27,7 @@ public class CompanyGradeService {
 	public CompanyGrade getCompanyGrade(int companyGradeId) {
 		return companyGradeMapper.getCompanyGrade(companyGradeId);
 	}
-	
+	@Transactional
 	public int insertCompanyGrade(CompanyGrade company) {
 		try {
 			return companyGradeMapper.insertCompanyGrade(company);
@@ -35,7 +36,7 @@ public class CompanyGradeService {
 			return 0;
 		}
 	}
-	
+	@Transactional
 	public int updateCompanyGrade(CompanyGrade company) {
 		try {
 			return companyGradeMapper.updateCompanyGrade(company);
@@ -44,7 +45,7 @@ public class CompanyGradeService {
 			return 0;
 		}
 	}
-	
+	@Transactional
 	public int deleteCompanyGrade(int companyGradeId) {
 		try {
 			return companyGradeMapper.deleteCompanyGrade(companyGradeId);

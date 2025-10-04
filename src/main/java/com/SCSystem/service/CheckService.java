@@ -42,7 +42,6 @@ public class CheckService {
 		return check;
 	}
 	
-	@Transactional
 	public int insert(Integer company_idx, Integer manager_idx, Integer charger_station_idx, Integer distribution_idx) {
 		try {
 			return mapper.insertCheck(company_idx, manager_idx, charger_station_idx, distribution_idx);
@@ -73,10 +72,9 @@ public class CheckService {
 		}
 	}
 	
-	@Transactional
-	public int delete(int check_idx) {
+	public int delete(int check_mst_idx) {
 		try {
-			return mapper.deleteCheck(check_idx);
+			return mapper.deleteCheck(check_mst_idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
@@ -91,17 +89,15 @@ public class CheckService {
 		return mapper.getChargerFile(idx);
 	}
 	
-	@Transactional
 	int insertChargerFile(ChargerFile chargerFile) {
 		return mapper.insertChargerFile(chargerFile);
 	}
 	
-	@Transactional
 	int updateChargerFile(ChargerFile chargerFile) {
 		return mapper.updateChargerFile(chargerFile);
 	}
 	
-	@Transactional
+
 	int deleteChargerFile(int charger_idx) {
 		return mapper.deleteChargerFile(charger_idx);
 	}
@@ -109,17 +105,14 @@ public class CheckService {
 	DistributionFile getDistributionFile(int idx) {
 		return mapper.getDistributionFile(idx);
 	}
-	@Transactional
 	int insertDistributionFile(DistributionFile distributionFile) {
 		return mapper.insertDistributionFile(distributionFile);
 	}
 
-	@Transactional
 	int updateDistributionFile(DistributionFile distributionFile) {
 		return mapper.updateDistributionFile(distributionFile);
 	}
 	
-	@Transactional
 	int deleteDistributionFile(int distribution_idx) {
 		return mapper.deleteDistributionFile(distribution_idx);
 	}

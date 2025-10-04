@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.SCSystem.dto.Charger;
@@ -45,15 +46,18 @@ public class DistributionService {
 		return mapper.get(idx);
 	}
 	
+	@Transactional
 	public int insert(Distribution dto) {
 		try {
-			int distributionIdx = mapper.insert(dto);
+			mapper.insert(dto);
+			int distributionIdx = dto.getIdx();
+			checkService.insert(dto.getCompany_idx(), dto.getManager_idx(), dto.getCharger_station_idx(), dto.getIdx());
 			int checkMstIdx = checkService.getCheckMstIdxByDistribution(distributionIdx);
 			DistributionFile distributionFile = new DistributionFile();
 			distributionFile.setDistribution_idx(distributionIdx);
 			distributionFile.setCheck_mst_idx(checkMstIdx);
 			checkService.insertDistributionFile(distributionFile);
-			return mapper.insert(dto);
+			return distributionIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
 			return 0;
@@ -69,12 +73,16 @@ public class DistributionService {
 		}
 	}
 	
+	@Transactional
 	public int delete(int idx) {
 		try {
 			List<Charger> list = chargerService.getListByDistribution(idx);
 			for(Charger charger : list) {
 				chargerService.delete(charger.getIdx());
 			}
+			checkService.deleteDistributionFile(idx);
+			int checkMstIdx = checkService.getCheckMstIdxByDistribution(idx);
+			checkService.delete(checkMstIdx);
 			return mapper.delete(idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());

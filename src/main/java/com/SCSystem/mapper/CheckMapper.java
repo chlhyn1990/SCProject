@@ -36,8 +36,8 @@ public interface CheckMapper {
 	ChargingOperation getChargingOperation(CheckMst checkMst);
 	Opinion getOpinion(CheckMst checkMst);
 	
-	int insertCheck(@Param("company_idx") Integer company_idx, 
-					@Param("manager_idx") Integer manager_idx,
+	int insertCheck(@Param("p_company_idx") Integer company_idx, 
+					@Param("p_manager_idx") Integer manager_idx,
 					@Param("p_charger_station_idx") Integer charger_station_idx,
 					@Param("p_distribution_idx") Integer distribution_idx);
 	
@@ -52,7 +52,7 @@ public interface CheckMapper {
 	int updateChargingOperation(ChargingOperation chargingOperation);
 	int updateOpinion(Opinion opinion);
 	
-	int deleteCheck(@Param("idx") Integer check_idx);
+	int deleteCheck(@Param("p_check_mst_idx") Integer check_mst_idx);
 	
 	int getCheckMstIdxByDistribution(int distribution_idx);
 	
