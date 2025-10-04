@@ -22,10 +22,10 @@
     	AND company_name LIKE CONCAT('%', #{searchCompany}, '%')
     </if>
     <if test="searchManager!= null and searchManager != ''">
-    	AND name LIKE CONCAT('%', #{searchManager}, '%')
+    	AND manager_name LIKE CONCAT('%', #{searchManager}, '%')
     </if>
     <if test="searchChargerStation != null and searchChargerStation != ''">
-    	AND name LIKE CONCAT('%', #{searchChargerStation}, '%')
+    	AND station_name LIKE CONCAT('%', #{searchChargerStation}, '%')
     </if>
 	</select>
 	
