@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Charger;
 import com.SCSystem.service.ChargerService;
+import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,7 +69,7 @@ public class ChargerController {
 	@ResponseBody
 	public ResponseEntity<ApiResult> insert(@RequestBody  Charger dto){
 		ApiResult apiResult = new ApiResult();
-		if(service.insert(dto) == 1){
+		if(service.insert(dto) > 0){
 			apiResult.setCode(ApiResult.SUCCESS);
 			apiResult.setMsg(ApiResult.SUCCESS_MSG);
 		}else {

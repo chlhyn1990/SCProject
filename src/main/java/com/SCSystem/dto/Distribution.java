@@ -16,4 +16,7 @@ public class Distribution {
     private String create_dt;
     private String modify_dt;
     private List<Charger> chargerList;
+    
+	private Integer company_idx;
+	private Integer manager_idx;
 }

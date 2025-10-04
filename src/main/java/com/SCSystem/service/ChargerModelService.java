@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,7 +27,7 @@ public class ChargerModelService {
 	public ChargerModel get(int idx) {
 		return mapper.get(idx);
 	}
-	
+
 	public int insert(ChargerModel dto) {
 		try {
 			return mapper.insert(dto);
@@ -35,7 +36,7 @@ public class ChargerModelService {
 			return 0;
 		}
 	}
-	
+
 	public int update(ChargerModel dto) {
 		try {
 			return mapper.update(dto);
@@ -44,7 +45,7 @@ public class ChargerModelService {
 			return 0;
 		}
 	}
-	
+
 	public int delete(int idx) {
 		try {
 			return mapper.delete(idx);

@@ -35,6 +35,9 @@
 		,NOW()
 		,NOW()		
 	)
+	<selectKey keyProperty="idx" resultType="java.lang.Integer" >
+         	SELECT LAST_INSERT_ID()
+  		</selectKey>
 	</insert>
 	
 	<update id="update" parameterType="com.SCSystem.dto.Distribution">

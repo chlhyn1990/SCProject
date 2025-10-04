@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.SCSystem.dto.ChargerFile;
 import com.SCSystem.dto.ChargingOperation;
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
 import com.SCSystem.dto.Compatibility;
 import com.SCSystem.dto.Convenience;
+import com.SCSystem.dto.DistributionFile;
 import com.SCSystem.dto.ElectricalStability;
 import com.SCSystem.dto.Environment;
 import com.SCSystem.dto.FireSafety;
@@ -34,8 +36,8 @@ public interface CheckMapper {
 	ChargingOperation getChargingOperation(CheckMst checkMst);
 	Opinion getOpinion(CheckMst checkMst);
 	
-	int insertCheck(@Param("company_idx") Integer company_idx, 
-					@Param("manager_idx") Integer manager_idx,
+	int insertCheck(@Param("p_company_idx") Integer company_idx, 
+					@Param("p_manager_idx") Integer manager_idx,
 					@Param("p_charger_station_idx") Integer charger_station_idx,
 					@Param("p_distribution_idx") Integer distribution_idx);
 	
@@ -50,6 +52,18 @@ public interface CheckMapper {
 	int updateChargingOperation(ChargingOperation chargingOperation);
 	int updateOpinion(Opinion opinion);
 	
-
+	int deleteCheck(@Param("p_check_mst_idx") Integer check_mst_idx);
+	
+	int getCheckMstIdxByDistribution(int distribution_idx);
+	
+	ChargerFile getChargerFile(int idx);
+	int insertChargerFile(ChargerFile chargerFile);
+	int updateChargerFile(ChargerFile chargerFile);
+	int deleteChargerFile(int charger_idx);
+	
+	DistributionFile getDistributionFile(int idx);
+	int insertDistributionFile(DistributionFile distributionFile);
+	int updateDistributionFile(DistributionFile distributionFile);
+	int deleteDistributionFile(int distribution_idx);
 }
 

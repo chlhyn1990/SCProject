@@ -29,7 +29,7 @@
     </if>
 	</select>
 	
-	<select id="setCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
+	<select id="getCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
 		SELECT A.* 
 		FROM as_evse.check_mst A
 		WHERE A.idx = #{idx}
@@ -90,28 +90,223 @@
 	</select>
 	
 	<insert id="insertCheck" statementType="CALLABLE">
-    {call insert_check_default_data(
-        #{company_idx, mode=IN, jdbcType=INTEGER},
-        #{manager_idx, mode=IN, jdbcType=INTEGER},
-        #{charger_station_idx, mode=IN, jdbcType=INTEGER},
-        #{distribution_idx, mode=IN, jdbcType=INTEGER}
+    {call insert_check_data(
+        #{p_company_idx, mode=IN, jdbcType=INTEGER},
+        #{p_manager_idx, mode=IN, jdbcType=INTEGER},
+        #{p_charger_station_idx, mode=IN, jdbcType=INTEGER},
+        #{p_distribution_idx, mode=IN, jdbcType=INTEGER}
     )}
 	</insert>
 	
-	<update id="update" parameterType="com.SCSystem.dto.Charger">
-	UPDATE as_evse.charger
-	SET charger_station_idx = #{charger_station_idx}
-	  , distribution_idx = #{distribution_idx}
-	  , charger_model_idx = #{charger_model_idx}
-	  , charger_id = #{charger_id}
-	  , me_id = #{me_id}
-	  , detail_place = #{detail_place}
-	  , broken_part = #{broken_part}
-	  , remark = #{remark}
-	  , fixed_dt = #{fixed_dt}
-	  , manager_idx = #{manager_idx}
-	  , modify_dt = NOW()
-	WHERE idx = #{idx}
+	<update id="updateCheckMst" parameterType="com.SCSystem.dto.CheckMst">
+		UPDATE check_mst
+		SET check_dt = #{check_dt}
+		  , temperature = #{temperature}
+		  , adjustment = #{adjustment}
+		  , modify_dt = NOW()
+		WHERE A.idx = #{idx}
 	</update>
+	<update id="updateCompatibility" parameterType="com.SCSystem.dto.Compatibility">
+		UPDATE compatibility
+		SET open = #{open}
+		  , access = #{access}
+		  , milestone = #{milestone}
+		  , rapid = #{rapid}
+		  , space = #{space}
+		  , free = #{free}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateEnvironment" parameterType="com.SCSystem.dto.Environment">
+		UPDATE environment
+		SET temperature = #{temperature}
+		  , gas = #{gas}
+		  , openness = #{openness}
+		  , slip = #{slip}
+		  , ventilation = #{ventilation}
+		  , snowrain = #{snowrain}
+		  , flooding = #{flooding}
+		  , vibration = #{vibration}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateConvenience" parameterType="com.SCSystem.dto.Convenience">
+		UPDATE convenience
+		SET homepage = #{homepage}
+		  , facility = #{facility}
+		  , status = #{status}
+		  , stopper = #{stopper}
+		  , screen = #{screen}
+		  , payment = #{payment}
+		  , lighting = #{lighting}
+		  , cctv = #{cctv}
+		  , emergency = #{emergency}
+		  , card = #{card}
+		  , traffic = #{traffic}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateProductSafety" parameterType="com.SCSystem.dto.ProductSafety">
+		UPDATE product_safety
+		SET rust = #{rust}
+		  , stopper = #{stopper}
+		  , connector = #{connector}
+		  , lock = #{lock}
+		  , discolor = #{discolor}
+		  , pad = #{pad}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateElectricalStability" parameterType="com.SCSystem.dto.ElectricalStability">
+		UPDATE electrical_stability
+		SET facilities = #{facilities}
+		  , rainwater = #{rainwater}
+		  , contact = #{contact}
+		  , danger = #{danger}
+		  , locking = #{locking}
+		  , wire = #{wire}
+		  , meter = #{meter}
+		  , gate = #{gate}
+		  , grounding_work = #{grounding_work}
+		  , resistance = #{resistance}
+		  , thickness = #{thickness}
+		  , distribution = #{distribution}
+		  , cable = #{cable}
+		  , wiring = #{wiring}
+		  , suitable_cable = #{suitable_cable}
+		  , metal_part = #{metal_part}
+		  , cable_damage = #{cable_damage}
+		  , wiring_status = #{wiring_status}
+		  , insulation_resistance = #{insulation_resistance}
+		  , type_charger1 = #{type_charger1}
+		  , type_charger2 = #{type_charger2}
+		  , gate_value = #{gate_value}
+		  , overcurrentW = #{overcurrentW}
+		  , overcurrentA = #{overcurrentA}
+		  , leakageW = #{leakageW}
+		  , leakageA = #{leakageA}
+		  , sensitivity = #{sensitivity}
+		  , wire_thickness = #{wire_thickness}
+		  , cable_tightening = #{cable_tightening}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateFireSafety" parameterType="com.SCSystem.dto.FireSafety">
+		UPDATE fire_safety
+		SET facility = #{facility}
+		  , evacuation = #{evacuation}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateMaintenance" parameterType="com.SCSystem.dto.Maintenance">
+		UPDATE maintenance
+		SET contact = #{contact}
+		  , organize = #{organize}
+		  , ascenter = #{ascenter}
+		  , complaint = #{complaint}
+		  , light = #{light}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateChargingOperation" parameterType="com.SCSystem.dto.ChargingOperation">
+		UPDATE charging_operation 
+		SET charge = #{charge}
+		  , speed = #{speed}
+		  , button = #{button}
+		  , share = #{share}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	<update id="updateOpinion" parameterType="com.SCSystem.dto.Opinion">
+		UPDATE opinion
+		SET content = #{content}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</update>
+	
+	<delete id="deleteCheck" statementType="CALLABLE">
+    {call delete_check_data(
+        #{p_check_mst_idx, mode=IN, jdbcType=INTEGER}
+    )}
+	</delete>
+	
+	<select id="getCheckMstIdxByDistribution" parameterType="Integer" resultType="Integer">
+		SELECT idx
+		FROM check_mst
+		WHERE distribution_idx = #{distribution_idx}
+	</select>
+	
+	<select id="getChargerFile" parameterType="Integer" resultType="Integer">
+		SELECT *
+		FROM charger_file
+		WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insertChargerFile" parameterType="com.SCSystem.dto.ChargerFile">
+		INSERT INTO charger_file
+		(check_mst_idx, charger_idx, create_dt)
+		VALUES
+		(#{check_mst_idx}, #{charger_idx}, NOW())
+	</insert>
+	
+	<select id="updateChargerFile" parameterType="com.SCSystem.dto.ChargerFile">
+		UPDATE charger_file
+		SET test_url = #{test_url}
+		  , test_path = #{test_path}
+		  , plate_url = #{plate_url}
+		  , plate_path = #{plate_path}
+		  , resistance_url = #{resistance_url}
+		  , resistance_path = #{resistance_path}
+		  , info_url = #{info_url}
+		  , info_path = #{info_path}
+		  , bollard_url = #{bollard_url}
+		  , bollard_path = #{bollard_path}
+		  , connector_url = #{connector_url}
+		  , connector_path = #{connector_path}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</select>
+	
+	<delete id="deleteChargerFile" parameterType="Integer">
+		DELETE FROM charger_file
+		WHERE charger_idx = #{charger_idx}
+	</delete>
+	
+	<select id="getDistributionFile" parameterType="Integer" resultType="Integer">
+		SELECT *
+		FROM distribution_file
+		WHERE idx = #{idx}
+	</select>
+	
+	<insert id="insertDistributionFile" parameterType="com.SCSystem.dto.DistributionFile">
+		INSERT INTO distribution_file
+		(check_mst_idx, distribution_idx, create_dt)
+		VALUES
+		(#{check_mst_idx}, #{distribution_idx}, NOW())
+	</insert>
+	
+	<select id="updateDistributionFile" parameterType="com.SCSystem.dto.DistributionFile">
+		UPDATE distribution_file
+		SET test_url = #{test_url}
+		  , test_path = #{test_path}
+		  , plate_url = #{plate_url}
+		  , plate_path = #{plate_path}
+		  , resistance_url = #{resistance_url}
+		  , resistance_path = #{resistance_path}
+		  , info_url = #{info_url}
+		  , info_path = #{info_path}
+		  , bollard_url = #{bollard_url}
+		  , bollard_path = #{bollard_path}
+		  , connector_url = #{connector_url}
+		  , connector_path = #{connector_path}
+		  , modify_dt = NOW()
+		WHERE idx = #{idx}
+	</select>
+	
+	<delete id="deleteDistributionFile" parameterType="Integer">
+		DELETE FROM distribution_file
+		WHERE distribution_idx = #{distribution_idx}
+	</delete>
+
 	
 </mapper>
