@@ -1,5 +1,12 @@
 package com.SCSystem.controller;
 
+import com.SCSystem.service.AppService;
+import com.SCSystem.service.FileUploadService;
+import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,25 +19,31 @@ import java.io.File;
 import java.io.IOException;
 
 @RequestMapping("/app/api")
+@Slf4j
 @RestController
 public class FileUploadController {
     private static final String UPLOAD_BASE_DIR = "/home/as_evse/uploads/";
 
-    @PostMapping("/upload")
+
+    @Autowired
+    FileUploadService fileUploadService;
+
+    @PostMapping("/upload/distribution_file")
     public ResponseEntity<String> handleFileUpload(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("folder") String folder,
-            @RequestParam("filename") String filename,
-            @RequestParam("distributionIdx") String distributionIdx // 이 파라미터도 클라이언트에서 보낼 것
+            @RequestParam("data") String data
     ) {
-
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("업로드할 파일이 없습니다.");
         }
 
         try {
+            JSONParser jsonParser = new JSONParser();
+            Object obj = jsonParser.parse(data);
+            JSONObject jsonObj = (JSONObject) obj;
+
             // 저장할 폴더 경로 (절대경로)
-            File directory = new File(UPLOAD_BASE_DIR + folder);
+            File directory = new File(UPLOAD_BASE_DIR + jsonObj.get("folder"));
             if (!directory.exists()) {
                 if (!directory.mkdirs()) {
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -39,10 +52,12 @@ public class FileUploadController {
             }
 
             // 저장할 파일 객체 생성
-            File dest = new File(directory, filename);
+            File dest = new File(directory, "filename");
 
             // 파일 저장
             file.transferTo(dest);
+
+            fileUploadService.insertDistributionFiles((Integer) jsonObj.get("distributionIdx") ,(String) jsonObj.get("filename"), (String) jsonObj.get("text"));
 
             return ResponseEntity.ok("업로드 성공: " + dest.getAbsolutePath());
         } catch (IOException e) {
@@ -54,5 +69,6 @@ public class FileUploadController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("업로드 실패: " + e.getMessage());
         }
+
     }
 }
