@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 
 @RequestMapping("/app/api")
 @Slf4j
 @RestController
 public class FileUploadController {
-    private static final String UPLOAD_BASE_DIR = "/home/as_evse/uploads/";
+    //private static final String UPLOAD_BASE_DIR = "/home/as_evse/uploads/";
+    private static final String UPLOAD_BASE_DIR = "F:\\upload/";
 
 
     @Autowired
@@ -42,32 +41,26 @@ public class FileUploadController {
             Object obj = jsonParser.parse(data);
             JSONObject jsonObj = (JSONObject) obj;
 
-            // 저장할 폴더 경로 (절대경로)
-            File directory = new File(UPLOAD_BASE_DIR + jsonObj.get("folder"));
-            if (!directory.exists()) {
-                if (!directory.mkdirs()) {
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body("폴더 생성 실패: " + directory.getAbsolutePath());
-                }
+            long jsonDistributionIdx = (Long) jsonObj.get("distributionIdx");
+            int distributionIdx = (int) jsonDistributionIdx;
+
+            Integer fileUploadResult = fileUploadService.makeFile(distributionIdx, (String) jsonObj.get("filename"), file);
+            if(fileUploadResult<0){
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("[FileUploadController] 업로드 실패!");
             }
 
-            // 저장할 파일 객체 생성
-            File dest = new File(directory, "filename");
+            Integer insertResult = fileUploadService.insertDistributionFiles(distributionIdx,(String) jsonObj.get("filename"), (String) jsonObj.get("text"));
 
-            // 파일 저장
-            file.transferTo(dest);
-
-            fileUploadService.insertDistributionFiles((Integer) jsonObj.get("distributionIdx") ,(String) jsonObj.get("filename"), (String) jsonObj.get("text"));
-
-            return ResponseEntity.ok("업로드 성공: " + dest.getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("업로드 실패: " + e.getMessage());
+            if(insertResult<0){
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("[FileUploadController] DB 저장 실패!");
+            }
+            return ResponseEntity.ok("[FileUploadController] 업로드 성공!");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("업로드 실패: " + e.getMessage());
+                    .body("[FileUploadController] 업로드 에러: " + e.getMessage());
         }
 
     }

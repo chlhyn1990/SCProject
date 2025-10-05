@@ -15,6 +15,6 @@ public interface AppCheckMapper {
     Integer insertDistributionResistance(Integer checkMstIdx, Integer distributionIdx, String resistanceUrl, String resistanceUrlPath);
     Integer insertDistributionWireStatus(Integer checkMstIdx, Integer distributionIdx, String wireStatusUrl, String wireStatusPath);
     Integer insertDistributionEtc(Integer checkMstIdx, Integer distributionIdx, String etcUrl, String etcPath);
-    String getStationIdByDistributionIdx(Integer distributionIdx);
-    Integer getCheckMstdxByDistributionIdx(Integer distributionIdx);
+    Integer getStationIdxByDistributionIdx(Integer distributionIdx);
+    Integer getCheckMstIdxByDistributionIdx(Integer distributionIdx);
 }

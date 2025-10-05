@@ -9,10 +9,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, foreground_url, foreground_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{foreground_url}, #{foreground_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{foregroundUrl}, #{foregroundPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        foreground_url = #{foreground_url},
-        foreground_path = #{foreground_path},
+        foreground_url = #{foregroundUrl},
+        foreground_path = #{foregroundPath},
         modify_dt = NOW()
     </insert>
 
@@ -20,10 +20,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, external_url, external_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{external_url}, #{external_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{externalUrl}, #{externalPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        external_url = #{external_url},
-        external_path = #{external_path},
+        external_url = #{externalUrl},
+        external_path = #{externalPath},
         modify_dt = NOW()
     </insert>
 
@@ -31,10 +31,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, internal_url, internal_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{internal_url}, #{internal_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{internalUrl}, #{internalPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        internal_url = #{internal_url},
-        internal_path = #{internal_path},
+        internal_url = #{internalUrl},
+        internal_path = #{internalPath},
         modify_dt = NOW()
     </insert>
 
@@ -42,10 +42,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, mccb_url, mccb_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{mccb_url}, #{mccb_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{mccbUrl}, #{mccbPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        mccb_url = #{mccb_url},
-        mccb_path = #{mccb_path},
+        mccb_url = #{mccbUrl},
+        mccb_path = #{mccbPath},
         modify_dt = NOW()
     </insert>
 
@@ -53,10 +53,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, resistance_url, resistance_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{resistance_url}, #{resistance_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{resistanceUrl}, #{resistancePath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        resistance_url = #{resistance_url},
-        resistance_path = #{resistance_path},
+        resistance_url = #{resistanceUrl},
+        resistance_path = #{resistancePath},
         modify_dt = NOW()
     </insert>
 
@@ -64,10 +64,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, wire_status_url, wire_status_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{wire_status_url}, #{wire_status_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{wire_statusUrl}, #{wire_statusPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        wire_status_url = #{wire_status_url},
-        wire_status_path = #{wire_status_path},
+        wire_status_url = #{wire_statusUrl},
+        wire_status_path = #{wire_statusPath},
         modify_dt = NOW()
     </insert>
 
@@ -75,10 +75,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, meter_url, meter_path, create_dt, modify_dt, meter_text)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{meter_url}, #{meter_path}, NOW(), NOW(), #{meter_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{meterUrl}, #{meterPath}, NOW(), NOW(), #{meter_text})
         ON DUPLICATE KEY UPDATE
-        meter_url = #{meter_url},
-        meter_path = #{meter_path},
+        meter_url = #{meterUrl},
+        meter_path = #{meterPath},
         meter_text = #{meter_text},
         modify_dt = NOW()
     </insert>
@@ -87,10 +87,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, modem_front_url, modem_front_path, create_dt, modify_dt, modem_front_text)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{modem_front_url}, #{modem_front_path}, NOW(), NOW(), #{modem_front_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{modem_frontUrl}, #{modem_frontPath}, NOW(), NOW(), #{modem_front_text})
         ON DUPLICATE KEY UPDATE
-        modem_front_url = #{modem_front_url},
-        modem_front_path = #{modem_front_path},
+        modem_front_url = #{modem_frontUrl},
+        modem_front_path = #{modem_frontPath},
         modem_front_text = #{modem_front_text},
         modify_dt = NOW()
     </insert>
@@ -99,10 +99,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, modem_back_url, modem_back_path, create_dt, modify_dt, modem_back_text)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{modem_back_url}, #{modem_back_path}, NOW(), NOW(), #{modem_back_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{modem_backUrl}, #{modem_backPath}, NOW(), NOW(), #{modem_back_text})
         ON DUPLICATE KEY UPDATE
-        modem_back_url = #{modem_back_url},
-        modem_back_path = #{modem_back_path},
+        modem_back_url = #{modem_backUrl},
+        modem_back_path = #{modem_backPath},
         modem_back_text = #{modem_back_text},
         modify_dt = NOW()
     </insert>
@@ -111,10 +111,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, bollard_url, bollard_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{bollard_url}, #{bollard_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{bollardUrl}, #{bollardPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        bollard_url = #{bollard_url},
-        bollard_path = #{bollard_path},
+        bollard_url = #{bollardUrl},
+        bollard_path = #{bollardPath},
         modify_dt = NOW()
     </insert>
 
@@ -122,21 +122,20 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, etc_url, etc_path, create_dt, modify_dt)
         VALUES
-        (#{check_mst_idx}, #{distribution_idx}, #{etc_url}, #{etc_path}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{etcUrl}, #{etcPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        etc_url = #{etc_url},
-        etc_path = #{etc_path},
+        etc_url = #{etcUrl},
+        etc_path = #{etcPath},
         modify_dt = NOW()
     </insert>
 
-    <select id="getStationIdByDistributionIdx" parameterType="Integer" resultType="string">
-        SELECT cs.station_id
-        FROM distribution d
-        JOIN charger_station cs ON d.charger_station_idx = cs.idx
-        WHERE d.idx = #{distributionIdx}
+    <select id="getStationIdxByDistributionIdx" parameterType="Integer" resultType="Integer">
+        SELECT charger_station_idx
+        FROM distribution
+        WHERE idx = #{distributionIdx}
     </select>
 
-    <select id="getCheckMstdxByDistributionIdx" parameterType="Integer" resultType="Integer">
+    <select id="getCheckMstIdxByDistributionIdx" parameterType="Integer" resultType="Integer">
         SELECT idx
         FROM check_mst
         WHERE distribution_idx = #{distributionIdx}
