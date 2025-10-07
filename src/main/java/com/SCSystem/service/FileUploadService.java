@@ -14,6 +14,8 @@ import java.io.IOException;
 public class FileUploadService {
     @Autowired
     AppCheckMapper appCheckMapper;
+    @Autowired
+
 
     private final static String FTP_URL = "ftp://MSI_PC:1234@192.168.55.34/";
 //  private final static String LOCAL_PATH = "/home/as_evse/uploads/";
@@ -29,6 +31,7 @@ public class FileUploadService {
 
             case "external.jpg":
                 result = appCheckMapper.insertDistributionExternal(checkMstIdx, distributionIdx, FTP_URL + stationIdx +"/"+distributionIdx+"/"+filename, LOCAL_PATH + stationIdx +distributionIdx+filename);
+
                 break;
 
             case "internal.jpg":
@@ -37,10 +40,21 @@ public class FileUploadService {
 
             case "mccb.jpg":
                 result = appCheckMapper.insertDistributionMccb(checkMstIdx, distributionIdx, FTP_URL + stationIdx +"/"+distributionIdx+"/"+filename, LOCAL_PATH + stationIdx +distributionIdx+filename);
+                if(null!=text) {
+                    result = appCheckMapper.insertElectricalStabilityOverCurrentA(checkMstIdx, distributionIdx, text);
+                    if(result<0){
+                        log.error("[FileUploadService] mccb checkList Insert Error!");
+                    }
+                }
                 break;
-
             case "resistance.jpg":
                 result = appCheckMapper.insertDistributionResistance(checkMstIdx, distributionIdx, FTP_URL + stationIdx +"/"+distributionIdx+"/"+filename, LOCAL_PATH + stationIdx +distributionIdx+filename);
+                if(null!=text) {
+                    result = appCheckMapper.insertElectricalStabilityResistance(checkMstIdx, distributionIdx, text);
+                    if(result<0){
+                        log.error("[FileUploadService] resistance checkList Insert Error!");
+                    }
+                }
                 break;
 
             case "wire_status.jpg":
@@ -67,6 +81,9 @@ public class FileUploadService {
                 break;
             default:
                 return -1;
+        }
+        if(result<0){
+            log.error("[FileUploadService] " +filename+" Insert Fail!");
         }
         return result;
     }

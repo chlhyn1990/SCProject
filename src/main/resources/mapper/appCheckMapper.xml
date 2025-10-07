@@ -140,6 +140,68 @@
         FROM check_mst
         WHERE distribution_idx = #{distributionIdx}
     </select>
-
+    <insert id="insertElectricalStabilityOverCurrentA" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, overcurrentA, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{overCurrentA}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        overcurrentA = #{overcurrentA},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityResistance" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, resistance, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{resistance}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        resistance = #{resistance},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityThickness" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, thickness, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{thickness}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        thickness = #{thickness},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityWireThickness" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, wire_thickness, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{wireThickness}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        wire_thickness = #{wireThickness},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityDistribution" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, distribution, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{distribution}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        distribution = #{distribution},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityCable" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, cable, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{cable}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        cable = #{cable},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilitySensitivity" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, sensitivity, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{sensitivity}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        cable = #{cable},
+        modify_dt = NOW()
+    </insert>
 
 </mapper>

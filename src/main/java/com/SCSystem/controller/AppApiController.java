@@ -28,7 +28,6 @@ public class AppApiController {
         String id=manager.getId();
         String password=manager.getPassword();
 
-        log.info("id:{}, passwd:{}", id, password);
         Manager loginManager = appService.getManager(id,password);
 
         if(loginManager.getIdx()>0) {
@@ -40,13 +39,13 @@ public class AppApiController {
         }
         else if(loginManager.getIdx()==0){
             //NOT FOUND user ID
-            log.info("[getMember]NOT Found User id:{}",id);
+            log.error("[getMember]NOT Found User id:{}",id);
             return new ResponseEntity<>(
                     loginManager,
                     HttpStatus.NOT_FOUND);
         }
         else if(loginManager.getIdx()==-1){
-            log.info("[getMember]NOT Matched Password id:{}",id);
+            log.error("[getMember]NOT Matched Password id:{}",id);
             //NOT MATCHED password
             return new ResponseEntity<>(
                     loginManager,
@@ -61,7 +60,7 @@ public class AppApiController {
         List<Charger> chargers = appService.getChargersFromDistributionIdx(distributionIdx.get("distributionIdx"));
 
         if(chargers.isEmpty()) {
-            log.info("[getChargersFromDistributionIdx]NOT FOUND CHARGER!");
+            log.error("[getChargersFromDistributionIdx]NOT FOUND CHARGER!");
             return new ResponseEntity<>(
                     chargers,
                     HttpStatus.NOT_FOUND);
@@ -81,7 +80,7 @@ public class AppApiController {
         if(null==chargerModel) {
             chargerModel = new ChargerModel();
             chargerModel.setIdx(0);
-            log.info("[getChargerModels]NOT FOUND CHARGER MODELS!");
+            log.error("[getChargerModels]NOT FOUND CHARGER MODELS!");
             return new ResponseEntity<>(
                     chargerModel,
                     HttpStatus.NOT_FOUND);
@@ -99,7 +98,7 @@ public class AppApiController {
         List<ChargerStation> chargerStations = appService.getNonFixedChargerStations(companyIdx.get("companyIdx"));
 
         if(chargerStations.isEmpty()) {
-            log.info("[getNonFixedChargerStations]NOT FOUND CHARGER STATIONS!");
+            log.error("[getNonFixedChargerStations]NOT FOUND CHARGER STATIONS!");
             return new ResponseEntity<>(
                     chargerStations,
                     HttpStatus.NOT_FOUND);
@@ -118,7 +117,7 @@ public class AppApiController {
         ChargerStation chargerStation = appService.getStationFromIdx(data.get("stationIdx"));
 
         if (updated == 1) {
-            log.info("[setStationManager]UPDATED MANAGER CHARGER STATIONS!");
+            log.error("[setStationManager]UPDATED MANAGER CHARGER STATIONS!");
             return new ResponseEntity<>(
                     chargerStation,
                     HttpStatus.OK);
@@ -138,7 +137,7 @@ public class AppApiController {
         List<Distribution> distributions = appService.getDistributions(stationIdx.get("stationIdx"));
 
         if(distributions.isEmpty()) {
-            log.info("[getChargerListFromStationIdx]NOT FOUND CHARGER!");
+            log.error("[getChargerListFromStationIdx]NOT FOUND CHARGER!");
             return new ResponseEntity<>(
                     distributions,
                     HttpStatus.NOT_FOUND);
@@ -162,7 +161,7 @@ public class AppApiController {
                     chargerStation,
                     HttpStatus.OK);
         } else {
-            log.info("[setStationManager]FAILED TO UPDATE MANAGER CHARGER STATIONS!");
+            log.error("[setStationManager]FAILED TO UPDATE MANAGER CHARGER STATIONS!");
             chargerStation = new ChargerStation();
             chargerStation.setIdx(-1);
             return new ResponseEntity<>(

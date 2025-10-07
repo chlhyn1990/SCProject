@@ -17,4 +17,12 @@ public interface AppCheckMapper {
     Integer insertDistributionEtc(Integer checkMstIdx, Integer distributionIdx, String etcUrl, String etcPath);
     Integer getStationIdxByDistributionIdx(Integer distributionIdx);
     Integer getCheckMstIdxByDistributionIdx(Integer distributionIdx);
+    Integer insertElectricalStabilityOverCurrentA(Integer checkMstIdx, Integer distributionIdx, String overCurrentA);
+    Integer insertElectricalStabilityResistance(Integer checkMstIdx, Integer distributionIdx, String resistance);
+
+    Integer insertElectricalStabilityThickness(Integer checkMstIdx, Integer distributionIdx, String thickness);
+    Integer insertElectricalStabilityWireThickness(Integer checkMstIdx, Integer distributionIdx, String wireThickness);
+    Integer insertElectricalStabilityDistribution(Integer checkMstIdx, Integer distributionIdx, String distribution);
+    Integer insertElectricalStabilityCable(Integer checkMstIdx, Integer distributionIdx, String cable);
+    Integer insertElectricalStabilitySensitivity(Integer checkMstIdx, Integer distributionIdx, String sensitivity);
 }
