@@ -41,7 +41,7 @@ public class FileUploadService {
             case "mccb.jpg":
                 result = appCheckMapper.insertDistributionMccb(checkMstIdx, distributionIdx, FTP_URL + stationIdx +"/"+distributionIdx+"/"+filename, LOCAL_PATH + stationIdx +distributionIdx+filename);
                 if(null!=text) {
-                    result = appCheckMapper.insertElectricalStabilityOverCurrentA(checkMstIdx, distributionIdx, text);
+                    result = appCheckMapper.insertElectricalStabilityOvercurrentA(checkMstIdx, distributionIdx, text);
                     if(result<0){
                         log.error("[FileUploadService] mccb checkList Insert Error!");
                     }

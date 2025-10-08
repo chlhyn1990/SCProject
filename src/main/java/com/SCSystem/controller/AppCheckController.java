@@ -24,7 +24,11 @@ public class AppCheckController {
     @PostMapping("/distribution")
     public ResponseEntity<String> insertElectricalStability(@RequestBody HashMap<String, String> data){
 
-        Integer result = appCheckService.insertElectricalStability(Integer.valueOf(data.get("distributionIdx")), data.get("insertType"), data.get("data"));
+        log.error("insertElectricalStability data : "+data.toString());
+        long longDistributionIdx = Long.valueOf(data.get("distributionIdx"));
+        int distributionIdx = (int)longDistributionIdx;
+
+        Integer result = appCheckService.insertElectricalStability(distributionIdx, data.get("insertType"), data.get("data"));
 
         if(result<0) {
             log.error("[insertElectricalStability]ERROR INSERT!");

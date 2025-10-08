@@ -64,10 +64,10 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, wire_status_url, wire_status_path, create_dt, modify_dt)
         VALUES
-        (#{checkMstIdx}, #{distributionIdx}, #{wire_statusUrl}, #{wire_statusPath}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{wireStatusUrl}, #{wireStatusPath}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        wire_status_url = #{wire_statusUrl},
-        wire_status_path = #{wire_statusPath},
+        wire_status_url = #{wireStatusUrl},
+        wire_status_path = #{wireStatusPath},
         modify_dt = NOW()
     </insert>
 
@@ -75,11 +75,11 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, meter_url, meter_path, create_dt, modify_dt, meter_text)
         VALUES
-        (#{checkMstIdx}, #{distributionIdx}, #{meterUrl}, #{meterPath}, NOW(), NOW(), #{meter_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{meterUrl}, #{meterPath}, NOW(), NOW(), #{meterText})
         ON DUPLICATE KEY UPDATE
         meter_url = #{meterUrl},
         meter_path = #{meterPath},
-        meter_text = #{meter_text},
+        meter_text = #{meterText},
         modify_dt = NOW()
     </insert>
 
@@ -87,11 +87,11 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, modem_front_url, modem_front_path, create_dt, modify_dt, modem_front_text)
         VALUES
-        (#{checkMstIdx}, #{distributionIdx}, #{modem_frontUrl}, #{modem_frontPath}, NOW(), NOW(), #{modem_front_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{modemFrontUrl}, #{modemFrontPath}, NOW(), NOW(), #{modemFrontText})
         ON DUPLICATE KEY UPDATE
-        modem_front_url = #{modem_frontUrl},
-        modem_front_path = #{modem_frontPath},
-        modem_front_text = #{modem_front_text},
+        modem_front_url = #{modemFrontUrl},
+        modem_front_path = #{modemFrontPath},
+        modem_front_text = #{modemFrontText},
         modify_dt = NOW()
     </insert>
 
@@ -99,11 +99,11 @@
         INSERT INTO distribution_file
         (check_mst_idx, distribution_idx, modem_back_url, modem_back_path, create_dt, modify_dt, modem_back_text)
         VALUES
-        (#{checkMstIdx}, #{distributionIdx}, #{modem_backUrl}, #{modem_backPath}, NOW(), NOW(), #{modem_back_text})
+        (#{checkMstIdx}, #{distributionIdx}, #{modemBackUrl}, #{modemBackPath}, NOW(), NOW(), #{modemBackText})
         ON DUPLICATE KEY UPDATE
-        modem_back_url = #{modem_backUrl},
-        modem_back_path = #{modem_backPath},
-        modem_back_text = #{modem_back_text},
+        modem_back_url = #{modemBackUrl},
+        modem_back_path = #{modemBackPath},
+        modem_back_text = #{modemBackText},
         modify_dt = NOW()
     </insert>
 
@@ -140,11 +140,11 @@
         FROM check_mst
         WHERE distribution_idx = #{distributionIdx}
     </select>
-    <insert id="insertElectricalStabilityOverCurrentA" parameterType="hashmap">
+    <insert id="insertElectricalStabilityOvercurrentA" parameterType="hashmap">
         INSERT INTO electrical_stability
         (check_mst_idx, distribution_idx, overcurrentA, create_dt, modify_dt)
         VALUES
-        (#{checkMstIdx}, #{distributionIdx}, #{overCurrentA}, NOW(), NOW())
+        (#{checkMstIdx}, #{distributionIdx}, #{overcurrentA}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
         overcurrentA = #{overcurrentA},
         modify_dt = NOW()
@@ -200,7 +200,16 @@
         VALUES
         (#{checkMstIdx}, #{distributionIdx}, #{sensitivity}, NOW(), NOW())
         ON DUPLICATE KEY UPDATE
-        cable = #{cable},
+        sensitivity = #{sensitivity},
+        modify_dt = NOW()
+    </insert>
+    <insert id="insertElectricalStabilityLeakA" parameterType="hashmap">
+        INSERT INTO electrical_stability
+        (check_mst_idx, distribution_idx, leakageA, create_dt, modify_dt)
+        VALUES
+        (#{checkMstIdx}, #{distributionIdx}, #{leakageA}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+        leakageA = #{leakageA},
         modify_dt = NOW()
     </insert>
 

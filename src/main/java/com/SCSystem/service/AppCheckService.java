@@ -31,6 +31,9 @@ public class AppCheckService {
             case "sensitivity":
                 result = appCheckMapper.insertElectricalStabilitySensitivity(checkMstIdx, distributionIdx, data);
                 break;
+            case "leakageA":
+                result =appCheckMapper.insertElectricalStabilityLeakA(checkMstIdx, distributionIdx,data);
+                break;
             default:
                 result=-1;
         }

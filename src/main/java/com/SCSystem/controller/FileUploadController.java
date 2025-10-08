@@ -20,9 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RestController
 public class FileUploadController {
-    //private static final String UPLOAD_BASE_DIR = "/home/as_evse/uploads/";
-    private static final String UPLOAD_BASE_DIR = "F:\\upload/";
-
 
     @Autowired
     FileUploadService fileUploadService;
@@ -44,10 +41,12 @@ public class FileUploadController {
             long jsonDistributionIdx = (Long) jsonObj.get("distributionIdx");
             int distributionIdx = (int) jsonDistributionIdx;
 
+            log.error("handleFileUpload data : "+jsonObj.toJSONString());
+
             Integer fileUploadResult = fileUploadService.makeFile(distributionIdx, (String) jsonObj.get("filename"), file);
             if(fileUploadResult<0){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("[FileUploadController] 업로드 실패!");
+                        .body("[FileUploadController]"+data+" 업로드 실패!");
             }
 
             Integer insertResult = fileUploadService.insertDistributionFiles(distributionIdx,(String) jsonObj.get("filename"), (String) jsonObj.get("text"));
@@ -56,7 +55,7 @@ public class FileUploadController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("[FileUploadController] DB 저장 실패!");
             }
-            return ResponseEntity.ok("[FileUploadController] 업로드 성공!");
+            return ResponseEntity.ok("[FileUploadController]"+data+" 업로드 실패!");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
