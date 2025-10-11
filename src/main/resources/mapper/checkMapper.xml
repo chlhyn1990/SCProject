@@ -43,6 +43,9 @@
 		, (SELECT B.name 
 			FROM as_evse.manager B
 			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.name 
+			FROM as_evse.charger_station B
+			WHERE B.idx = A.charger_station_idx) charger_station_name
 		FROM as_evse.check_mst A
 		WHERE A.idx = #{idx}
 	</select>

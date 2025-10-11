@@ -1,6 +1,7 @@
 package com.SCSystem.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,22 @@ public class CheckController {
                 HttpStatus.OK
 				);
 	}
+	
+	@PostMapping("/excel/{check_mst_idx}")
+	 public ResponseEntity<byte[]> generateReport(@PathVariable int check_mst_idx) {
+	     byte[] excelData;
+		try {
+			excelData = service.createInspectionForm(check_mst_idx);
+			return ResponseEntity.ok()
+		             .header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		             .header("Content-Disposition", "attachment; filename=\"report.xlsx\"")
+		             .body(excelData);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	 }
 	
 	
 }
