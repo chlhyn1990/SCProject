@@ -17,13 +17,25 @@ public interface AppCheckMapper {
     Integer insertDistributionEtc(Integer checkMstIdx, Integer distributionIdx, String etcUrl, String etcPath);
     Integer getStationIdxByDistributionIdx(Integer distributionIdx);
     Integer getCheckMstIdxByDistributionIdx(Integer distributionIdx);
-    Integer insertElectricalStabilityOvercurrentA(Integer checkMstIdx, Integer distributionIdx, String overcurrentA);
-    Integer insertElectricalStabilityResistance(Integer checkMstIdx, Integer distributionIdx, String resistance);
 
-    Integer insertElectricalStabilityThickness(Integer checkMstIdx, Integer distributionIdx, String thickness);
-    Integer insertElectricalStabilityWireThickness(Integer checkMstIdx, Integer distributionIdx, String wireThickness);
-    Integer insertElectricalStabilityDistribution(Integer checkMstIdx, Integer distributionIdx, String distribution);
-    Integer insertElectricalStabilityCable(Integer checkMstIdx, Integer distributionIdx, String cable);
-    Integer insertElectricalStabilitySensitivity(Integer checkMstIdx, Integer distributionIdx, String sensitivity);
-    Integer insertElectricalStabilityLeakA(Integer checkMstIdx, Integer distributionIdx, String leakageA);
+    Integer updateElectricalStabilityOvercurrentA(Integer checkMstIdx, Integer distributionIdx, String overcurrentA);
+    Integer updateElectricalStabilityResistance(Integer checkMstIdx, Integer distributionIdx, String resistance);
+
+    Integer updateElectricalStabilityThickness(Integer checkMstIdx, Integer distributionIdx, String thickness);
+    Integer updateElectricalStabilityWireThickness(Integer checkMstIdx, Integer distributionIdx, String wireThickness);
+    Integer updateElectricalStabilityDistribution(Integer checkMstIdx, Integer distributionIdx, String distribution);
+    Integer updateElectricalStabilityCable(Integer checkMstIdx, Integer distributionIdx, String cable);
+    Integer updateElectricalStabilitySensitivity(Integer checkMstIdx, Integer distributionIdx, String sensitivity);
+    Integer updateElectricalStabilityLeakA(Integer checkMstIdx, Integer distributionIdx, String leakageA);
+
+
+
+    //ChargerCheck
+    Integer getCheckMstIdxByChargerIdx(Integer chargerIdx);
+    Integer updateChargerFileTest(Integer checkMst, String testUrl, String testPath);
+    Integer updateChargerFilePlate(Integer checkMst, String plateUrl, String platePath);
+    Integer updateChargerFileResistance(Integer checkMst, String resistanceUrl, String resistancePath);
+    Integer updateChargerFileInfo(Integer checkMst, String infoUrl, String infoPath);
+    Integer updateChargerFileBollard(Integer checkMst, String bollardUrl, String bollardPath);
+    Integer updateChargerFileConnector(Integer checkMst, String connectorUrl, String connectorPath);
 }
