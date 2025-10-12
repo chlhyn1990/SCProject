@@ -176,7 +176,7 @@ public class CheckService {
 	    chargerStation.setDistributionList(distributionService.getListByStation(check.getCheckMst().getCharger_station_idx()));
 	    
 	    try {
-	        templateFile = new File("C:\\dev\\project\\sheet1.xlsx");
+	        templateFile = new File("sheet1.xlsx");
 	        if (templateFile.exists() && templateFile.isFile()) {
 	            templateStream = new FileInputStream(templateFile);
 	        } 
