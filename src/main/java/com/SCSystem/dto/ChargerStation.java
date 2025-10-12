@@ -24,10 +24,6 @@ public class ChargerStation {
 	private String sigungu;
 	private double latitude;
 	private double longitude;
-	private int volt;
-	private int watt;
-	private String chargerType;
-	private String result;
 	private String create_dt;
 	private String modify_dt;
 }
