@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
+import com.SCSystem.dto.Distribution;
 import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,16 @@ public class CheckController {
 	@ResponseBody
 	public ResponseEntity<List<CheckMst>> getCheckMstByStation(@PathVariable int charger_station_idx){
 		List<CheckMst> dto = service.getCheckMstByStation(charger_station_idx);
+        return new ResponseEntity<>(
+        		dto,
+                HttpStatus.OK
+        		);
+	}
+	
+	@PostMapping("/distribution/{idx}")
+	@ResponseBody
+	public ResponseEntity<Distribution> getDistributionByCheckMst(@PathVariable int idx){
+		Distribution dto = service.getDistributionByCheckMst(idx);
         return new ResponseEntity<>(
         		dto,
                 HttpStatus.OK

@@ -1,5 +1,7 @@
 package com.SCSystem.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +28,6 @@ public class ChargerStation {
 	private double longitude;
 	private String create_dt;
 	private String modify_dt;
+	
+	private List<Distribution> distributionList;
 }

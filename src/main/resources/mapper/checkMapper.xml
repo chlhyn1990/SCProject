@@ -38,6 +38,19 @@
 		WHERE A.charger_station_idx = #{charger_station_idx}
 	</select>
 	
+	<select id="getDistributionByCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.Distribution">
+		SELECT A.* 
+		     , (SELECT B.name 
+			FROM as_evse.charger_station B
+			WHERE B.idx = (SELECT charger_station_idx FROM check_mst where idx = #{idx})) station_name
+			, (SELECT B.name 
+			FROM as_evse.manager B
+			WHERE B.idx = (SELECT manager_idx FROM check_mst where idx = #{idx})) manager_name
+			, (SELECT DATE_FORMAT(check_dt, '%Y%m%d') FROM check_mst where idx = #{idx}) check_dt
+		FROM as_evse.distribution A
+		WHERE A.idx = (SELECT distribution_idx FROM check_mst where idx = #{idx})
+	</select>
+	
 	<select id="getCheckMst" parameterType="Integer" resultType="com.SCSystem.dto.CheckMst">
 		SELECT A.* 
 		, (SELECT B.name 
@@ -120,7 +133,7 @@
 		  , temperature = #{temperature}
 		  , adjustment = #{adjustment}
 		  , modify_dt = NOW()
-		WHERE idx = #{idx}
+		WHERE charger_station_idx = (SELECT charger_station_idx FROM check_mst WHERE idx = #{idx})
 	</update>
 	<update id="updateCompatibility" parameterType="com.SCSystem.dto.Compatibility">
 		UPDATE compatibility

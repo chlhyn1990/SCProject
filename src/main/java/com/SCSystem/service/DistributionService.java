@@ -27,7 +27,7 @@ public class DistributionService {
 	@Autowired
 	ChargerService chargerService;
 	@Autowired
-	CheckService checkService;
+	CheckMapper checkMapper;
 	
 	public List<Distribution> getList() {
 		List<Distribution> distributionList = mapper.getList();
@@ -51,12 +51,12 @@ public class DistributionService {
 		try {
 			mapper.insert(dto);
 			int distributionIdx = dto.getIdx();
-			checkService.insert(dto.getCompany_idx(), dto.getManager_idx(), dto.getCharger_station_idx(), dto.getIdx());
-			int checkMstIdx = checkService.getCheckMstIdxByDistribution(distributionIdx);
+			checkMapper.insertCheck(dto.getCompany_idx(), dto.getManager_idx(), dto.getCharger_station_idx(), dto.getIdx());
+			int checkMstIdx = checkMapper.getCheckMstIdxByDistribution(distributionIdx);
 			DistributionFile distributionFile = new DistributionFile();
 			distributionFile.setDistribution_idx(distributionIdx);
 			distributionFile.setCheck_mst_idx(checkMstIdx);
-			checkService.insertDistributionFile(distributionFile);
+			checkMapper.insertDistributionFile(distributionFile);
 			return distributionIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
@@ -80,9 +80,9 @@ public class DistributionService {
 			for(Charger charger : list) {
 				chargerService.delete(charger.getIdx());
 			}
-			checkService.deleteDistributionFile(idx);
-			int checkMstIdx = checkService.getCheckMstIdxByDistribution(idx);
-			checkService.delete(checkMstIdx);
+			checkMapper.deleteDistributionFile(idx);
+			int checkMstIdx = checkMapper.getCheckMstIdxByDistribution(idx);
+			checkMapper.deleteCheck(checkMstIdx);
 			return mapper.delete(idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());

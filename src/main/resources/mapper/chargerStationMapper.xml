@@ -28,8 +28,14 @@
 	</select>
 	
 	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">
-	SELECT * 
-	FROM as_evse.charger_station
+	SELECT A.*
+		, (SELECT name 
+			 FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name  
+	FROM as_evse.charger_station A
 	WHERE idx = #{idx}
 	</select>
 	

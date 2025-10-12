@@ -37,4 +37,8 @@ public class Distribution {
     
 	private Integer company_idx;
 	private Integer manager_idx;
+	
+	private String station_name;
+	private String manager_name;
+	private String check_dt;
 }
