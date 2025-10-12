@@ -1,6 +1,7 @@
 package com.SCSystem.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SCSystem.dto.ApiResult;
 import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
+import com.SCSystem.dto.Distribution;
 import com.SCSystem.service.CheckService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,16 @@ public class CheckController {
 	@ResponseBody
 	public ResponseEntity<List<CheckMst>> getCheckMstByStation(@PathVariable int charger_station_idx){
 		List<CheckMst> dto = service.getCheckMstByStation(charger_station_idx);
+        return new ResponseEntity<>(
+        		dto,
+                HttpStatus.OK
+        		);
+	}
+	
+	@PostMapping("/distribution/{idx}")
+	@ResponseBody
+	public ResponseEntity<Distribution> getDistributionByCheckMst(@PathVariable int idx){
+		Distribution dto = service.getDistributionByCheckMst(idx);
         return new ResponseEntity<>(
         		dto,
                 HttpStatus.OK
@@ -65,6 +77,22 @@ public class CheckController {
                 HttpStatus.OK
 				);
 	}
+	
+	@PostMapping("/excel/{check_mst_idx}")
+	 public ResponseEntity<byte[]> generateReport(@PathVariable int check_mst_idx) {
+	     byte[] excelData;
+		try {
+			excelData = service.createInspectionForm(check_mst_idx);
+			return ResponseEntity.ok()
+		             .header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		             .header("Content-Disposition", "attachment; filename=\"report.xlsx\"")
+		             .body(excelData);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	 }
 	
 	
 }

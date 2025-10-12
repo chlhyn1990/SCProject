@@ -25,13 +25,31 @@
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.Distribution">
 	INSERT INTO as_evse.distribution
-	(charger_station_idx, id, name, detail_place, create_dt, modify_dt)
+	(charger_station_idx, id, name, place1, place2, place3, volt, watt, stand_type, wall_type, move_type, etc_type, screen, touch, communicate, card, charge, gate, power, err, connector, etc, create_dt, modify_dt)
 	VALUES
 	(
 		 #{charger_station_idx}
 		,#{id}
 		,#{name}
-		,#{detail_place}
+		,#{place1}
+		,#{place2}
+		,#{place3}
+		,#{volt}
+		,#{watt}
+		,#{stand_type}
+		,#{wall_type}
+		,#{move_type}
+		,#{etc_type}
+		,#{screen}
+		,#{touch}
+		,#{communicate}
+		,#{card}
+		,#{charge}
+		,#{gate}
+		,#{power}
+		,#{err}
+		,#{connector}
+		,#{etc}
 		,NOW()
 		,NOW()		
 	)
@@ -45,7 +63,25 @@
 	SET charger_station_idx = #{charger_station_idx}
 	  , id = #{id}
 	  , name = #{name}
-	  , detail_place = #{detail_place}
+	  , place1 = #{place1}
+	  , place2 = #{place2}
+	  , place3 = #{place3}
+	  , volt = #{volt}
+	  , watt = #{watt}
+	  , stand_type = #{stand_type}
+	  , wall_type = #{wall_type}
+	  , move_type = #{move_type}
+	  , etc_type = #{etc_type}
+	  , screen = #{screen}
+	  , touch = #{touch}
+	  , communicate = #{communicate}
+	  , card = #{card}
+	  , charge = #{charge}
+	  , gate = #{gate}
+	  , power = #{power}
+	  , err = #{err}
+	  , connector = #{connector}
+	  , etc = #{etc}
 	  , modify_dt = NOW()
 	WHERE idx = #{idx}
 	</update>

@@ -11,6 +11,7 @@ import com.SCSystem.dto.Check;
 import com.SCSystem.dto.CheckMst;
 import com.SCSystem.dto.Compatibility;
 import com.SCSystem.dto.Convenience;
+import com.SCSystem.dto.Distribution;
 import com.SCSystem.dto.DistributionFile;
 import com.SCSystem.dto.ElectricalStability;
 import com.SCSystem.dto.Environment;
@@ -27,6 +28,7 @@ public interface CheckMapper {
 	
 	CheckMst getCheckMst(int idx);
 	List<CheckMst> getCheckMstByStation(int charger_station_idx);
+	Distribution getDistributionByCheckMst(int idx);
 	Compatibility getCompatibility(CheckMst checkMst);
 	Environment getEnvironment(CheckMst checkMst);
 	Convenience getConvenience(CheckMst checkMst);

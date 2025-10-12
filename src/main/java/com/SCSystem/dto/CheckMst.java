@@ -23,6 +23,7 @@ public class CheckMst {
 	private String modify_dt;
 	private String create_dt;
 	
+	private String charger_station_name;
 	private String distribution_name;
 	private String manager_name;
 }

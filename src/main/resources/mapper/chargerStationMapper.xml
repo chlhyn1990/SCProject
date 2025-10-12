@@ -28,14 +28,20 @@
 	</select>
 	
 	<select id="get" parameterType="Integer" resultType="com.SCSystem.dto.ChargerStation">
-	SELECT * 
-	FROM as_evse.charger_station
+	SELECT A.*
+		, (SELECT name 
+			 FROM as_evse.manager B
+			WHERE B.idx = A.manager_idx) manager_name
+		, (SELECT B.company_name 
+			 FROM as_evse.company B
+			WHERE B.idx = A.company_idx) company_name  
+	FROM as_evse.charger_station A
 	WHERE idx = #{idx}
 	</select>
 	
 	<insert id="insert" parameterType="com.SCSystem.dto.ChargerStation">
 	INSERT INTO as_evse.charger_station
-	(company_idx, manager_idx, name, chargerCompany, station_id, addr, detail_addr, sido, sigungu, latitude, longitude, volt, watt, chargerType, result, create_dt, modify_dt)
+	(company_idx, manager_idx, name, chargerCompany, station_id, addr, detail_addr, sido, sigungu, latitude, longitude, create_dt, modify_dt)
 	VALUES
 	(
 		 #{company_idx}
@@ -49,10 +55,6 @@
 		,#{sigungu}
 		,#{latitude}
 		,#{longitude}
-		,#{volt}
-		,#{watt}
-		,#{chargerType}
-		,#{result}
 		,NOW()
 		,NOW()		
 	)
@@ -75,10 +77,6 @@
 	  , sigungu = #{sigungu}
 	  , latitude = #{latitude}
 	  , longitude = #{longitude}
-	  , volt = #{volt}
-	  , watt = #{watt}
-	  , chargerType = #{chargerType}
-	  , result = #{result}
 	  , modify_dt = NOW()
 	WHERE idx = #{idx}
 	</update>

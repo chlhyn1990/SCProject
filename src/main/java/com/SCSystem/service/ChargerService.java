@@ -21,7 +21,7 @@ public class ChargerService {
 	@Autowired
 	ChargerMapper mapper;
 	@Autowired
-	CheckService checkService;
+	CheckMapper checkMapper;
 	
 	public List<Charger> getListByDistribution(int distribution_idx) {
 		return mapper.getListByDistribution(distribution_idx);
@@ -39,11 +39,11 @@ public class ChargerService {
 		try {
 			mapper.insert(dto);
 			int chargerIdx = dto.getIdx();
-			int checkMstIdx = checkService.getCheckMstIdxByDistribution(dto.getDistribution_idx());
+			int checkMstIdx = checkMapper.getCheckMstIdxByDistribution(dto.getDistribution_idx());
 			ChargerFile chargerFile = new ChargerFile();
 			chargerFile.setCharger_idx(chargerIdx);
 			chargerFile.setCheck_mst_idx(checkMstIdx);
-			checkService.insertChargerFile(chargerFile);
+			checkMapper.insertChargerFile(chargerFile);
 			return chargerIdx;
 		}catch(Exception e) {
 			log.warn(e.getMessage());
@@ -62,7 +62,7 @@ public class ChargerService {
 	@Transactional
 	public int delete(int idx) {
 		try {
-			checkService.deleteChargerFile(idx);
+			checkMapper.deleteChargerFile(idx);
 			return mapper.delete(idx);
 		}catch(Exception e) {
 			log.warn(e.getMessage());
