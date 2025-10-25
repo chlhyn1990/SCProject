@@ -3,6 +3,7 @@ package com.SCSystem.service;
 import com.SCSystem.mapper.AppCheckMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,8 +19,8 @@ public class FileUploadService {
 
 
     private final static String FTP_URL = "ftp://MSI_PC:1234@192.168.55.34/";
-//  private final static String LOCAL_PATH = "/home/as_evse/uploads/";
-    private static final String LOCAL_PATH = "C:\\uploads/";
+    @Value("${file.upload.path}")
+	private String LOCAL_PATH;;
     private Integer stationIdx;
     public Integer insertDistributionFiles(Integer distributionIdx, String filename, String text){
         Integer checkMstIdx = appCheckMapper.getCheckMstIdxByDistributionIdx(distributionIdx);
