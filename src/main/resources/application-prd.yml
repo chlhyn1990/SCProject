@@ -23,6 +23,12 @@ mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.SCSystem
+
+file:
+  upload:
+    path: /home/as_evse/uploads/
+  template:
+    path: /home/as_evse/was/		
   
 logging:
   level:

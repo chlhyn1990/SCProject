@@ -21,6 +21,6 @@ public class Check {
 	private ChargingOperation chargingOperation; //충전작동
 	private Opinion opinion; //종합의견
 	
-	private DistributionFile[] distributionFile;
+	private DistributionFile distributionFile;
 	private ChargerFile[] chargerFile;
 }

@@ -78,11 +78,11 @@ public class CheckController {
 				);
 	}
 	
-	@PostMapping("/excel/{check_mst_idx}")
-	 public ResponseEntity<byte[]> generateReport(@PathVariable int check_mst_idx) {
+	@PostMapping("/excel/{charger_station_idx}")
+	 public ResponseEntity<byte[]> generateReport(@PathVariable int charger_station_idx) {
 	     byte[] excelData;
 		try {
-			excelData = service.createInspectionForm(check_mst_idx);
+			excelData = service.createInspectionForm(charger_station_idx);
 			return ResponseEntity.ok()
 		             .header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 		             .header("Content-Disposition", "attachment; filename=\"report.xlsx\"")

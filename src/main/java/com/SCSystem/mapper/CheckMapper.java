@@ -64,7 +64,7 @@ public interface CheckMapper {
 	int updateChargerFile(ChargerFile chargerFile);
 	int deleteChargerFile(int charger_idx);
 	
-	DistributionFile getDistributionFile(int idx);
+	DistributionFile getDistributionFile(CheckMst checkMst);
 	int insertDistributionFile(DistributionFile distributionFile);
 	int updateDistributionFile(DistributionFile distributionFile);
 	int deleteDistributionFile(int distribution_idx);

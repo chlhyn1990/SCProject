@@ -19,7 +19,7 @@ public class FileUploadService {
 
     private final static String FTP_URL = "ftp://MSI_PC:1234@192.168.55.34/";
 //  private final static String LOCAL_PATH = "/home/as_evse/uploads/";
-    private static final String LOCAL_PATH = "F:\\upload/";
+    private static final String LOCAL_PATH = "C:\\uploads/";
     private Integer stationIdx;
     public Integer insertDistributionFiles(Integer distributionIdx, String filename, String text){
         Integer checkMstIdx = appCheckMapper.getCheckMstIdxByDistributionIdx(distributionIdx);
@@ -31,7 +31,6 @@ public class FileUploadService {
 
             case "external.jpg":
                 result = appCheckMapper.insertDistributionExternal(checkMstIdx, distributionIdx, FTP_URL + stationIdx +"/"+distributionIdx+"/"+filename, LOCAL_PATH + stationIdx +"/"+distributionIdx+"/"+filename);
-
                 break;
 
             case "internal.jpg":

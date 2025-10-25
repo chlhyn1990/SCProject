@@ -118,6 +118,8 @@
 		WHERE A.idx = #{idx}
 	</select>
 	
+	
+	
 	<insert id="insertCheck" statementType="CALLABLE">
     {call insert_check_data(
         #{p_company_idx, mode=IN, jdbcType=INTEGER},
@@ -301,10 +303,11 @@
 		WHERE charger_idx = #{charger_idx}
 	</delete>
 	
-	<select id="getDistributionFile" parameterType="Integer" resultType="Integer">
-		SELECT *
-		FROM distribution_file
-		WHERE idx = #{idx}
+	<select id="getDistributionFile" parameterType="com.SCSystem.dto.CheckMst" resultType="com.SCSystem.dto.DistributionFile">
+		SELECT B.* 
+		FROM as_evse.check_mst A
+		JOIN distribution_file B ON A.idx = B.check_mst_idx
+		WHERE A.idx = #{idx}
 	</select>
 	
 	<insert id="insertDistributionFile" parameterType="com.SCSystem.dto.DistributionFile">
@@ -316,19 +319,9 @@
 	
 	<select id="updateDistributionFile" parameterType="com.SCSystem.dto.DistributionFile">
 		UPDATE distribution_file
-		SET test_url = #{test_url}
-		  , test_path = #{test_path}
-		  , plate_url = #{plate_url}
-		  , plate_path = #{plate_path}
-		  , resistance_url = #{resistance_url}
-		  , resistance_path = #{resistance_path}
-		  , info_url = #{info_url}
-		  , info_path = #{info_path}
-		  , bollard_url = #{bollard_url}
-		  , bollard_path = #{bollard_path}
-		  , connector_url = #{connector_url}
-		  , connector_path = #{connector_path}
-		  , modify_dt = NOW()
+		SET meter_text = #{meter_text}
+		  , modem_front_text = #{modem_front_text}
+		  , modem_back_text = #{modem_back_text}
 		WHERE idx = #{idx}
 	</select>
 	

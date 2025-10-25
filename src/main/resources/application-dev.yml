@@ -25,6 +25,12 @@ spring:
     url: jdbc:mysql://localhost:3306/as_evse
     username: as_evse
     password: asEvse!1@2
+
+file:
+  upload:
+    path: C:/uploads/
+  template:
+    path: C:/dev/project/
   
     
 # MyBatis 설정 정보
